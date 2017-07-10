@@ -2,26 +2,20 @@
   "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "name": {
+    "webAppName": {
       "type": "string"
     },
     "storageName": {
-      "type": "string"
-    },
-    "location": {
-      "type": "string"
-    },
-    "subscriptionId": {
       "type": "string"
     }
   },
   "resources": [
     {
       "apiVersion": "2016-03-01",
-      "name": "[parameters('name')]",
+      "name": "[parameters('webAppName')]",
       "type": "Microsoft.Web/sites",
       "properties": {
-        "name": "[parameters('name')]",
+        "name": "[parameters('webAppName')]",
         "siteConfig": {
           "appSettings": [
             {
@@ -42,7 +36,7 @@
             },
             {
               "name": "WEBSITE_CONTENTSHARE",
-              "value": "[concat(toLower(parameters('name')), 'a70c')]"
+              "value": "[concat(toLower(parameters('webAppName')), 'a70c')]"
             },
             {
               "name": "WEBSITE_NODE_DEFAULT_VERSION",
@@ -55,14 +49,14 @@
       "dependsOn": [
         "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
       ],
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "kind": "functionapp"
     },
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[parameters('storageName')]",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "properties": {
         "accountType": "Standard_LRS"
       }

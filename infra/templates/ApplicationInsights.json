@@ -1,0 +1,24 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appInsightsName": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "apiVersion": "2016-08-01",
+      "name": "[parameters('appInsightsName')]",
+      "type": "Microsoft.Insights/components",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [],
+      "properties": {
+        "ApplicationId": "[parameters('appInsightsName')]"
+      }
+    }
+  ],
+  "outputs": {}
+}

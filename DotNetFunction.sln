@@ -23,7 +23,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{909C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{539D6251-ED3A-4230-A448-081BB1435281}"
 	ProjectSection(SolutionItems) = preProject
-		infra\templates\azuredeploy.json = infra\templates\azuredeploy.json
+		infra\templates\ApplicationInsights.json = infra\templates\ApplicationInsights.json
+		infra\templates\deploy.json = infra\templates\deploy.json
+		infra\templates\FunctionApp.json = infra\templates\FunctionApp.json
 	EndProjectSection
 EndProject
 Global
