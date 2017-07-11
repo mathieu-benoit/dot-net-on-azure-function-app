@@ -8,14 +8,16 @@ namespace DotNetFunction
 {
     public static class GenerateDeployToAzureUriFunction
     {
-        [FunctionName("HttpTriggerWithParametersCSharp")]
-
-        public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "HttpTriggerCSharp/name/{name}")]HttpRequestMessage req, string name, TraceWriter log)
+        [FunctionName("GenerateDeployToAzureUri")]
+        public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "GenerateDeployToAzureUri/{sourceUri}")]HttpRequestMessage request, string sourceUri, TraceWriter log)
         {
             log.Info("C# HTTP trigger function processed a request.");
 
-            // Fetching the name from the path parameter in the request URL
-            return req.CreateResponse(HttpStatusCode.OK, "Hello " + name);
+            var generatedUri = "Hello " + sourceUri;
+
+            log.Info(string.Format("Request: {0} with Response: {1}.", sourceUri, generatedUri));
+            
+            return request.CreateResponse(HttpStatusCode.OK, generatedUri);
         }
     }
 }
