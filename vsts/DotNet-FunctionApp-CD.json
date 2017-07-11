@@ -1,0 +1,379 @@
+{
+    "source": 2,
+    "id": 1,
+    "revision": 8,
+    "name": "DotNet-FunctionApp-CD",
+    "description": null,
+    "createdBy": {
+        "id": "17256fe4-f2a3-4370-b081-ec283edb6a77",
+        "displayName": "Mathieu Benoit",
+        "uniqueName": "mabenoit@microsoft.com",
+        "url": "https://app.vssps.visualstudio.com/A6d1a4ff8-9a1f-46cb-bd61-54cb9a797939/_apis/Identities/17256fe4-f2a3-4370-b081-ec283edb6a77",
+        "imageUrl": "https://mabenoit-ms.visualstudio.com/_api/_common/identityImage?id=17256fe4-f2a3-4370-b081-ec283edb6a77"
+    },
+    "createdOn": "2017-07-11T17:57:05.573Z",
+    "modifiedBy": {
+        "id": "17256fe4-f2a3-4370-b081-ec283edb6a77",
+        "displayName": "Mathieu Benoit",
+        "uniqueName": "mabenoit@microsoft.com",
+        "url": "https://app.vssps.visualstudio.com/A6d1a4ff8-9a1f-46cb-bd61-54cb9a797939/_apis/Identities/17256fe4-f2a3-4370-b081-ec283edb6a77",
+        "imageUrl": "https://mabenoit-ms.visualstudio.com/_api/_common/identityImage?id=17256fe4-f2a3-4370-b081-ec283edb6a77"
+    },
+    "modifiedOn": "2017-07-11T22:42:49.930Z",
+    "path": "\\",
+    "variables": {
+        "SlotName": {
+            "value": "staging"
+        }
+    },
+    "variableGroups": [],
+    "environments": [
+        {
+            "id": 1,
+            "name": "Staging",
+            "rank": 1,
+            "owner": {
+                "id": "17256fe4-f2a3-4370-b081-ec283edb6a77",
+                "displayName": "Mathieu Benoit",
+                "uniqueName": "mabenoit@microsoft.com",
+                "url": "https://app.vssps.visualstudio.com/A6d1a4ff8-9a1f-46cb-bd61-54cb9a797939/_apis/Identities/17256fe4-f2a3-4370-b081-ec283edb6a77",
+                "imageUrl": "https://mabenoit-ms.visualstudio.com/_api/_common/identityImage?id=17256fe4-f2a3-4370-b081-ec283edb6a77"
+            },
+            "variables": {
+                "AdministratorLogin": {
+                    "value": ""
+                },
+                "AdministratorLoginPassword": {
+                    "value": null,
+                    "isSecret": true
+                },
+                "ConnectionStringName": {
+                    "value": ""
+                },
+                "DatabaseName": {
+                    "value": ""
+                },
+                "ReleaseConfiguration": {
+                    "value": "Release"
+                },
+                "ReleasePlatform": {
+                    "value": "Any CPU"
+                },
+                "ResourceGroupName": {
+                    "value": "mabenoittest"
+                },
+                "ServerName": {
+                    "value": ""
+                }
+            },
+            "preDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 1
+                    }
+                ]
+            },
+            "deployStep": {
+                "tasks": [],
+                "id": 2
+            },
+            "postDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 3
+                    }
+                ]
+            },
+            "deployPhases": [
+                {
+                    "deploymentInput": {
+                        "parallelExecution": {
+                            "parallelExecutionType": "none"
+                        },
+                        "skipArtifactsDownload": false,
+                        "queueId": 42,
+                        "demands": [],
+                        "enableAccessToken": false,
+                        "timeoutInMinutes": 0,
+                        "jobCancelTimeoutInMinutes": 1
+                    },
+                    "rank": 1,
+                    "phaseType": 1,
+                    "name": "Run on agent",
+                    "workflowTasks": [
+                        {
+                            "taskId": "497d490f-eea7-4f2b-ab94-48d9c1acdcb1",
+                            "version": "3.*",
+                            "name": "Deploy Azure App Service",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": null,
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "ConnectedServiceName": "209aa168-9bbc-4de9-8e59-dafbc81a6411",
+                                "WebAppName": "$(ResourceGroupName)",
+                                "ServerfarmId": "invalidServerfarmId",
+                                "WebAppKind": "app",
+                                "DockerNamespace": "",
+                                "DockerRepository": "",
+                                "DockerImageTag": "$(Build.BuildId)",
+                                "StartupCommand": "",
+                                "DeployToSlotFlag": "true",
+                                "ResourceGroupName": "$(ResourceGroupName)",
+                                "SlotName": "$(SlotName)",
+                                "VirtualApplication": "",
+                                "Package": "$(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/drop",
+                                "WebAppUri": "",
+                                "ScriptType": "",
+                                "InlineScript": "",
+                                "ScriptPath": "",
+                                "GenerateWebConfig": "false",
+                                "WebConfigParameters": "",
+                                "AppSettings": "",
+                                "TakeAppOfflineFlag": "true",
+                                "UseWebDeploy": "true",
+                                "SetParametersFile": "",
+                                "RemoveAdditionalFilesFlag": "false",
+                                "ExcludeFilesFromAppDataFlag": "false",
+                                "AdditionalArguments": "",
+                                "RenameFilesFlag": "false",
+                                "XmlTransformation": "false",
+                                "XmlVariableSubstitution": "false",
+                                "JSONFiles": ""
+                            }
+                        }
+                    ]
+                }
+            ],
+            "environmentOptions": {
+                "emailNotificationType": "OnlyOnFailure",
+                "emailRecipients": "release.environment.owner;release.creator",
+                "skipArtifactsDownload": false,
+                "timeoutInMinutes": 0,
+                "enableAccessToken": false,
+                "publishDeploymentStatus": false
+            },
+            "demands": [],
+            "conditions": [
+                {
+                    "name": "ReleaseStarted",
+                    "conditionType": 1,
+                    "value": ""
+                }
+            ],
+            "executionPolicy": {
+                "concurrencyCount": 0,
+                "queueDepthCount": 0
+            },
+            "schedules": [],
+            "retentionPolicy": {
+                "daysToKeep": 30,
+                "releasesToKeep": 3,
+                "retainBuild": true
+            },
+            "processParameters": {},
+            "properties": {}
+        },
+        {
+            "id": 2,
+            "name": "Production",
+            "rank": 2,
+            "owner": {
+                "id": "17256fe4-f2a3-4370-b081-ec283edb6a77",
+                "displayName": "Mathieu Benoit",
+                "uniqueName": "mabenoit@microsoft.com",
+                "url": "https://app.vssps.visualstudio.com/A6d1a4ff8-9a1f-46cb-bd61-54cb9a797939/_apis/Identities/17256fe4-f2a3-4370-b081-ec283edb6a77",
+                "imageUrl": "https://mabenoit-ms.visualstudio.com/_api/_common/identityImage?id=17256fe4-f2a3-4370-b081-ec283edb6a77"
+            },
+            "variables": {
+                "AdministratorLogin": {
+                    "value": ""
+                },
+                "AdministratorLoginPassword": {
+                    "value": null,
+                    "isSecret": true
+                },
+                "ConnectionStringName": {
+                    "value": ""
+                },
+                "DatabaseName": {
+                    "value": ""
+                },
+                "ReleaseConfiguration": {
+                    "value": "Release"
+                },
+                "ReleasePlatform": {
+                    "value": "Any CPU"
+                },
+                "ResourceGroupName": {
+                    "value": "mabenoittest"
+                },
+                "ServerName": {
+                    "value": ""
+                },
+                "SlotToSwap": {
+                    "value": "staging"
+                }
+            },
+            "preDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 4
+                    }
+                ]
+            },
+            "deployStep": {
+                "tasks": [],
+                "id": 5
+            },
+            "postDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 6
+                    }
+                ]
+            },
+            "deployPhases": [
+                {
+                    "deploymentInput": {
+                        "parallelExecution": {
+                            "parallelExecutionType": "none"
+                        },
+                        "skipArtifactsDownload": false,
+                        "queueId": 42,
+                        "demands": [],
+                        "enableAccessToken": false,
+                        "timeoutInMinutes": 0,
+                        "jobCancelTimeoutInMinutes": 1
+                    },
+                    "rank": 1,
+                    "phaseType": 1,
+                    "name": "Run on agent",
+                    "workflowTasks": [
+                        {
+                            "taskId": "f045e430-8704-11e6-968f-e717e6411619",
+                            "version": "0.*",
+                            "name": "Swap Staging to Production",
+                            "refName": "AzureAppServiceManage_1",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "ConnectedServiceName": "209aa168-9bbc-4de9-8e59-dafbc81a6411",
+                                "Action": "Swap Slots",
+                                "WebAppName": "$(ResourceGroupName)",
+                                "SpecifySlot": "",
+                                "ResourceGroupName": "$(ResourceGroupName)",
+                                "SourceSlot": "$(SlotToSwap)",
+                                "SwapWithProduction": "true",
+                                "TargetSlot": "test",
+                                "PreserveVnet": "false",
+                                "Slot": "",
+                                "ExtensionsList": "",
+                                "OutputVariable": ""
+                            }
+                        }
+                    ]
+                }
+            ],
+            "environmentOptions": {
+                "emailNotificationType": "OnlyOnFailure",
+                "emailRecipients": "release.environment.owner;release.creator",
+                "skipArtifactsDownload": false,
+                "timeoutInMinutes": 0,
+                "enableAccessToken": false,
+                "publishDeploymentStatus": false
+            },
+            "demands": [],
+            "conditions": [
+                {
+                    "name": "Staging",
+                    "conditionType": 2,
+                    "value": "4"
+                }
+            ],
+            "executionPolicy": {
+                "concurrencyCount": 0,
+                "queueDepthCount": 0
+            },
+            "schedules": [],
+            "retentionPolicy": {
+                "daysToKeep": 30,
+                "releasesToKeep": 3,
+                "retainBuild": true
+            },
+            "processParameters": {},
+            "properties": {}
+        }
+    ],
+    "artifacts": [
+        {
+            "sourceId": "8994a52e-3e36-43b0-aad3-751820cb0816:27",
+            "type": "Build",
+            "alias": "DotNet-FunctionApp-CI",
+            "definitionReference": {
+                "artifactSourceDefinitionUrl": {
+                    "id": "https://mabenoit-ms.visualstudio.com/_permalink/_build/index?collectionId=e373a2ff-a162-446f-b7ec-415465e9e56c&projectId=8994a52e-3e36-43b0-aad3-751820cb0816&definitionId=27",
+                    "name": ""
+                },
+                "defaultVersionBranch": {
+                    "id": "",
+                    "name": ""
+                },
+                "defaultVersionSpecific": {
+                    "id": "",
+                    "name": ""
+                },
+                "defaultVersionTags": {
+                    "id": "",
+                    "name": ""
+                },
+                "defaultVersionType": {
+                    "id": "latestType",
+                    "name": "Latest"
+                },
+                "definition": {
+                    "id": "27",
+                    "name": "DotNet-FunctionApp-CI"
+                },
+                "project": {
+                    "id": "8994a52e-3e36-43b0-aad3-751820cb0816",
+                    "name": "DotNetMethodOnFunctionApp"
+                }
+            },
+            "isPrimary": true
+        }
+    ],
+    "triggers": [],
+    "releaseNameFormat": "Release-$(rev:r)",
+    "url": "https://mabenoit-ms.vsrm.visualstudio.com/8994a52e-3e36-43b0-aad3-751820cb0816/_apis/Release/definitions/1",
+    "_links": {
+        "self": {
+            "href": "https://mabenoit-ms.vsrm.visualstudio.com/8994a52e-3e36-43b0-aad3-751820cb0816/_apis/Release/definitions/1"
+        },
+        "web": {
+            "href": "https://mabenoit-ms.visualstudio.com/8994a52e-3e36-43b0-aad3-751820cb0816/_release?definitionId=1"
+        }
+    },
+    "tags": [],
+    "properties": {}
+}

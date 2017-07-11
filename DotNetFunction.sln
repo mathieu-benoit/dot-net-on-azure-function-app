@@ -14,6 +14,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{43937ADC-2156-4C54-A19C-54C9826766C8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vsts", "vsts", "{9D7CF83C-C93B-4266-B6BC-87FB17216CC2}"
+	ProjectSection(SolutionItems) = preProject
+		vsts\DotNet-FunctionApp-CI.json = vsts\DotNet-FunctionApp-CI.json
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "imgs", "imgs", "{B0E410F8-E7BE-46D7-84FB-4749F19392D4}"
 EndProject

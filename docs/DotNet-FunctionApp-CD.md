@@ -1,77 +1,73 @@
-Here is one example to Build an .NET method to an Azure Function App via VSTS. You could adapt it with your own context, needs and constraints.
+Here is one example to Release a .NET method to an Azure Function App. You could adapt it with your own context, needs and constraints.
 
-![Build Overview](/docs/imgs/AspDotNetCore-AppServiceWindows-CI.PNG)
+# Import the Release Definition
 
-# Import the Build Definition
-
-You could import [the associated Build Definition stored in this repository](/vsts/DotNet-FunctionApp-CI.json) and then follow these steps to adapt it to your current project, credentials, etc.:
+You could import [the associated Release Definition stored in this repository](/vsts/DotNet-FunctionApp-CD.json) and then follow these steps to adapt it to your current project, credentials, etc.:
 
 TODO
 
-# Create manually the Build Definition
+# Create manually the Release Definition
 
-## Variables
-- BuildConfiguration = release
+## Overview
+![Release Overview](/docs/imgs/DotNet-FunctionApp-CD.PNG)
 
-## Repository
-- Repository Type = GitHub
-- Connection = set appropriate
-- Repository = mathieu-benoit/dot-net-on-azure-function-app
-- Default branch = master
+## Staging Environment
+![Staging Release Overview](/docs/imgs/DotNet-FunctionApp-CD-Staging.PNG)
 
-## Triggers
-- Continuous Integration (CI) = true
+### Deployment conditions
+- Trigger = After release creation
 
-## Process - Build process
-- Name = DotNet-FunctionApp-CI
-- Default agent queue = Hosted VS2017
+### Approvals
+- Pre-deployment approver = Automatic
+- Post-deployment approver = Automatic
 
-## Steps 
-- Restore
-  - Type = .NET Core
-  - Command = restore
-  - Project(s) = **/*.csproj
-- Build
-  - Type = .NET Core
-  - Command = build
-  - Project(s) = src/AspNetCoreApplication/AspNetCoreApplication.csproj\ntest/AspNetCoreApplication.UnitTests/AspNetCoreApplication.UnitTests.csproj
-  - Arguments = --configuration $(BuildConfiguration)
-- UnitTests
-  - Type = .NET Core
-  - Command = test
-  - Project(s) = **/*UnitTests/*.csproj
-  - Arguments = --configuration $(BuildConfiguration) -xml TEST-TestResults.xml
-- Publish Test Results
-  - Type = Publish Test Results
-  - Test Result Format = XUnit
-  - Test Results Files = **/TEST-*.xml
-- Publish Web App
-  - Type = .NET Core
-  - Command = publish
-  - Publish Web Projects = true
-  - Arguments = --configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)
-  - Zip Published Projects = true
-- Validate ARM Templates
-  - Azure subscription = set appropriate
-  - Action = Create or update resource group
-  - Resource group = test
-  - Location = East US
-  - Template location = Linked artifact
-  - Template = infra/templates/deploy-windows.json
-  - Override template parameters = -appServicePlanName test -webAppName test
-  - Deployment mode = Validation only
-- Publish Artifact: web
-  - Type = Publish Build Artifacts
-  - Path to publish = $(build.artifactstagingdirectory)
-  - Artifact Name = web
-  - Artifact Type = Server
-- Publish Artifact: infra
-  - Type = Publish Build Artifacts
-  - Path to publish = infra/templates
-  - Artifact Name = infra
-  - Artifact Type = Server
-- Publish Artifact: scripts
-  - Type = Publish Build Artifacts
-  - Copy Root = infra/scripts
-  - Artifact Name = scripts
-  - Artifact Type = Server
+### Variables
+- ResourceGroupName = set appropriate
+- SlotName = staging
+- Location = East US
+
+### Steps 
+- Deploy Web App
+  - Type = Azure App Service Deploy
+  - Version = 3.*
+  - Azure Subscription = set appropriate
+  - App Service Name = $(ResourceGroupName)
+  - Deploy to Slot = true
+  - Resource Group = $(ResourceGroupName)
+  - Slot = $(SlotName)
+  - Package or Folder = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/drop
+  - Publish using Web Deploy = true
+  - Take App Offline = true
+
+## Production Environment
+![Production Release Overview](/docs/imgs/DotNet-FunctionApp-CD-Production.PNG)
+
+### Deployment conditions
+- Trigger = After successful deployment to another environment ("Staging")
+
+### Approvals
+- Pre-deployment approver = Specific Users (set appropriate users)
+- Post-deployment approver = Automatic
+
+### Variables
+- ResourceGroupName = set appropriate
+- SlotToSwap = staging
+- Location = East US
+
+### Steps
+- Swap Staging to Production
+  - Type = Azure App Service Manage (PREVIEW)
+  - Version = 0.*
+  - Azure Subscription = set appropriate
+  - Action = Swap Slots
+  - App Service Name = $(ResourceGroupName)
+  - Resource Group = $(ResourceGroupName)
+  - Source Slot = $(SlotToSwap)
+  - Swap with Production = true
+- Set Resource Group Lock
+  - Type = Azure PowerShell
+  - Version = 1.*
+  - Azure Connection Type = set appropriate
+  - Azure RM Subscription = set appropriate
+  - Script Path = $(System.DefaultWorkingDirectory)/AspDotNetCore-AppServiceWindows-CI/scripts/[AddResourceGroupLock.ps1](../infra/scripts/AddResourceGroupLock.ps1)
+  - Script Arguments = $(ResourceGroupName)
