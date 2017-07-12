@@ -14,7 +14,7 @@
                 "definitionType": "task"
             },
             "inputs": {
-                "solution": "$(Parameters.solution)",
+                "solution": "**\\*.sln",
                 "nugetConfigPath": "",
                 "restoreMode": "restore",
                 "noCache": "false",
@@ -96,6 +96,72 @@
             "enabled": true,
             "continueOnError": false,
             "alwaysRun": false,
+            "displayName": "Validate ARM Templates",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "refName": "AzureResourceGroupDeployment_6",
+            "task": {
+                "id": "94a74903-f93f-4075-884f-dc11f34058b4",
+                "versionSpec": "2.*",
+                "definitionType": "task"
+            },
+            "inputs": {
+                "ConnectedServiceName": "120887e6-de63-4d53-b184-c46f2e17f1e7",
+                "action": "Create Or Update Resource Group",
+                "resourceGroupName": "$(ValidateTemplatesResourceGroup)",
+                "location": "East US",
+                "templateLocation": "Linked artifact",
+                "csmFileLink": "",
+                "csmParametersFileLink": "",
+                "csmFile": "infra/templates/deploy.json",
+                "csmParametersFile": "",
+                "overrideParameters": "-storageName test -webAppName test",
+                "deploymentMode": "Validation",
+                "enableDeploymentPrerequisites": "None",
+                "deploymentGroupEndpoint": "",
+                "project": "",
+                "deploymentGroupName": "",
+                "copyAzureVMTags": "true",
+                "outputVariable": ""
+            }
+        },
+        {
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Remove temporary ValidateTemplatesResourceGroup",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "refName": "AzureResourceGroupDeployment_7",
+            "task": {
+                "id": "94a74903-f93f-4075-884f-dc11f34058b4",
+                "versionSpec": "2.*",
+                "definitionType": "task"
+            },
+            "inputs": {
+                "ConnectedServiceName": "120887e6-de63-4d53-b184-c46f2e17f1e7",
+                "action": "DeleteRG",
+                "resourceGroupName": "$(ValidateTemplatesResourceGroup)",
+                "location": "",
+                "templateLocation": "Linked artifact",
+                "csmFileLink": "",
+                "csmParametersFileLink": "",
+                "csmFile": "",
+                "csmParametersFile": "",
+                "overrideParameters": "",
+                "deploymentMode": "Incremental",
+                "enableDeploymentPrerequisites": "None",
+                "deploymentGroupEndpoint": "",
+                "project": "",
+                "deploymentGroupName": "",
+                "copyAzureVMTags": "true",
+                "outputVariable": ""
+            }
+        },
+        {
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
             "displayName": "Copy Files",
             "timeoutInMinutes": 0,
             "condition": "succeeded()",
@@ -129,7 +195,7 @@
             },
             "inputs": {
                 "PathtoPublish": "$(build.artifactstagingdirectory)",
-                "ArtifactName": "$(Parameters.ArtifactName)",
+                "ArtifactName": "drop",
                 "ArtifactType": "Container",
                 "TargetPath": "\\\\my\\share\\$(Build.DefinitionName)\\$(Build.BuildNumber)"
             }
@@ -189,6 +255,9 @@
         "system.debug": {
             "value": "false",
             "allowOverride": true
+        },
+        "ValidateTemplatesResourceGroup": {
+            "value": "validate-templates-rg"
         }
     },
     "retentionRules": [
@@ -276,7 +345,9 @@
             "apiUrl": "https://api.github.com/repos/mathieu-benoit/dot-net-on-azure-function-app",
             "branchesUrl": "https://api.github.com/repos/mathieu-benoit/dot-net-on-azure-function-app/branches",
             "cloneUrl": "https://github.com/mathieu-benoit/dot-net-on-azure-function-app.git",
-            "refsUrl": "https://api.github.com/repos/mathieu-benoit/dot-net-on-azure-function-app/git/refs"
+            "refsUrl": "https://api.github.com/repos/mathieu-benoit/dot-net-on-azure-function-app/git/refs",
+            "definitionId": "27",
+            "branch": "master"
         },
         "id": "https://github.com/mathieu-benoit/dot-net-on-azure-function-app.git",
         "type": "GitHub",
@@ -287,32 +358,7 @@
         "checkoutSubmodules": false
     },
     "processParameters": {
-        "inputs": [
-            {
-                "options": {},
-                "properties": {},
-                "name": "solution",
-                "label": "Path to solution or packages.config",
-                "defaultValue": "**\\*.sln",
-                "required": true,
-                "type": "filePath",
-                "helpMarkDown": "The path to the Visual Studio solution file or NuGet packages.config",
-                "visibleRule": "",
-                "groupName": ""
-            },
-            {
-                "options": {},
-                "properties": {},
-                "name": "ArtifactName",
-                "label": "Artifact Name",
-                "defaultValue": "drop",
-                "required": true,
-                "type": "string",
-                "helpMarkDown": "The name of the artifact to create.",
-                "visibleRule": "",
-                "groupName": ""
-            }
-        ]
+        "inputs": []
     },
     "quality": 1,
     "authoredBy": {
@@ -337,8 +383,8 @@
     "uri": "vstfs:///Build/Definition/27",
     "path": "\\",
     "type": 2,
-    "revision": 16,
-    "createdDate": "2017-07-11T22:08:49.523Z",
+    "revision": 21,
+    "createdDate": "2017-07-12T15:41:27.030Z",
     "project": {
         "id": "8994a52e-3e36-43b0-aad3-751820cb0816",
         "name": "DotNetMethodOnFunctionApp",

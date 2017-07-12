@@ -12,6 +12,7 @@ TODO
 
 ## Variables
 - BuildConfiguration = release
+- ValidateTemplatesResourceGroup = validate-templates-rg
 
 ## Repository
 - Repository Type = GitHub
@@ -48,6 +49,23 @@ TODO
   - Search folder = $(System.DefaultWorkingDirectory)
   - Build Platform = $(BuildPlatform)
   - Build Configuration = $(BuildConfiguration)
+- Validate ARM Templates
+  - Type = Azure Resource Group Deployment
+  - Version = 2.*
+  - Azure subscription = set appropriate
+  - Action = Create or update resource group
+  - Resource group = $(ValidateTemplatesResourceGroup)
+  - Location = East US
+  - Template location = Linked artifact
+  - Template = infra/templates/deploy.json
+  - Override template parameters = -storageName test -webAppName test
+  - Deployment mode = Validation only
+- Remove temporary ValidateTemplatesResourceGroup
+  - Type = Azure Resource Group Deployment
+  - Version = 2.*
+  - Azure subscription = set appropriate
+  - Action = Delete resource group
+  - Resource group = $(ValidateTemplatesResourceGroup)
 - Copy Files
   - Type = Copy Files
   - Version = 2.*
