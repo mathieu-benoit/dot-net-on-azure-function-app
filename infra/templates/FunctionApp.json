@@ -67,11 +67,11 @@
   "outputs": {
     "functionKey": {
       "type": "string",
-      "value": "[listsecrets(resourceId('Microsoft.Web/sites/functions', parameters('webAppName')),'2015-08-01').key]"
+      "value": "[listsecrets(resourceId('Microsoft.Web/sites/functions', parameters('webAppName'), parameters('webAppName')),'2015-08-01').key]"
     },
     "functionUrl": {
       "type": "string",
-      "value": "[listsecrets(resourceId('Microsoft.Web/sites/functions', parameters('webAppName')),'2015-08-01').trigger_url]"
+      "value": "[listsecrets(resourceId('Microsoft.Web/sites/functions', parameters('webAppName'), parameters('webAppName')),'2015-08-01').trigger_url]"
     }
   }
 }
