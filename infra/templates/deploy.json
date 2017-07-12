@@ -13,7 +13,7 @@
     "templateLinkBase": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "https://raw.githubusercontent.com/mathieu-benoit/asp-dot-net-core-on-azure-web-app/master/infra/AspNetCoreApplication.Infrastructure/templates/"
+      "defaultValue": "https://raw.githubusercontent.com/mathieu-benoit/dot-net-on-azure-function-app/master/infra/templates/"
     }
   },
   "variables": {},
@@ -25,7 +25,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('templateLinkBase'), 'WebAppWindows.json')]"
+          "uri": "[concat(parameters('templateLinkBase'), 'FunctionApp.json')]"
         },
         "parameters": {
           "webAppName": {
