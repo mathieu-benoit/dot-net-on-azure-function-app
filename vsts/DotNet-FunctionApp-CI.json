@@ -162,7 +162,7 @@
             "enabled": true,
             "continueOnError": false,
             "alwaysRun": false,
-            "displayName": "Copy Files",
+            "displayName": "Copy Files: function",
             "timeoutInMinutes": 0,
             "condition": "succeeded()",
             "refName": "CopyFiles_7",
@@ -184,7 +184,7 @@
             "enabled": true,
             "continueOnError": false,
             "alwaysRun": true,
-            "displayName": "Publish Artifact",
+            "displayName": "Publish Artifact: function",
             "timeoutInMinutes": 0,
             "condition": "succeededOrFailed()",
             "refName": "PublishBuildArtifacts_5",
@@ -195,7 +195,47 @@
             },
             "inputs": {
                 "PathtoPublish": "$(build.artifactstagingdirectory)",
-                "ArtifactName": "drop",
+                "ArtifactName": "function",
+                "ArtifactType": "Container",
+                "TargetPath": "\\\\my\\share\\$(Build.DefinitionName)\\$(Build.BuildNumber)"
+            }
+        },
+        {
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Publish Artifact: infra",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "refName": "PublishBuildArtifacts_8",
+            "task": {
+                "id": "2ff763a7-ce83-4e1f-bc89-0ae63477cebe",
+                "versionSpec": "1.*",
+                "definitionType": "task"
+            },
+            "inputs": {
+                "PathtoPublish": "infra/templates",
+                "ArtifactName": "infra",
+                "ArtifactType": "Container",
+                "TargetPath": "\\\\my\\share\\$(Build.DefinitionName)\\$(Build.BuildNumber)"
+            }
+        },
+        {
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Publish Artifact: scripts",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "refName": "PublishBuildArtifacts_9",
+            "task": {
+                "id": "2ff763a7-ce83-4e1f-bc89-0ae63477cebe",
+                "versionSpec": "1.*",
+                "definitionType": "task"
+            },
+            "inputs": {
+                "PathtoPublish": "infra/scripts",
+                "ArtifactName": "scripts",
                 "ArtifactType": "Container",
                 "TargetPath": "\\\\my\\share\\$(Build.DefinitionName)\\$(Build.BuildNumber)"
             }
@@ -285,7 +325,7 @@
         {
             "name": "CurrentBuildsInProgress",
             "scope": "refs/heads/master",
-            "intValue": 0
+            "intValue": 1
         },
         {
             "name": "CanceledBuilds",
@@ -383,8 +423,8 @@
     "uri": "vstfs:///Build/Definition/27",
     "path": "\\",
     "type": 2,
-    "revision": 21,
-    "createdDate": "2017-07-12T15:41:27.030Z",
+    "revision": 23,
+    "createdDate": "2017-07-12T21:08:14.013Z",
     "project": {
         "id": "8994a52e-3e36-43b0-aad3-751820cb0816",
         "name": "DotNetMethodOnFunctionApp",

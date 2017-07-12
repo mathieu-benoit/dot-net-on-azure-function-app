@@ -66,15 +66,27 @@ TODO
   - Azure subscription = set appropriate
   - Action = Delete resource group
   - Resource group = $(ValidateTemplatesResourceGroup)
-- Copy Files
+- Copy Files: function
   - Type = Copy Files
   - Version = 2.*
   - Source Folder = $(build.sourcesdirectory)/src/DotNetFunction/bin/$(BuildConfiguration)/net461
   - Content = **
   - Target Folder = $(build.artifactstagingdirectory)
-- Publish Artifact
+- Publish Artifact: function
   - Type = Publish Build Artifacts
   - Version = 1.*
   - Path to Publish = $(build.artifactstagingdirectory)
-  - Artifact Name = drop
+  - Artifact Name = function
+  - Artifact Type = Server
+- Publish Artifact: infra
+  - Type = Publish Build Artifacts
+  - Version = 1.*
+  - Path to Publish = infra/templates
+  - Artifact Name = infra
+  - Artifact Type = Server
+- Publish Artifact: scripts
+  - Type = Publish Build Artifacts
+  - Version = 1.*
+  - Path to Publish = infra/scripts
+  - Artifact Name = scripts
   - Artifact Type = Server
