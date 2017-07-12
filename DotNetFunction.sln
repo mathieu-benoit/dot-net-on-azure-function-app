@@ -44,6 +44,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{
 		infra\templates\ApplicationInsights.json = infra\templates\ApplicationInsights.json
 		infra\templates\deploy.json = infra\templates\deploy.json
 		infra\templates\FunctionApp.json = infra\templates\FunctionApp.json
+		infra\templates\FunctionAppSlot.json = infra\templates\FunctionAppSlot.json
 	EndProjectSection
 EndProject
 Global

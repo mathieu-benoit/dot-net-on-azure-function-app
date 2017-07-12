@@ -37,5 +37,15 @@
         }
       }
     }
-  ]
+  ],
+  "outputs": {
+    "functionKey": {
+      "type": "string",
+      "value": "[reference('functionapp').outputs.functionKey]"
+    },
+    "functionUrl": {
+      "type": "string",
+      "value": "[reference('functionapp').outputs.functionUrl]"
+    }
+  }
 }

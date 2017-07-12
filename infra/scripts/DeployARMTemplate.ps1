@@ -3,11 +3,11 @@
 Param(
     [string] $ResourceGroupLocation = 'East US',
     [string] [Parameter(Mandatory=$true)] $ResourceGroupName,
-    [string] $TemplateFile = '..\templates\AppServicePlan.json'
+    [string] $TemplateFile = '..\templates\deploy.json'
 )
 
 #Login-AzureRmAccount
-#Select-AzureSubscription "MySubscription"
+#Select-AzureRmSubscription -SubscriptionId $SubscriptionId;
 New-AzureRmResourceGroup -Name $ResourceGroupName -Location $ResourceGroupLocation
 New-AzureRmResourceGroupDeployment -Name $ResourceGroupName `
                                        -ResourceGroupName $ResourceGroupName `

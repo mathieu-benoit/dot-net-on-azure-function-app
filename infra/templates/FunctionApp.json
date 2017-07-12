@@ -11,9 +11,11 @@
   },
   "resources": [
     {
-      "apiVersion": "2016-03-01",
+      "apiVersion": "2016-08-01",
       "name": "[parameters('webAppName')]",
       "type": "Microsoft.Web/sites",
+      "location": "[resourceGroup().location]",
+      "kind": "functionapp",
       "properties": {
         "name": "[parameters('webAppName')]",
         "siteConfig": {
@@ -48,18 +50,28 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
-      ],
-      "location": "[resourceGroup().location]",
-      "kind": "functionapp"
+      ]
     },
     {
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "2016-01-01",
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[parameters('storageName')]",
       "location": "[resourceGroup().location]",
-      "properties": {
-        "accountType": "Standard_LRS"
-      }
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "kind": "Storage"
     }
-  ]
+  ],
+  "outputs": {
+    "functionKey": {
+      "type": "string",
+      "value": "[listsecrets(resourceId('Microsoft.Web/sites/functions', parameters('webAppName')),'2015-08-01').key]"
+    },
+    "functionUrl": {
+      "type": "string",
+      "value": "[listsecrets(resourceId('Microsoft.Web/sites/functions', parameters('webAppName')),'2015-08-01').trigger_url]"
+    }
+  }
 }
