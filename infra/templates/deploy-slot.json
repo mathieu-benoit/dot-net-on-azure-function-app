@@ -47,7 +47,7 @@
     },
     {
       "apiVersion": "2015-01-01",
-      "name": "functionApp",
+      "name": "functionAppSlot",
       "type": "Microsoft.Resources/deployments",
       "dependsOn": [
         "[concat('Microsoft.Resources/deployments/', 'applicationInsights')]"
