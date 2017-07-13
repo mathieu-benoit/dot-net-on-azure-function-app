@@ -49,7 +49,7 @@ TODO
   - Search folder = $(System.DefaultWorkingDirectory)
   - Build Platform = $(BuildPlatform)
   - Build Configuration = $(BuildConfiguration)
-- Validate ARM Templates
+- Validate ARM Templates: production
   - Type = Azure Resource Group Deployment
   - Version = 2.*
   - Azure subscription = set appropriate
@@ -58,7 +58,18 @@ TODO
   - Location = East US
   - Template location = Linked artifact
   - Template = infra/templates/deploy.json
-  - Override template parameters = -functionAppName tmpforvalidation -storageName tmpforvalidation
+  - Override template parameters = -functionAppName tmpforvalidation
+  - Deployment mode = Validation only
+- Validate ARM Templates: staging
+  - Type = Azure Resource Group Deployment
+  - Version = 2.*
+  - Azure subscription = set appropriate
+  - Action = Create or update resource group
+  - Resource group = $(ValidateTemplatesResourceGroup)
+  - Location = East US
+  - Template location = Linked artifact
+  - Template = infra/templates/deploy-slot.json
+  - Override template parameters = -functionAppName tmpforvalidation
   - Deployment mode = Validation only
 - Remove temporary ValidateTemplatesResourceGroup
   - Type = Azure Resource Group Deployment
