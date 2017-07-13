@@ -36,9 +36,9 @@ TODO
   - Location = $(Location)
   - Template location = Linked artifact
   - Template = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/infra/[deploy.json](../infra/templates/deploy.json)
-  - Override Template Parameters = -functionAppName $(ResourceGroupName) -storageName $(ResourceGroupName)
+  - Override Template Parameters = -functionAppName $(ResourceGroupName)
   - Deployment Mode = Incremental
-- Ensure Production Function App exists
+- Provision Staging
   - Type = Azure Resource Group Deployment
   - Version = 2.*
   - Azure Subscription = set appropriate
@@ -46,10 +46,10 @@ TODO
   - Resource Group = $(ResourceGroupName)
   - Location = $(Location)
   - Template location = Linked artifact
-  - Template = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/infra/[deploy.json](../infra/templates/deploy.json)
-  - Override Template Parameters = -hostingPlanName $(ResourceGroupName) -webAppName $(ResourceGroupName) -storageName $(ResourceGroupName)
+  - Template = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/infra/[deplo-slot.json](../infra/templates/deploy-slot.json)
+  - Override Template Parameters = -functionAppName $(ResourceGroupName) -slotName $(SlotName)
   - Deployment Mode = Incremental
-- Deploy Web App
+- Deploy Function App on Staging
   - Type = Deploy Staging
   - Version = 3.*
   - Azure Subscription = set appropriate
