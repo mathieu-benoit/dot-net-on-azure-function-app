@@ -3,13 +3,16 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "functionAppName": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     },
     "storageName": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     },
     "applicationInsightsInstrumentationKey": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     }
   },
   "resources": [
@@ -25,7 +28,7 @@
       "kind": "Storage"
     },
     {
-      "apiVersion": "2016-08-01",
+      "apiVersion": "2015-08-01",
       "name": "[parameters('functionAppName')]",
       "type": "Microsoft.Web/sites",
       "location": "[resourceGroup().location]",
@@ -41,7 +44,7 @@
         {
           "name": "slotConfigNames",
           "type": "config",
-          "apiVersion": "2016-08-01",
+          "apiVersion": "2015-08-01",
           "dependsOn": [
             "[resourceId('Microsoft.Web/sites', parameters('functionAppName'))]"
           ],
@@ -56,7 +59,7 @@
           }
         },
         {
-          "apiVersion": "2016-08-01",
+          "apiVersion": "2015-08-01",
           "name": "appsettings",
           "type": "config",
           "dependsOn": [

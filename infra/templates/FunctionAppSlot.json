@@ -2,11 +2,19 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "webAppName": {
+    "functionAppName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "storageName": {
       "type": "string",
       "minLength": 1
     },
     "slotName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "applicationInsightsInstrumentationKey": {
       "type": "string",
       "minLength": 1
     }
@@ -15,17 +23,49 @@
   "resources": [
     {
       "apiVersion": "2015-08-01",
-      "name": "[concat(parameters('webAppName'), '/', parameters('slotName'))]",
+      "name": "[concat(parameters('functionAppName'), '/', parameters('slotName'))]",
       "type": "Microsoft.Web/sites/slots",
       "location": "[resourceGroup().location]",
       "dependsOn": [],
       "properties": {
-        "name": "[concat(parameters('webAppName'), '(', parameters('slotName'), ')')]",
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('webAppName'))]"
+        "name": "[concat(parameters('functionAppName'), '(', parameters('slotName'), ')')]"
       },
-      "tags": {
-        "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('webAppName'))]": "Resource"
-      }
+      "resources": [
+        {
+          "name": "slotConfigNames",
+          "type": "config",
+          "apiVersion": "2015-08-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites/slots', parameters('functionAppName'), parameters('slotName'))]"
+          ],
+          "tags": {
+            "displayName": "slotConfigNames"
+          },
+          "properties": {
+            "appSettingNames": [
+              "WEBSITE_CONTENTSHARE",
+              "APPINSIGHTS_INSTRUMENTATIONKEY"
+            ]
+          }
+        },
+        {
+          "apiVersion": "2015-08-01",
+          "name": "appsettings",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites/slots', parameters('functionAppName'), parameters('slotName'))]"
+          ],
+          "properties": {
+            "AzureWebJobsDashboard": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageName')), '2015-05-01-preview').key1)]",
+            "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageName')), '2015-05-01-preview').key1)]",
+            "FUNCTIONS_EXTENSION_VERSION": "~1",
+            "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageName')), '2015-05-01-preview').key1)]",
+            "WEBSITE_CONTENTSHARE": "[parameters('slotName')]",
+            "AzureWebJobsSecretStorageType": "Blob",
+            "APPINSIGHTS_INSTRUMENTATIONKEY": "[parameters('applicationInsightsInstrumentationKey')]"
+          }
+        }
+      ]
     }
   ]
 }

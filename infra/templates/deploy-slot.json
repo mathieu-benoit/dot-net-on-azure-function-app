@@ -1,0 +1,78 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "functionAppName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "slotName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "staging"
+    },
+    "storageName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[parameters('functionAppName')]"
+    },
+    "appInsightsName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('functionAppName'), '-', parameters('slotName'))]"
+    },
+    "templateLinkBase": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "https://raw.githubusercontent.com/mathieu-benoit/dot-net-on-azure-function-app/master/infra/templates/"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "apiVersion": "2015-01-01",
+      "name": "applicationInsights",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('templateLinkBase'), 'ApplicationInsights.json')]"
+        },
+        "parameters": {
+          "appInsightsName": {
+            "value": "[parameters('appInsightsName')]"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2015-01-01",
+      "name": "functionApp",
+      "type": "Microsoft.Resources/deployments",
+      "dependsOn": [
+        "[concat('Microsoft.Resources/deployments/', 'applicationInsights')]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('templateLinkBase'), 'FunctionAppSlot.json')]"
+        },
+        "parameters": {
+          "functionAppName": {
+            "value": "[parameters('functionAppName')]"
+          },
+          "slotName": {
+            "value": "[parameters('slotName')]"
+          },
+          "storageName": {
+            "value": "[parameters('storageName')]"
+          },
+          "applicationInsightsInstrumentationKey": {
+            "value": "[reference('applicationInsights').outputs.instrumentationKey.value]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {}
+}
