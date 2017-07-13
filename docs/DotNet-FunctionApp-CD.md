@@ -27,15 +27,37 @@ TODO
 - Location = East US
 
 ### Steps 
+- Ensure Production Function App exists
+  - Type = Azure Resource Group Deployment
+  - Version = 2.*
+  - Azure Subscription = set appropriate
+  - Action = Create Or Update Resource Group
+  - Resource Group = $(ResourceGroupName)
+  - Location = $(Location)
+  - Template location = Linked artifact
+  - Template = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/infra/[deploy.json](../infra/templates/deploy.json)
+  - Override Template Parameters = -functionAppName $(ResourceGroupName) -storageName $(ResourceGroupName)
+  - Deployment Mode = Incremental
+- Ensure Production Function App exists
+  - Type = Azure Resource Group Deployment
+  - Version = 2.*
+  - Azure Subscription = set appropriate
+  - Action = Create Or Update Resource Group
+  - Resource Group = $(ResourceGroupName)
+  - Location = $(Location)
+  - Template location = Linked artifact
+  - Template = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/infra/[deploy.json](../infra/templates/deploy.json)
+  - Override Template Parameters = -hostingPlanName $(ResourceGroupName) -webAppName $(ResourceGroupName) -storageName $(ResourceGroupName)
+  - Deployment Mode = Incremental
 - Deploy Web App
-  - Type = Azure App Service Deploy
+  - Type = Deploy Staging
   - Version = 3.*
   - Azure Subscription = set appropriate
   - App Service Name = $(ResourceGroupName)
   - Deploy to Slot = true
   - Resource Group = $(ResourceGroupName)
   - Slot = $(SlotName)
-  - Package or Folder = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/drop
+  - Package or Folder = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/function
   - Publish using Web Deploy = true
   - Take App Offline = true
 
@@ -67,7 +89,8 @@ TODO
 - Set Resource Group Lock
   - Type = Azure PowerShell
   - Version = 1.*
-  - Azure Connection Type = set appropriate
-  - Azure RM Subscription = set appropriate
-  - Script Path = $(System.DefaultWorkingDirectory)/AspDotNetCore-AppServiceWindows-CI/scripts/[AddResourceGroupLock.ps1](../infra/scripts/AddResourceGroupLock.ps1)
+  - Azure Connection Type = Azure Resource Manager
+  - Azure Subscription = set appropriate
+  - Script Type = Script File Path
+  - Script Path = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/[AddResourceGroupLock.ps1](../infra/scripts/AddResourceGroupLock.ps1)
   - Script Arguments = $(ResourceGroupName)

@@ -7,18 +7,22 @@
       "minLength": 1
     }
   },
-  "variables": {},
   "resources": [
     {
-      "apiVersion": "2016-08-01",
+      "apiVersion": "2014-08-01",
       "name": "[parameters('appInsightsName')]",
       "type": "Microsoft.Insights/components",
       "location": "[resourceGroup().location]",
-      "dependsOn": [],
       "properties": {
-        "ApplicationId": "[parameters('appInsightsName')]"
+        "ApplicationId": "[parameters('appInsightsName')]",
+        "Application_Type": "other"
       }
     }
   ],
-  "outputs": {}
+  "outputs": {
+    "instrumentationKey": {
+      "value": "[reference(resourceId('Microsoft.Insights/Components', parameters('appInsightsName'))).InstrumentationKey]",
+      "type": "string"
+    }
+  }
 }

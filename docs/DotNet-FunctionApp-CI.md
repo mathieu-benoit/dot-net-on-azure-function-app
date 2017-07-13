@@ -58,7 +58,7 @@ TODO
   - Location = East US
   - Template location = Linked artifact
   - Template = infra/templates/deploy.json
-  - Override template parameters = -hostingPlanName tmpforvalidation -storageName tmpforvalidation -webAppName tmpforvalidation
+  - Override template parameters = -functionAppName tmpforvalidation -storageName tmpforvalidation
   - Deployment mode = Validation only
 - Remove temporary ValidateTemplatesResourceGroup
   - Type = Azure Resource Group Deployment
