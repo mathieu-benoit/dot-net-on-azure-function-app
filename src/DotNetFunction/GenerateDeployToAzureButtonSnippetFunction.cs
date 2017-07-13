@@ -9,7 +9,7 @@ namespace DotNetFunction
     public static class GenerateDeployToAzureButtonSnippetFunction
     {
         [FunctionName("GenerateDeployToAzureButtonSnippet")]
-        public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "GenerateDeployToAzureButtonSnippet/{sourceUri}")]HttpRequestMessage request, string sourceUri, TraceWriter log)
+        public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "GenerateDeployToAzureButtonSnippet/{sourceUri}")]HttpRequestMessage request, string sourceUri, TraceWriter log)
         {
             if(string.IsNullOrEmpty(sourceUri))
                 return request.CreateResponse(HttpStatusCode.OK, string.Empty);
