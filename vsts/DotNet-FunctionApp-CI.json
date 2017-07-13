@@ -115,7 +115,7 @@
                 "csmParametersFileLink": "",
                 "csmFile": "infra/templates/deploy.json",
                 "csmParametersFile": "",
-                "overrideParameters": "-storageName test -webAppName test",
+                "overrideParameters": "-hostingPlanName tmpforvalidation -webAppName tmpforvalidation -storageName tmpforvalidation",
                 "deploymentMode": "Validation",
                 "enableDeploymentPrerequisites": "None",
                 "deploymentGroupEndpoint": "",
@@ -320,12 +320,18 @@
         {
             "name": "CurrentBuildsInQueue",
             "scope": "refs/heads/master",
-            "intValue": 0
+            "intValue": 1
         },
         {
             "name": "CurrentBuildsInProgress",
             "scope": "refs/heads/master",
-            "intValue": 1
+            "intValue": 0
+        },
+        {
+            "name": "CanceledBuilds",
+            "scope": "refs/heads/master",
+            "intValue": 0,
+            "date": "2017-07-12T00:00:00.000Z"
         },
         {
             "name": "CanceledBuilds",
@@ -337,7 +343,19 @@
             "name": "FailedBuilds",
             "scope": "refs/heads/master",
             "intValue": 3,
+            "date": "2017-07-12T00:00:00.000Z"
+        },
+        {
+            "name": "FailedBuilds",
+            "scope": "refs/heads/master",
+            "intValue": 3,
             "date": "2017-07-11T00:00:00.000Z"
+        },
+        {
+            "name": "PartiallySuccessfulBuilds",
+            "scope": "refs/heads/master",
+            "intValue": 0,
+            "date": "2017-07-12T00:00:00.000Z"
         },
         {
             "name": "PartiallySuccessfulBuilds",
@@ -348,8 +366,20 @@
         {
             "name": "SuccessfulBuilds",
             "scope": "refs/heads/master",
+            "intValue": 0,
+            "date": "2017-07-12T00:00:00.000Z"
+        },
+        {
+            "name": "SuccessfulBuilds",
+            "scope": "refs/heads/master",
             "intValue": 7,
             "date": "2017-07-11T00:00:00.000Z"
+        },
+        {
+            "name": "TotalBuilds",
+            "scope": "refs/heads/master",
+            "intValue": 3,
+            "date": "2017-07-12T00:00:00.000Z"
         },
         {
             "name": "TotalBuilds",
@@ -423,8 +453,8 @@
     "uri": "vstfs:///Build/Definition/27",
     "path": "\\",
     "type": 2,
-    "revision": 23,
-    "createdDate": "2017-07-12T21:08:14.013Z",
+    "revision": 25,
+    "createdDate": "2017-07-13T14:43:43.380Z",
     "project": {
         "id": "8994a52e-3e36-43b0-aad3-751820cb0816",
         "name": "DotNetMethodOnFunctionApp",
