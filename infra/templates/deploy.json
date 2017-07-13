@@ -2,6 +2,10 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "hostingPlanName": {
+      "type": "string",
+      "minLength": 1
+    },
     "webAppName": {
       "type": "string",
       "minLength": 1
@@ -28,6 +32,9 @@
           "uri": "[concat(parameters('templateLinkBase'), 'FunctionApp.json')]"
         },
         "parameters": {
+          "hostingPlanName": {
+            "value": "[parameters('hostingPlanName')]"
+          },
           "webAppName": {
             "value": "[parameters('webAppName')]"
           },
@@ -38,6 +45,5 @@
       }
     }
   ],
-  "outputs": {
-  }
+  "outputs": {}
 }
