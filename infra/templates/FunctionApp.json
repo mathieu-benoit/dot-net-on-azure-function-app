@@ -10,9 +10,20 @@
     },
     "applicationInsightsInstrumentationKey": {
       "type": "string"
-    },
+    }
   },
   "resources": [
+    {
+      "apiVersion": "2016-01-01",
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[parameters('storageName')]",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "kind": "Storage"
+    },
     {
       "apiVersion": "2016-08-01",
       "name": "[parameters('functionAppName')]",
@@ -62,17 +73,6 @@
           }
         }
       ]
-    },
-    {
-      "apiVersion": "2016-01-01",
-      "type": "Microsoft.Storage/storageAccounts",
-      "name": "[parameters('storageName')]",
-      "location": "[resourceGroup().location]",
-      "sku": {
-        "name": "Standard_LRS",
-        "tier": "Standard"
-      },
-      "kind": "Storage"
     }
   ],
   "outputs": {}

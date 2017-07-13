@@ -60,7 +60,7 @@
             "value": "[parameters('storageName')]"
           },
           "applicationInsightsInstrumentationKey": {
-            "value": "[reference('applicationInsights').outputs.instrumentationKey]"
+            "value": "[reference('applicationInsights').outputs.instrumentationKey.value]"
           }
         }
       }
