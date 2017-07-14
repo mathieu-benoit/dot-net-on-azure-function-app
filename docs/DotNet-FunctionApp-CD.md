@@ -9,24 +9,30 @@ TODO
 # Create manually the Release Definition
 
 ## Overview
+
 ![Release Overview](/docs/imgs/DotNet-FunctionApp-CD.PNG)
 
 ## Staging Environment
+
 ![Staging Release Overview](/docs/imgs/DotNet-FunctionApp-CD-Staging.PNG)
 
 ### Deployment conditions
+
 - Trigger = After release creation
 
 ### Approvals
+
 - Pre-deployment approver = Automatic
 - Post-deployment approver = Automatic
 
 ### Variables
+
 - ResourceGroupName = set appropriate
 - SlotName = staging
 - Location = East US
 
 ### Steps 
+
 - Ensure Production Function App exists
   - Type = Azure Resource Group Deployment
   - Version = 2.*
@@ -62,21 +68,26 @@ TODO
   - Take App Offline = true
 
 ## Production Environment
+
 ![Production Release Overview](/docs/imgs/DotNet-FunctionApp-CD-Production.PNG)
 
 ### Deployment conditions
+
 - Trigger = After successful deployment to another environment ("Staging")
 
 ### Approvals
+
 - Pre-deployment approver = Specific Users (set appropriate users)
 - Post-deployment approver = Automatic
 
 ### Variables
+
 - ResourceGroupName = set appropriate
 - SlotToSwap = staging
 - Location = East US
 
 ### Steps
+
 - Swap Staging to Production
   - Type = Azure App Service Manage (PREVIEW)
   - Version = 0.*

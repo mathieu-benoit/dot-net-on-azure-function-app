@@ -1,4 +1,4 @@
-Here is one example to Build an .NET method to an Azure Function App via VSTS. You could adapt it with your own context, needs and constraints.
+Here is one example to Build a .NET method to be deployed as an Azure Function App via VSTS. You could adapt it with your own context, needs and constraints.
 
 ![Build Overview](/docs/imgs/DotNet-FunctionApp-CI.PNG)
 
@@ -11,23 +11,28 @@ TODO
 # Create manually the Build Definition
 
 ## Variables
+
 - BuildConfiguration = release
 - ValidateTemplatesResourceGroup = validate-templates-rg
 
 ## Repository
+
 - Repository Type = GitHub
 - Connection = set appropriate
 - Repository = mathieu-benoit/dot-net-on-azure-function-app
 - Default branch = master
 
 ## Triggers
+
 - Continuous Integration (CI) = true
 
 ## Process - Build process
+
 - Name = DotNet-FunctionApp-CI
 - Default agent queue = Hosted VS2017
 
 ## Steps 
+
 - NuGet restore
   - Type = NuGet Installer
   - Version = 0.*

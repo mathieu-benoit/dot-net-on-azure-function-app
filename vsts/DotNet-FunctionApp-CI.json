@@ -298,7 +298,7 @@
             }
         },
         {
-            "enabled": false,
+            "enabled": true,
             "definition": {
                 "id": "a9db38f9-9fdc-478c-b0f9-464221e58316"
             },
@@ -314,6 +314,18 @@
                 "id": "57578776-4c22-4526-aeb0-86b6da17ee9c"
             },
             "inputs": {}
+        }
+    ],
+    "triggers": [
+        {
+            "branchFilters": [
+                "+master"
+            ],
+            "pathFilters": [],
+            "batchChanges": false,
+            "maxConcurrentBuildsPerBranch": 1,
+            "pollingInterval": 0,
+            "triggerType": 2
         }
     ],
     "variables": {
@@ -417,7 +429,7 @@
         {
             "name": "SuccessfulBuilds",
             "scope": "refs/heads/master",
-            "intValue": 1,
+            "intValue": 2,
             "date": "2017-07-13T00:00:00.000Z"
         },
         {
@@ -435,7 +447,7 @@
         {
             "name": "TotalBuilds",
             "scope": "refs/heads/master",
-            "intValue": 1,
+            "intValue": 2,
             "date": "2017-07-13T00:00:00.000Z"
         },
         {
@@ -516,8 +528,8 @@
     "uri": "vstfs:///Build/Definition/27",
     "path": "\\",
     "type": 2,
-    "revision": 30,
-    "createdDate": "2017-07-13T22:05:43.500Z",
+    "revision": 32,
+    "createdDate": "2017-07-14T19:48:20.323Z",
     "project": {
         "id": "8994a52e-3e36-43b0-aad3-751820cb0816",
         "name": "DotNetMethodOnFunctionApp",
