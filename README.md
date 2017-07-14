@@ -10,7 +10,7 @@ ALM and DevOps practices with a sample .NET method hosted in Azure Function App.
 
 # Build Definition with VSTS
 
-[Build - CI](/docs/DotNet-FunctionApp-CI.md)
+Details could be found here: [Build - CI](/docs/DotNet-FunctionApp-CI.md)
 
 Here are the DevOps practices highlighted within this CI pipeline:
 - CI/Build triggered at each commit
@@ -23,10 +23,15 @@ Here are the DevOps practices highlighted within this CI pipeline:
 
 # Release Definition with VSTS
 
-[Release - CD](/docs/DotNet-FunctionApp-CD.md)
+Details could be found here: [Release - CD](/docs/DotNet-FunctionApp-CD.md)
 
 Here are the DevOps practices highlighted within this CD pipeline:
 - CD triggered at each CI/Build succesfully completed
+- Infrastructure as Code with the ARM Templates and the PowerShell scripts
+- Deploy the .NET method on the Azure serverless service: Azure Function App
+- Use the Staging Slot mechanism with the associated Swap action to minimize downtime while upgrading the Production
+- Securing the production environment by adding a Lock on the associated Azure Resource Group
+- Monitor the Function App by using Application Insights
 
 # Other Misc DevOps practices implemented
 
