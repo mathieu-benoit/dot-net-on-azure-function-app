@@ -39,7 +39,7 @@ Here are the DevOps practices highlighted within this CD pipeline:
 
 # Alternatives and potantial further considerations
 
-- Describre local setup
+- Describre [local setup with Visual Studio](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-your-first-function-visual-studio)
 - Add Integration Tests within the CD pipeline
 - Instead of having a compiled .NET method/library, use static files with C#, NodeJS, etc.
 - Instead of using a Consumption Plan to host the Azure Function, use an App Service Plan to leverage its capabilities: more slots, etc.
