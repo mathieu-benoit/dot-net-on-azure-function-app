@@ -105,3 +105,6 @@ TODO
   - Script Type = Script File Path
   - Script Path = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/[AddResourceGroupLock.ps1](../infra/scripts/AddResourceGroupLock.ps1)
   - Script Arguments = $(ResourceGroupName)
+- Check Production URL
+  - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
+  - URL = https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction/test

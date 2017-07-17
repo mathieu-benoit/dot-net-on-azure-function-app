@@ -50,8 +50,9 @@ TODO
   - Type = Visual Studio Test
   - Version = 2.*
   - Select tests using = Test assemblies
-  - Test assemblies = \**\$(BuildConfiguration)\*test*.dll\n!**\obj\**
+  - Test assemblies = \**\$(BuildConfiguration)\*UnitTests.dll\n!**\obj\**
   - Search folder = $(System.DefaultWorkingDirectory)
+  - Test filter criteria = TestCategory=UnitTests
   - Build Platform = $(BuildPlatform)
   - Build Configuration = $(BuildConfiguration)
 - Validate ARM Templates: production

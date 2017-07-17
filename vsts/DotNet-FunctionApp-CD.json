@@ -1,7 +1,7 @@
 {
     "source": 2,
     "id": 1,
-    "revision": 17,
+    "revision": 23,
     "name": "DotNet-FunctionApp-CD",
     "description": null,
     "createdBy": {
@@ -19,11 +19,17 @@
         "url": "https://app.vssps.visualstudio.com/A6d1a4ff8-9a1f-46cb-bd61-54cb9a797939/_apis/Identities/17256fe4-f2a3-4370-b081-ec283edb6a77",
         "imageUrl": "https://mabenoit-ms.visualstudio.com/_api/_common/identityImage?id=17256fe4-f2a3-4370-b081-ec283edb6a77"
     },
-    "modifiedOn": "2017-07-13T22:17:15.430Z",
+    "modifiedOn": "2017-07-17T21:48:37.860Z",
     "path": "\\",
     "variables": {
         "Location": {
             "value": "East US"
+        },
+        "ReleaseConfiguration": {
+            "value": "Release"
+        },
+        "ReleasePlatform": {
+            "value": "Any CPU"
         },
         "SlotName": {
             "value": "staging"
@@ -43,30 +49,8 @@
                 "imageUrl": "https://mabenoit-ms.visualstudio.com/_api/_common/identityImage?id=17256fe4-f2a3-4370-b081-ec283edb6a77"
             },
             "variables": {
-                "AdministratorLogin": {
-                    "value": ""
-                },
-                "AdministratorLoginPassword": {
-                    "value": null,
-                    "isSecret": true
-                },
-                "ConnectionStringName": {
-                    "value": ""
-                },
-                "DatabaseName": {
-                    "value": ""
-                },
-                "ReleaseConfiguration": {
-                    "value": "Release"
-                },
-                "ReleasePlatform": {
-                    "value": "Any CPU"
-                },
                 "ResourceGroupName": {
                     "value": "mabenoittest"
-                },
-                "ServerName": {
-                    "value": ""
                 }
             },
             "preDeployApprovals": {
@@ -262,30 +246,8 @@
                 "imageUrl": "https://mabenoit-ms.visualstudio.com/_api/_common/identityImage?id=17256fe4-f2a3-4370-b081-ec283edb6a77"
             },
             "variables": {
-                "AdministratorLogin": {
-                    "value": ""
-                },
-                "AdministratorLoginPassword": {
-                    "value": null,
-                    "isSecret": true
-                },
-                "ConnectionStringName": {
-                    "value": ""
-                },
-                "DatabaseName": {
-                    "value": ""
-                },
-                "ReleaseConfiguration": {
-                    "value": "Release"
-                },
-                "ReleasePlatform": {
-                    "value": "Any CPU"
-                },
                 "ResourceGroupName": {
                     "value": "mabenoittest"
-                },
-                "ServerName": {
-                    "value": ""
                 },
                 "SlotToSwap": {
                     "value": "staging"
@@ -379,6 +341,22 @@
                                 "ScriptPath": "$(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/AddResourceGroupLock.ps1",
                                 "Inline": "# You can write your azure powershell scripts inline here. \n# You can also pass predefined and custom variables to this script using arguments",
                                 "ScriptArguments": "$(ResourceGroupName)"
+                            }
+                        },
+                        {
+                            "taskId": "2a1711d0-b4a4-11e6-a3c2-edf36ba3fddc",
+                            "version": "1.*",
+                            "name": "Check Production URL",
+                            "refName": "check-url_1",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "url": "https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction/test"
                             }
                         }
                     ]
