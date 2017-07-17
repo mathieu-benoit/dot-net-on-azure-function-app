@@ -58,6 +58,9 @@
           "uri": "[concat(parameters('templateLinkBase'), 'FunctionApp.json')]"
         },
         "parameters": {
+          "hostingPlanName": {
+            "value": "[parameters('hostingPlanName')]"
+          },
           "functionAppName": {
             "value": "[parameters('functionAppName')]"
           },
