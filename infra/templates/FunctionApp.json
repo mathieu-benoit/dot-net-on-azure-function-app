@@ -2,6 +2,10 @@
   "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "hostingPlanName": {
+      "type": "string",
+      "minLength": 1
+    },
     "functionAppName": {
       "type": "string",
       "minLength": 1
@@ -28,6 +32,17 @@
       "kind": "Storage"
     },
     {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2015-08-01",
+      "name": "[parameters('hostingPlanName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "name": "[parameters('hostingPlanName')]",
+        "computeMode": "Dynamic",
+        "sku": "Dynamic"
+      }
+    },
+    {
       "apiVersion": "2015-08-01",
       "name": "[parameters('functionAppName')]",
       "type": "Microsoft.Web/sites",
@@ -35,10 +50,12 @@
       "kind": "functionapp",
       "properties": {
         "name": "[parameters('functionAppName')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]", 
         "clientAffinityEnabled": false
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]",
+        "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
       ],
       "resources": [
         {
