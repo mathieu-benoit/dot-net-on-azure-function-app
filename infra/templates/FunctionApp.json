@@ -70,7 +70,7 @@
             "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageName')), '2015-05-01-preview').key1)]",
             "FUNCTIONS_EXTENSION_VERSION": "~1",
             "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageName')), '2015-05-01-preview').key1)]",
-            "WEBSITE_CONTENTSHARE": "[parameters('functionAppName')]",
+            "WEBSITE_CONTENTSHARE": "production",
             "AzureWebJobsSecretStorageType": "Blob",
             "APPINSIGHTS_INSTRUMENTATIONKEY": "[parameters('applicationInsightsInstrumentationKey')]"
           }
