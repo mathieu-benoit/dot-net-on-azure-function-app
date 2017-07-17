@@ -66,7 +66,7 @@ TODO
   - Package or Folder = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/function
   - Publish using Web Deploy = true
   - Take App Offline = true
-- Run UnitTests
+- Run IntegrationTests
   - Type = Visual Studio Test
   - Version = 2.*
   - Select tests using = Test assemblies
