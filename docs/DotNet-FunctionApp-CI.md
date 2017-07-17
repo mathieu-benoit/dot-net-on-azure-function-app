@@ -46,7 +46,7 @@ TODO
   - Visual Studio Version = Latest
   - Platform = $(BuildPlatform)
   - Configuration = $(BuildConfiguration)
-- Test Assemblies
+- Run UnitTests
   - Type = Visual Studio Test
   - Version = 2.*
   - Select tests using = Test assemblies
@@ -88,11 +88,11 @@ TODO
   - Version = 2.*
   - Source Folder = $(build.sourcesdirectory)/src/DotNetFunction/bin/$(BuildConfiguration)/net461
   - Content = **
-  - Target Folder = $(build.artifactstagingdirectory)
+  - Target Folder = $(build.artifactstagingdirectory)/function
 - Publish Artifact: function
   - Type = Publish Build Artifacts
   - Version = 1.*
-  - Path to Publish = $(build.artifactstagingdirectory)
+  - Path to Publish = $(build.artifactstagingdirectory)/function
   - Artifact Name = function
   - Artifact Type = Server
 - Publish Artifact: infra
@@ -106,4 +106,16 @@ TODO
   - Version = 1.*
   - Path to Publish = infra/scripts
   - Artifact Name = scripts
+  - Artifact Type = Server
+- Copy Files: integration-tests
+  - Type = Copy Files
+  - Version = 2.*
+  - Source Folder = $(build.sourcesdirectory)/test/DotNetFunction.IntegrationTests/bin/$(BuildConfiguration)
+  - Content = **
+  - Target Folder = $(build.artifactstagingdirectory)/integration-tests
+- Publish Artifact: function
+  - Type = Publish Build Artifacts
+  - Version = 1.*
+  - Path to Publish = $(build.artifactstagingdirectory)/integration-tests
+  - Artifact Name = integration-tests
   - Artifact Type = Server

@@ -95,7 +95,7 @@
         {
             "name": "CurrentBuildsInProgress",
             "scope": "refs/heads/master",
-            "intValue": 1
+            "intValue": 0
         },
         {
             "name": "CanceledBuilds",
@@ -190,7 +190,7 @@
         {
             "name": "SuccessfulBuilds",
             "scope": "refs/heads/master",
-            "intValue": 2,
+            "intValue": 8,
             "date": "2017-07-17T00:00:00.000Z"
         },
         {
@@ -220,7 +220,7 @@
         {
             "name": "TotalBuilds",
             "scope": "refs/heads/master",
-            "intValue": 3,
+            "intValue": 9,
             "date": "2017-07-17T00:00:00.000Z"
         },
         {
@@ -268,6 +268,7 @@
             {
                 "steps": [
                     {
+                        "environment": {},
                         "enabled": true,
                         "continueOnError": false,
                         "alwaysRun": false,
@@ -292,6 +293,7 @@
                         }
                     },
                     {
+                        "environment": {},
                         "enabled": true,
                         "continueOnError": false,
                         "alwaysRun": false,
@@ -319,10 +321,11 @@
                         }
                     },
                     {
+                        "environment": {},
                         "enabled": true,
                         "continueOnError": false,
                         "alwaysRun": false,
-                        "displayName": "Test Assemblies",
+                        "displayName": "Run UnitTests",
                         "timeoutInMinutes": 0,
                         "condition": "succeeded()",
                         "refName": "VSTest_3",
@@ -333,7 +336,7 @@
                         },
                         "inputs": {
                             "testSelector": "testAssemblies",
-                            "testAssemblyVer2": "**\\$(BuildConfiguration)\\*test*.dll\n!**\\obj\\**",
+                            "testAssemblyVer2": "**\\$(BuildConfiguration)\\*UnitTests.dll\n!**\\obj\\**",
                             "testPlan": "",
                             "testSuite": "",
                             "testConfiguration": "",
@@ -360,6 +363,7 @@
                         }
                     },
                     {
+                        "environment": {},
                         "enabled": true,
                         "continueOnError": false,
                         "alwaysRun": false,
@@ -393,6 +397,7 @@
                         }
                     },
                     {
+                        "environment": {},
                         "enabled": true,
                         "continueOnError": false,
                         "alwaysRun": false,
@@ -426,6 +431,7 @@
                         }
                     },
                     {
+                        "environment": {},
                         "enabled": true,
                         "continueOnError": false,
                         "alwaysRun": false,
@@ -459,6 +465,7 @@
                         }
                     },
                     {
+                        "environment": {},
                         "enabled": true,
                         "continueOnError": false,
                         "alwaysRun": false,
@@ -474,13 +481,14 @@
                         "inputs": {
                             "SourceFolder": "$(build.sourcesdirectory)/src/DotNetFunction/bin/$(BuildConfiguration)/net461",
                             "Contents": "**\n",
-                            "TargetFolder": "$(build.artifactstagingdirectory)",
+                            "TargetFolder": "$(build.artifactstagingdirectory)/function",
                             "CleanTargetFolder": "false",
                             "OverWrite": "false",
                             "flattenFolders": "false"
                         }
                     },
                     {
+                        "environment": {},
                         "enabled": true,
                         "continueOnError": false,
                         "alwaysRun": true,
@@ -494,13 +502,14 @@
                             "definitionType": "task"
                         },
                         "inputs": {
-                            "PathtoPublish": "$(build.artifactstagingdirectory)",
+                            "PathtoPublish": "$(build.artifactstagingdirectory)/function",
                             "ArtifactName": "function",
                             "ArtifactType": "Container",
                             "TargetPath": "\\\\my\\share\\$(Build.DefinitionName)\\$(Build.BuildNumber)"
                         }
                     },
                     {
+                        "environment": {},
                         "enabled": true,
                         "continueOnError": false,
                         "alwaysRun": false,
@@ -521,6 +530,7 @@
                         }
                     },
                     {
+                        "environment": {},
                         "enabled": true,
                         "continueOnError": false,
                         "alwaysRun": false,
@@ -536,6 +546,50 @@
                         "inputs": {
                             "PathtoPublish": "infra/scripts",
                             "ArtifactName": "scripts",
+                            "ArtifactType": "Container",
+                            "TargetPath": "\\\\my\\share\\$(Build.DefinitionName)\\$(Build.BuildNumber)"
+                        }
+                    },
+                    {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Copy Files: integration-tests",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "refName": "ClonedCopyFiles_713",
+                        "task": {
+                            "id": "5bfb729a-a7c8-4a78-a7c3-8d717bb7c13c",
+                            "versionSpec": "2.*",
+                            "definitionType": "task"
+                        },
+                        "inputs": {
+                            "SourceFolder": "$(build.sourcesdirectory)/test/DotNetFunction.IntegrationTests/bin/$(BuildConfiguration)",
+                            "Contents": "**\n",
+                            "TargetFolder": "$(build.artifactstagingdirectory)/integration-tests",
+                            "CleanTargetFolder": "false",
+                            "OverWrite": "false",
+                            "flattenFolders": "false"
+                        }
+                    },
+                    {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Publish Artifact: integration-tests",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "refName": "PublishBuildArtifacts12",
+                        "task": {
+                            "id": "2ff763a7-ce83-4e1f-bc89-0ae63477cebe",
+                            "versionSpec": "1.*",
+                            "definitionType": "task"
+                        },
+                        "inputs": {
+                            "PathtoPublish": "$(build.sourcesdirectory)/integration-tests",
+                            "ArtifactName": "integration-tests",
                             "ArtifactType": "Container",
                             "TargetPath": "\\\\my\\share\\$(Build.DefinitionName)\\$(Build.BuildNumber)"
                         }
@@ -597,8 +651,8 @@
     "uri": "vstfs:///Build/Definition/27",
     "path": "\\",
     "type": 2,
-    "revision": 33,
-    "createdDate": "2017-07-17T21:19:40.517Z",
+    "revision": 38,
+    "createdDate": "2017-07-17T22:25:44.300Z",
     "project": {
         "id": "8994a52e-3e36-43b0-aad3-751820cb0816",
         "name": "DotNetMethodOnFunctionApp",

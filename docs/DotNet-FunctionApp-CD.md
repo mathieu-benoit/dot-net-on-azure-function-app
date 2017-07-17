@@ -66,6 +66,15 @@ TODO
   - Package or Folder = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/function
   - Publish using Web Deploy = true
   - Take App Offline = true
+- Run UnitTests
+  - Type = Visual Studio Test
+  - Version = 2.*
+  - Select tests using = Test assemblies
+  - Test assemblies = \**\$(BuildConfiguration)\*IntegrationTests.dll\n!**\obj\**
+  - Search folder = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/integration-tests
+  - Test filter criteria = TestCategory=IntegrationTests
+  - Build Platform = $(ReleasePlatform)
+  - Build Configuration = $(ReleaseConfiguration)
 
 ## Production Environment
 
