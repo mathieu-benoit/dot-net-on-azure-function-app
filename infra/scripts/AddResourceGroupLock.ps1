@@ -7,5 +7,5 @@ Param(
 )
 
 #Login-AzureRmAccount
-#Select-AzureSubscription "MySubscription"
-New-AzureRMResourceLock -LockName $LockName -LockLevel CanNotDelete -ResourceGroupName $ResourceGroupName
+#Select-AzureRmSubscription -SubscriptionId $SubscriptionId;
+New-AzureRMResourceLock -LockName $LockName -LockLevel CanNotDelete -ResourceGroupName $ResourceGroupName -Force

@@ -72,9 +72,13 @@ TODO
   - Test assemblies = *IntegrationTests.dll
   - Search folder = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/integration-tests
   - Test filter criteria = TestCategory=IntegrationTests
-  - Override test run parameters = -Url https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction/test
+  - Select test platform using = Version
+  - Test paltform version = Latest
+  - Settings file = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/integration-tests/TestRunParameters.runsettings
+  - Override test run parameters = -BaseUrl -BaseUrl https://$(ResourceGroupName)-$(SlotName).azurewebsites.net/api/SampleHelloDotNetFunction
   - Build Platform = $(ReleasePlatform)
   - Build Configuration = $(ReleaseConfiguration)
+  - Upload test attachments = true
 
 ## Production Environment
 
