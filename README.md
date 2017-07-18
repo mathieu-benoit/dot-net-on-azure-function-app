@@ -43,4 +43,4 @@ Here are the DevOps practices highlighted within this CD pipeline:
 - Add Integration Tests within the CD pipeline
 - Instead of having a compiled .NET method/library, use static files with C#, NodeJS, etc.
 - Instead of using a Consumption Plan to host the Azure Function, use an App Service Plan to leverage its capabilities: more slots, etc.
-- Instead of allowing 'anonymous' request you could/should setup another AuthorizationLevel and then [retrieve by code the key](https://stackoverflow.com/questions/43253453/get-function-host-keys-of-azure-function-in-powershell/44117841#44117841) for your URL ping test during your CD pipeline.
+- Instead of allowing 'anonymous' request you could/should setup another AuthorizationLevel and then [retrieve by ARM Template the key](https://stackoverflow.com/questions/43253453/get-function-host-keys-of-azure-function-in-powershell/44117841#44117841) or [by REST API](https://github.com/Azure/azure-webjobs-sdk-script/wiki/Key-management-API) for your URL ping test during your CD pipeline.
