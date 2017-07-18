@@ -11,9 +11,9 @@ namespace DotNetFunction.IntegrationTests
         private string BaseUrl = "http://localhost:7071/api/SampleHelloDotNetFunction";
 
         [TestInitialize()]
-        public void MyTestInitialize()
+        public void TestInitialize()
         {
-            if (!string.IsNullOrEmpty(TestContext.Properties["BaseUrl"] as string)) 
+            if (TestContext.Properties["BaseUrl"] != null)
             {
                 //Set the BaseURL from a build
                 BaseUrl = TestContext.Properties["BaseUrl"].ToString();
