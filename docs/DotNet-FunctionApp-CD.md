@@ -65,14 +65,14 @@ TODO
   - Slot = $(SlotName)
   - Package or Folder = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/function
   - Publish using Web Deploy = true
-  - Take App Offline = true
 - Run IntegrationTests
   - Type = Visual Studio Test
   - Version = 2.*
   - Select tests using = Test assemblies
-  - Test assemblies = \**\$(BuildConfiguration)\*IntegrationTests.dll\n!**\obj\**
+  - Test assemblies = *IntegrationTests.dll
   - Search folder = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/integration-tests
   - Test filter criteria = TestCategory=IntegrationTests
+  - Override test run parameters = -Url https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction/test
   - Build Platform = $(ReleasePlatform)
   - Build Configuration = $(ReleaseConfiguration)
 

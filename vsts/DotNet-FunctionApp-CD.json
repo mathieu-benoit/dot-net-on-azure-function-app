@@ -1,7 +1,7 @@
 {
     "source": 2,
     "id": 1,
-    "revision": 24,
+    "revision": 25,
     "name": "DotNet-FunctionApp-CD",
     "description": null,
     "createdBy": {
@@ -19,7 +19,7 @@
         "url": "https://app.vssps.visualstudio.com/A6d1a4ff8-9a1f-46cb-bd61-54cb9a797939/_apis/Identities/17256fe4-f2a3-4370-b081-ec283edb6a77",
         "imageUrl": "https://mabenoit-ms.visualstudio.com/_api/_common/identityImage?id=17256fe4-f2a3-4370-b081-ec283edb6a77"
     },
-    "modifiedOn": "2017-07-17T22:29:33.157Z",
+    "modifiedOn": "2017-07-17T22:35:06.913Z",
     "path": "\\",
     "variables": {
         "Location": {
@@ -230,7 +230,7 @@
                                 "vsTestVersion": "latest",
                                 "vstestLocation": "",
                                 "runSettingsFile": "",
-                                "overrideTestrunParameters": "",
+                                "overrideTestrunParameters": "-Url https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction/test",
                                 "runInParallel": "False",
                                 "runTestsInIsolation": "False",
                                 "pathtoCustomTestAdapters": "",

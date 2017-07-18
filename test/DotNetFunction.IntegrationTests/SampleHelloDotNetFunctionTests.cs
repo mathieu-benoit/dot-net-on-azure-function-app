@@ -8,15 +8,15 @@ namespace DotNetFunction.IntegrationTests
     public class SampleHelloDotNetFunctionTests
     {
         public TestContext TestContext { get; set; }
-        private string Url = "http://localhost:7071/api/SampleHelloDotNetFunction";
+        private string BaseUrl = "http://localhost:7071/api/SampleHelloDotNetFunction";
 
         [TestInitialize()]
         public void MyTestInitialize()
         {
-            if (!string.IsNullOrEmpty(TestContext.Properties["Url"] as string)) 
+            if (!string.IsNullOrEmpty(TestContext.Properties["BaseUrl"] as string)) 
             {
-                //Set URL from a build
-                Url = TestContext.Properties["Url"].ToString();
+                //Set the BaseURL from a build
+                BaseUrl = TestContext.Properties["BaseUrl"].ToString();
             }
         }
 
@@ -26,7 +26,7 @@ namespace DotNetFunction.IntegrationTests
         {
             //Arrange
             var httpClient = new HttpClient();
-            var urlTested = Url;
+            var urlTested = BaseUrl;
 
             //Act
             var response = await httpClient.GetAsync(urlTested);
@@ -42,7 +42,7 @@ namespace DotNetFunction.IntegrationTests
             //Arrange
             var httpClient = new HttpClient();
             var nameTested = "john";
-            var urlTested = $"{Url}/{nameTested}";
+            var urlTested = $"{BaseUrl}/{nameTested}";
 
             //Act
             var response = await httpClient.GetAsync(urlTested);
