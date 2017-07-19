@@ -124,3 +124,7 @@ TODO
 - Check Production URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
   - URL = https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction/test
+
+  ### General remark
+
+  For the "Set Resource Group Lock" step, you will need to make sure that your default Service Principal user created by VSTS (during the Azure RM service endpoint creation) has the Owner role and not by default the Contributor role. Otherwise this task will fail. To assign the Owner role, you could go to the Access control (IAM) blade of your Azure subscription within the new Azure portal and then Assign (Add button) the associated VisualStudioSPN... user to the Owner role.
