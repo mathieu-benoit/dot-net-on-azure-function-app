@@ -6,6 +6,6 @@ Param(
     [string] $LockName = 'DoNotDeleteLock'
 )
 
-#Login-AzureRmAccount
+#Login-AzureRmAccount;
 #Select-AzureRmSubscription -SubscriptionId $SubscriptionId;
-New-AzureRMResourceLock -LockName $LockName -LockLevel CanNotDelete -ResourceGroupName $ResourceGroupName -Force
+New-AzureRMResourceLock -LockName $LockName -LockLevel CanNotDelete -ResourceGroupName $ResourceGroupName -Force;

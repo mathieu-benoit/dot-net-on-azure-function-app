@@ -8,6 +8,10 @@ ALM and DevOps practices with a sample .NET method hosted in Azure Function App.
 
 ![Process - Overview](/docs/imgs/Process-Overview.PNG)
 
+The goal of this GitHub repository is to demonstrate and use DevOps practices by leveraging a very simple compiled .NET method on Azure Function Apps (this Function is just a simple HttpTrigger saying "Hello" to the name passed in the querystring parameter).
+
+Locally you will need to configure [Visual Studio 2017 Preview version 15.3 with the Azure Functions Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-your-first-function-visual-studio).
+
 # Build Definition with VSTS
 
 Details could be found here: [Build - CI](/docs/DotNet-FunctionApp-CI.md)
@@ -18,7 +22,7 @@ Here are the DevOps practices highlighted within this CI pipeline:
 - Unit tests the .NET method
 - Infrastructure as Code with the ARM Templates and the PowerShell scripts
 - ARM Templates validation
-- Expose artifacts to be used then by the CD pipeline (.NET library, ARM Templates and PowerShell scripts)
+- Expose artifacts to be used then by the CD pipeline (.NET library, ARM Templates, PowerShell scripts and Integration tests dlls)
 - Create a bug work item on build failure (assign to requestor)
 
 # Release Definition with VSTS
@@ -40,7 +44,17 @@ Here are the DevOps practices highlighted within this CD pipeline:
 
 # Alternatives and potantial further considerations
 
-- Describre [local setup with Visual Studio](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-your-first-function-visual-studio)
+- Instead of allowing 'anonymous' request you could/should setup another AuthorizationLevel, for security reason, and then [retrieve by ARM Template the key](https://stackoverflow.com/questions/43253453/get-function-host-keys-of-azure-function-in-powershell/44117841#44117841) or [by REST API](https://github.com/Azure/azure-webjobs-sdk-script/wiki/Key-management-API) for your URL ping test during your CD pipeline.
+- [Configure VSTS and Microsoft Teams](https://almvm.azurewebsites.net/labs/vsts/teams/) (or Slack or HipChat, etc.) to add more collaboration by setting up notifications once a work item is updated, a commit is done, a build or release or done, etc.
 - Instead of having a compiled .NET method/library, use static files with C#, NodeJS, etc.
 - Instead of using a Consumption Plan to host the Azure Function, use an App Service Plan to leverage its capabilities: more slots, etc.
-- Instead of allowing 'anonymous' request you could/should setup another AuthorizationLevel and then [retrieve by ARM Template the key](https://stackoverflow.com/questions/43253453/get-function-host-keys-of-azure-function-in-powershell/44117841#44117841) or [by REST API](https://github.com/Azure/azure-webjobs-sdk-script/wiki/Key-management-API) for your URL ping test during your CD pipeline.
+
+# Resources
+
+- [A day in the life of an Azure serverless developer](https://channel9.msdn.com/Events/Build/2017/T6003)
+- [Create your first function using Visual Studio](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-your-first-function-visual-studio)
+- [Automate resource deployment for your function app in Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-infrastructure-as-code)
+- [Serverless computing with Azure Function in a DevOps Model](https://blogs.msdn.microsoft.com/troubleshooting_tips_for_developers/2017/07/05/serverless-computing-with-azure-function-in-a-devops-model/)
+- [Deployment Slots Preview for Azure Functions](https://blogs.msdn.microsoft.com/appserviceteam/2017/06/13/deployment-slots-preview-for-azure-functions/)
+- [Application Insights integration with Functions now in preview](https://blogs.msdn.microsoft.com/appserviceteam/2017/05/10/application-insights-integration-with-functions-now-in-preview/)
+- Deploying Azure Function App with Deployment Slots using ARM Templates - Blog series: [First](https://nascent.blog/2017/05/31/azure-function-app-deployment-slots-arm-template/), [Second](https://nascent.blog/2017/06/22/azure-functions-arm-templates-snags-1-http-triggers-keys/) and [Third](https://nascent.blog/2017/06/27/azure-functions-slots-arm-templates-snags-2-redeploy-causes-unwanted-swap/)

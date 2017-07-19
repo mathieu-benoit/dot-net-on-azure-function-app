@@ -24,7 +24,10 @@ TODO
 
 ## Triggers
 
-- Continuous Integration (CI) = true
+- Continuous Integration = Enabled
+  - Choose the correct repository
+  - Branch Filters
+    - Type = Include ; Branch specification = master
 
 ## Process - Build process
 

@@ -12,26 +12,35 @@ TODO
 
 ![Release Overview](/docs/imgs/DotNet-FunctionApp-CD.PNG)
 
+## Artifacts
+
+- Build - DotNet-FunctionApp-CI
+  - Source (Build definition) = DotNet-FunctionApp-CI
+  - Default version = Latest
+  - Source alias = DotNet-FunctionApp-CI
+  - Continuous deployment trigger = Enabled
+
+## Variables
+
+- ResourceGroupName = set appropriate
+- SlotName = staging
+- SlotToSwap = staging
+- Location = East US
+- ReleaseConfiguration = Release
+- ReleasePlatform = Any CPU
+
 ## Staging Environment
 
 ![Staging Release Overview](/docs/imgs/DotNet-FunctionApp-CD-Staging.PNG)
 
-### Deployment conditions
+### Pre-deploymnet conditions
 
-- Trigger = After release creation
+- Triggers
+  - Select the source of the trigger = Release
+- Pre-deployment approvers
+  - Approval type = Automatic
 
-### Approvals
-
-- Pre-deployment approver = Automatic
-- Post-deployment approver = Automatic
-
-### Variables
-
-- ResourceGroupName = set appropriate
-- SlotName = staging
-- Location = East US
-
-### Steps 
+### Tasks 
 
 - Ensure Production Function App exists
   - Type = Azure Resource Group Deployment
@@ -84,22 +93,16 @@ TODO
 
 ![Production Release Overview](/docs/imgs/DotNet-FunctionApp-CD-Production.PNG)
 
-### Deployment conditions
+### Pre-deploymnet conditions
 
-- Trigger = After successful deployment to another environment ("Staging")
+- Triggers
+  - Select the source of the trigger = Environment
+  - Environment(s) that will trigger a deployment = Staging
+- Pre-deployment approvers
+  - Approval type = Specific users
+  - Select approvers = set appropriate
 
-### Approvals
-
-- Pre-deployment approver = Specific Users (set appropriate users)
-- Post-deployment approver = Automatic
-
-### Variables
-
-- ResourceGroupName = set appropriate
-- SlotToSwap = staging
-- Location = East US
-
-### Steps
+### Tasks
 
 - Swap Staging to Production
   - Type = Azure App Service Manage (PREVIEW)
@@ -117,7 +120,7 @@ TODO
   - Azure Subscription = set appropriate
   - Script Type = Script File Path
   - Script Path = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/[AddResourceGroupLock.ps1](../infra/scripts/AddResourceGroupLock.ps1)
-  - Script Arguments = $(ResourceGroupName)
+  - Script Arguments = -ResourceGroupName $(ResourceGroupName)
 - Check Production URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
   - URL = https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction/test

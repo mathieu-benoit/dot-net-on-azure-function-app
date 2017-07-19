@@ -128,12 +128,6 @@
             "date": "2017-07-12T00:00:00.000Z"
         },
         {
-            "name": "CanceledBuilds",
-            "scope": "refs/heads/master",
-            "intValue": 0,
-            "date": "2017-07-11T00:00:00.000Z"
-        },
-        {
             "name": "FailedBuilds",
             "scope": "refs/heads/master",
             "intValue": 0,
@@ -164,12 +158,6 @@
             "date": "2017-07-12T00:00:00.000Z"
         },
         {
-            "name": "FailedBuilds",
-            "scope": "refs/heads/master",
-            "intValue": 3,
-            "date": "2017-07-11T00:00:00.000Z"
-        },
-        {
             "name": "PartiallySuccessfulBuilds",
             "scope": "refs/heads/master",
             "intValue": 0,
@@ -198,12 +186,6 @@
             "scope": "refs/heads/master",
             "intValue": 0,
             "date": "2017-07-12T00:00:00.000Z"
-        },
-        {
-            "name": "PartiallySuccessfulBuilds",
-            "scope": "refs/heads/master",
-            "intValue": 0,
-            "date": "2017-07-11T00:00:00.000Z"
         },
         {
             "name": "SuccessfulBuilds",
@@ -236,12 +218,6 @@
             "date": "2017-07-12T00:00:00.000Z"
         },
         {
-            "name": "SuccessfulBuilds",
-            "scope": "refs/heads/master",
-            "intValue": 7,
-            "date": "2017-07-11T00:00:00.000Z"
-        },
-        {
             "name": "TotalBuilds",
             "scope": "refs/heads/master",
             "intValue": 4,
@@ -270,12 +246,6 @@
             "scope": "refs/heads/master",
             "intValue": 3,
             "date": "2017-07-12T00:00:00.000Z"
-        },
-        {
-            "name": "TotalBuilds",
-            "scope": "refs/heads/master",
-            "intValue": 10,
-            "date": "2017-07-11T00:00:00.000Z"
         }
     ],
     "_links": {
