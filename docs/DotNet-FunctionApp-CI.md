@@ -29,12 +29,18 @@ TODO
   - Branch Filters
     - Type = Include ; Branch specification = master
 
+## Options
+
+- Create work item on failure = Enabled
+  - Type = Bug
+  - Assign to requestor = true
+
 ## Process - Build process
 
 - Name = DotNet-FunctionApp-CI
 - Default agent queue = Hosted VS2017
 
-## Steps 
+## Tasks 
 
 - NuGet restore
   - Type = NuGet Installer
