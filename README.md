@@ -22,6 +22,10 @@ The goal of this GitHub repository is to demonstrate and use DevOps practices by
 
 Locally you will need to configure [Visual Studio 2017 Preview version 15.3 with the Azure Functions Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-your-first-function-visual-studio).
 
+By opening the .sln with Visual Studio you should see the structure of the solution like this:
+
+![Visual Studio Solution Structure Overview](/docs/imgs/Visual-Studio-Solution-Structure-Overview.PNG)
+
 To be able to setup the Build and Release definitions, you will need a Team Services (VSTS) account. If you don't have one, you could create it for free [here](https://www.visualstudio.com/team-services/).
 
 To be able to deploy  the Azure services (Function App, Application Insights, etc.), you will need an Azure subscription. If you don't have one, you could create it for free [here](https://azure.microsoft.com/fr-ca/free/).
