@@ -1,5 +1,15 @@
 ALM and DevOps practices with a sample .NET method hosted in Azure Function App.
 
+TOC
+
+- [History of changes](#history-of-changes)
+- [Overview](#overview)
+- [Build Definition with VSTS](#build-definition-with-vsts)
+- [Release Definition with VSTS](#release-definition-with-vsts)
+- [Other Misc DevOps practices implemented](#other-misc-devops-practices-implemented)
+- [Alternatives and potantial further considerations](#alternatives-and-potantial-further-considerations)
+- [Resources](#resources)
+
 # History of changes
 
 - July 2017 - Initial setup.
@@ -8,17 +18,21 @@ ALM and DevOps practices with a sample .NET method hosted in Azure Function App.
 
 ![Process - Overview](/docs/imgs/Process-Overview.PNG)
 
-The goal of this GitHub repository is to demonstrate and use DevOps practices by leveraging a very simple compiled .NET method on Azure Function Apps (this Function is just a simple HttpTrigger saying "Hello" to the name passed in the querystring parameter).
+The goal of this GitHub repository is to demonstrate and use DevOps practices by leveraging a very simple compiled .NET method on Azure Function Apps (this Function is just an HttpTrigger saying "Hello" to the name passed in the querystring parameter).
 
 Locally you will need to configure [Visual Studio 2017 Preview version 15.3 with the Azure Functions Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-your-first-function-visual-studio).
+
+To be able to setup the Build and Release definitions, you will need a Team Services (VSTS) account. If you don't have one, you could create it for free [here](https://www.visualstudio.com/team-services/).
+
+To be able to deploy  the Azure services (Function App, Application Insights, etc.), you will need an Azure subscription. If you don't have one, you could create it for free [here](https://azure.microsoft.com/fr-ca/free/).
 
 # Build Definition with VSTS
 
 Details could be found here: [Build - CI](/docs/DotNet-FunctionApp-CI.md)
 
 Here are the DevOps practices highlighted within this CI pipeline:
-- CI/Build triggered at each commit
-- Build the .NET library
+- CI/Build triggered at each commit on the master branch
+- Compile the .NET library
 - Unit tests the .NET method
 - Infrastructure as Code with the ARM Templates and the PowerShell scripts
 - ARM Templates validation
@@ -40,6 +54,7 @@ Here are the DevOps practices highlighted within this CD pipeline:
 
 # Other Misc DevOps practices implemented
 
+- GitHub as source control to leverage key features for collaboration such as feature-branch with pull request, etc.
 - CI/CD definitions as Code with the exported json file of the Build and Release Definitions
 
 # Alternatives and potantial further considerations

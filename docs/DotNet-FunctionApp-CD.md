@@ -1,5 +1,11 @@
 Here is one example to Release a .NET method to an Azure Function App. You could adapt it with your own context, needs and constraints.
 
+2 ways to create the associated Release Definition:
+
+- [Import the Release Definition](#import-the-release-definition)
+- [Create manually the Release Definition](#create-manually-the-release-definition)
+- [Deploy to Azure buttons](#deploy-to-azure-buttons)
+
 # Import the Release Definition
 
 You could import [the associated Release Definition stored in this repository](/vsts/DotNet-FunctionApp-CD.json) and then follow these steps to adapt it to your current project, credentials, etc.:
@@ -128,3 +134,15 @@ TODO
   ### General remark
 
   For the "Set Resource Group Lock" step, you will need to make sure that your default Service Principal user created by VSTS (during the Azure RM service endpoint creation) has the Owner role and not by default the Contributor role. Otherwise this task will fail. To assign the Owner role, you could go to the Access control (IAM) blade of your Azure subscription within the new Azure portal and then Assign (Add button) the associated VisualStudioSPN... user to the Owner role.
+
+# Deploy to Azure buttons
+
+By using the buttons below it's another way to deploy the Azure services without VSTS and without taking into account the app/method by itself, just deploying the infrastructure within Azure. 
+
+The Azure Function App + its Blob storage + Application Insights:
+
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmathieu-benoit%2Fdot-net-on-azure-function-app%2Fmaster%2Finfra%2Ftemplates%2Fdeploy.json" target="_blank">![Deploy to Azure](http://azuredeploy.net/deploybutton.png)</a>
+
+The Azure Function App Slot + its Application Insights (you should deploy the Azure Function App before, see button above):
+
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmathieu-benoit%2Fdot-net-on-azure-function-app%2Fmaster%2Finfra%2Ftemplates%2Fdeploy-slot.json" target="_blank">![Deploy to Azure](http://azuredeploy.net/deploybutton.png)</a>

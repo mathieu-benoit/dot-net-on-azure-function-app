@@ -1,5 +1,10 @@
 Here is one example to Build a .NET method to be deployed as an Azure Function App via VSTS. You could adapt it with your own context, needs and constraints.
 
+2 ways to create the associated Build Definition:
+
+- [Import the Build Definition](#import-the-build-definition)
+- [Create manually the Build Definition](#create-manually-the-build-definition)
+
 ![Build Overview](/docs/imgs/DotNet-FunctionApp-CI.PNG)
 
 # Import the Build Definition
