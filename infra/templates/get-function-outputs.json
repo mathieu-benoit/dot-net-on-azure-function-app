@@ -1,0 +1,26 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "functionAppName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "functionName": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "variables": {},
+  "resources": [],
+  "outputs": {
+    "functionKey": {
+      "type": "string",
+      "value": "[listsecrets(resourceId('Microsoft.Web/sites/functions', parameters('functionAppName'), parameters('functionName')),'2015-08-01').key]"
+    },
+    "functionUrl": {
+      "type": "string",
+      "value": "[listsecrets(resourceId('Microsoft.Web/sites/functions', parameters('functionAppName'), parameters('functionName')),'2015-08-01').trigger_url]"
+    }
+  }
+}
