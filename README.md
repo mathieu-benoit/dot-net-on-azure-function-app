@@ -37,9 +37,9 @@ Details could be found here: [Build - CI](/docs/DotNet-FunctionApp-CI.md)
 Here are the DevOps practices highlighted within this CI pipeline:
 - CI/Build triggered at each commit on the master branch
 - Compile the .NET library
-- Unit tests the .NET method
+- Run Unit tests of the .NET method
 - Infrastructure as Code with the ARM Templates and the PowerShell scripts
-- ARM Templates validation
+- Run ARM Templates validation
 - Expose artifacts to be used then by the CD pipeline (.NET library, ARM Templates, PowerShell scripts and Integration tests dlls)
 - Create a bug work item on build failure (assign to requestor)
 
@@ -49,9 +49,9 @@ Details could be found here: [Release - CD](/docs/DotNet-FunctionApp-CD.md)
 
 Here are the DevOps practices highlighted within this CD pipeline:
 - CD triggered at each CI/Build succesfully completed
-- Infrastructure as Code with the ARM Templates and the PowerShell scripts
+- Deploy the Infrastructure as Code with the ARM Templates and the PowerShell scripts
 - Deploy the .NET method on the Azure serverless service: Azure Function App
-- Run IntegrationTests once the Function App is deployed in Staging
+- Run IntegrationTests once the Function App is deployed on Staging
 - Use the Staging Slot mechanism with the associated Swap action to minimize downtime while upgrading the Production
 - Securing the production environment by adding a Lock on the associated Azure Resource Group
 - Monitor the Function App by using Application Insights
@@ -68,7 +68,7 @@ Here are the DevOps practices highlighted within this CD pipeline:
     - [Configure VSTS and Microsoft Teams](https://almvm.azurewebsites.net/labs/vsts/teams/) (or Slack or HipChat, etc.) to add more collaboration by setting up notifications once a work item is updated, a commit is done, a build or release or done, etc.
     - Instead of just having a Production environment with its staging slot, having a QA environment with its associated staging too.
 - Alternatives
-    - Instead of having a compiled .NET method/library, use static files with C#, NodeJS, etc.
+    - Instead of having a compiled .NET method/library, use static files with C#, NodeJS, etc. instead.
 
 # Resources
 

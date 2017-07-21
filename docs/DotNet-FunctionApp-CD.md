@@ -1,6 +1,6 @@
 Here is one example to Release a .NET method to an Azure Function App. You could adapt it with your own context, needs and constraints.
 
-2 ways to create the associated Release Definition:
+2 ways to create the associated Release Definition + another one just to deploy the Azure services:
 
 - [Import the Release Definition](#import-the-release-definition)
 - [Create manually the Release Definition](#create-manually-the-release-definition)
