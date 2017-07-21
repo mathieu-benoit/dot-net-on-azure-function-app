@@ -67,6 +67,7 @@ TODO
   - Test assemblies = \**\$(BuildConfiguration)\*UnitTests.dll\n!**\obj\**
   - Search folder = $(System.DefaultWorkingDirectory)
   - Test filter criteria = TestCategory=UnitTests
+  - Test run title = UnitTests
   - Build Platform = $(BuildPlatform)
   - Build Configuration = $(BuildConfiguration)
 - Validate ARM Templates: production

@@ -66,7 +66,7 @@ Here are the DevOps practices highlighted within this CD pipeline:
 - Instead of allowing 'anonymous' request you could/should setup another AuthorizationLevel, for security reason, and then [retrieve by ARM Template the key](https://stackoverflow.com/questions/43253453/get-function-host-keys-of-azure-function-in-powershell/44117841#44117841) or [by REST API](https://github.com/Azure/azure-webjobs-sdk-script/wiki/Key-management-API) for your URL ping test during your CD pipeline.
 - [Configure VSTS and Microsoft Teams](https://almvm.azurewebsites.net/labs/vsts/teams/) (or Slack or HipChat, etc.) to add more collaboration by setting up notifications once a work item is updated, a commit is done, a build or release or done, etc.
 - Instead of having a compiled .NET method/library, use static files with C#, NodeJS, etc.
-- Instead of using a Consumption Plan to host the Azure Function, use an App Service Plan to leverage its capabilities: more slots, etc.
+- Instead of just having a Production environment with its staging slot, having a QA environment with its associated staging too.
 
 # Resources
 

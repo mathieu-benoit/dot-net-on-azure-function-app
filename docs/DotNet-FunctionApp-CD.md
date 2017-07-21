@@ -91,6 +91,7 @@ TODO
   - Test paltform version = Latest
   - Settings file = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/integration-tests/TestRunParameters.runsettings
   - Override test run parameters = -BaseUrl -BaseUrl https://$(ResourceGroupName)-$(SlotName).azurewebsites.net/api/SampleHelloDotNetFunction
+  - Test run title = IntegrationTests
   - Build Platform = $(ReleasePlatform)
   - Build Configuration = $(ReleaseConfiguration)
   - Upload test attachments = true
