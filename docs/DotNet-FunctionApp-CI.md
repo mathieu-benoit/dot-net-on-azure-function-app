@@ -128,7 +128,7 @@ TODO
   - Source Folder = $(build.sourcesdirectory)/test/DotNetFunction.IntegrationTests/bin/$(BuildConfiguration)
   - Content = **
   - Target Folder = $(build.artifactstagingdirectory)/integration-tests
-- Publish Artifact: function
+- Publish Artifact: integration-tests
   - Type = Publish Build Artifacts
   - Version = 1.*
   - Path to Publish = $(build.artifactstagingdirectory)/integration-tests
