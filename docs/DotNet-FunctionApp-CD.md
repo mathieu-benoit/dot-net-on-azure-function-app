@@ -90,7 +90,7 @@ TODO
   - Select test platform using = Version
   - Test paltform version = Latest
   - Settings file = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/integration-tests/TestRunParameters.runsettings
-  - Override test run parameters = -BaseUrl -BaseUrl https://$(ResourceGroupName)-$(SlotName).azurewebsites.net/api/SampleHelloDotNetFunction
+  - Override test run parameters = -BaseUrl https://$(ResourceGroupName)-$(SlotName).azurewebsites.net/api/SampleHelloDotNetFunction
   - Test run title = IntegrationTests
   - Build Platform = $(ReleasePlatform)
   - Build Configuration = $(ReleaseConfiguration)
