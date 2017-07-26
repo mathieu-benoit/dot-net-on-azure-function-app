@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26711.1
+VisualStudioVersion = 15.0.26720.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetFunction", "src\DotNetFunction\DotNetFunction.csproj", "{E82A3F5E-9CA6-4E2E-8D51-A938DD62A363}"
 EndProject
@@ -43,14 +43,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{909C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{539D6251-ED3A-4230-A448-081BB1435281}"
 	ProjectSection(SolutionItems) = preProject
-		infra\templates\ApplicationInsights.json = infra\templates\ApplicationInsights.json
 		infra\templates\deploy-slot.json = infra\templates\deploy-slot.json
 		infra\templates\deploy.json = infra\templates\deploy.json
-		infra\templates\FunctionApp.json = infra\templates\FunctionApp.json
-		infra\templates\FunctionAppSlot.json = infra\templates\FunctionAppSlot.json
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetFunction.IntegrationTests", "test\DotNetFunction.IntegrationTests\DotNetFunction.IntegrationTests.csproj", "{A6398BE2-943A-4C33-B05D-E796CBB86CF4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nested", "nested", "{FF2F9942-B9D2-438E-8340-2DF05D5C1FF9}"
+	ProjectSection(SolutionItems) = preProject
+		infra\templates\nested\ApplicationInsights.json = infra\templates\nested\ApplicationInsights.json
+		infra\templates\nested\FunctionApp.json = infra\templates\nested\FunctionApp.json
+		infra\templates\nested\FunctionAppSlot.json = infra\templates\nested\FunctionAppSlot.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +85,7 @@ Global
 		{909C4A6F-C429-46C9-8B78-4E6E3A26C608} = {DFCFBD96-C773-4F03-BC03-DC327F730690}
 		{539D6251-ED3A-4230-A448-081BB1435281} = {DFCFBD96-C773-4F03-BC03-DC327F730690}
 		{A6398BE2-943A-4C33-B05D-E796CBB86CF4} = {6CFE9AD3-1A52-48F6-BBFB-0E9F02FEF51B}
+		{FF2F9942-B9D2-438E-8340-2DF05D5C1FF9} = {539D6251-ED3A-4230-A448-081BB1435281}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {593B5211-2ED0-4537-A624-24D38AA69DB1}

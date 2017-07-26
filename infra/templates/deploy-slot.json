@@ -4,7 +4,8 @@
   "parameters": {
     "functionAppName": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "defaultValue": "[resourceGroup().name]"
     },
     "slotName": {
       "type": "string",
@@ -14,12 +15,12 @@
     "storageName": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "[parameters('functionAppName')]"
+      "defaultValue": "[resourceGroup().name]"
     },
     "appInsightsName": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "[concat(parameters('functionAppName'), '-', parameters('slotName'))]"
+      "defaultValue": "[concat(resourceGroup().name, '-', parameters('slotName'))]"
     },
     "templateLinkBase": {
       "type": "string",
@@ -27,11 +28,14 @@
       "defaultValue": "https://raw.githubusercontent.com/mathieu-benoit/dot-net-on-azure-function-app/master/infra/templates/"
     }
   },
-  "variables": {},
+  "variables": {
+    "applicationInsightsDeploymentName": "[concat(deployment().name, '-applicationInsightsSlot')]",
+    "functionAppDeploymentName": "[concat(deployment().name, '-functionAppSlot')]"
+  },
   "resources": [
     {
       "apiVersion": "2015-01-01",
-      "name": "[concat(deployment().name, '-applicationInsightsSlot')]",
+      "name": "[variables('applicationInsightsDeploymentName')]",
       "type": "Microsoft.Resources/deployments",
       "properties": {
         "mode": "Incremental",
@@ -47,10 +51,10 @@
     },
     {
       "apiVersion": "2015-01-01",
-      "name": "[concat(deployment().name, '-functionAppSlot')]",
+      "name": "[variables('functionAppDeploymentName')]",
       "type": "Microsoft.Resources/deployments",
       "dependsOn": [
-        "[concat('Microsoft.Resources/deployments/', 'applicationInsights')]"
+        "[concat('Microsoft.Resources/deployments/', variables('applicationInsightsDeploymentName'))]"
       ],
       "properties": {
         "mode": "Incremental",
