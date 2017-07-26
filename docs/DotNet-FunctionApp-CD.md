@@ -80,6 +80,9 @@ TODO
   - Slot = $(SlotName)
   - Package or Folder = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/function
   - Publish using Web Deploy = true
+- Check Production URL
+  - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
+  - URL = https://$(ResourceGroupName)-$(SlotName).azurewebsites.net/api/SampleHelloDotNetFunction/test
 - Run IntegrationTests
   - Type = Visual Studio Test
   - Version = 2.*
