@@ -136,6 +136,36 @@ TODO
 
   For the "Set Resource Group Lock" step, you will need to make sure that your default Service Principal user created by VSTS (during the Azure RM service endpoint creation) has the Owner role and not by default the Contributor role. Otherwise this task will fail. To assign the Owner role, you could go to the Access control (IAM) blade of your Azure subscription within the new Azure portal and then Assign (Add button) the associated VisualStudioSPN... user to the Owner role.
 
+## Rollback Environment
+
+This environment should be used just if necessary when the bad things happened in Production just after this release pipeline. It allows to be prepared by automation to rollback the changed and get back to the previous version.
+
+![Rollback Release Overview](/docs/imgs/DotNet-FunctionApp-CD-Rollback.PNG)
+
+### Pre-deploymnet conditions
+
+- Triggers
+  - Select the source of the trigger = Environment
+  - Environment(s) that will trigger a deployment = Production
+- Pre-deployment approvers
+  - Approval type = Specific users
+  - Select approvers = set appropriate
+
+### Tasks
+
+- Rollback Swap
+  - Type = Azure App Service Manage (PREVIEW)
+  - Version = 0.*
+  - Azure Subscription = set appropriate
+  - Action = Swap Slots
+  - App Service Name = $(ResourceGroupName)
+  - Resource Group = $(ResourceGroupName)
+  - Source Slot = $(SlotToSwap)
+  - Swap with Production = true
+- Check Production URL
+  - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
+  - URL = https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction/test
+
 # Deploy to Azure buttons
 
 By using the buttons below it's another way to deploy the Azure services without VSTS and without taking into account the app/method by itself, just deploying the infrastructure within Azure. 

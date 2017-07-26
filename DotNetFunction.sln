@@ -26,10 +26,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "imgs", "imgs", "{B0E410F8-E7BE-46D7-84FB-4749F19392D4}"
 	ProjectSection(SolutionItems) = preProject
 		docs\imgs\DotNet-FunctionApp-CD-Production.PNG = docs\imgs\DotNet-FunctionApp-CD-Production.PNG
+		docs\imgs\DotNet-FunctionApp-CD-Rollback.PNG = docs\imgs\DotNet-FunctionApp-CD-Rollback.PNG
 		docs\imgs\DotNet-FunctionApp-CD-Staging.PNG = docs\imgs\DotNet-FunctionApp-CD-Staging.PNG
 		docs\imgs\DotNet-FunctionApp-CD.PNG = docs\imgs\DotNet-FunctionApp-CD.PNG
 		docs\imgs\DotNet-FunctionApp-CI.PNG = docs\imgs\DotNet-FunctionApp-CI.PNG
 		docs\imgs\Process-Overview.PNG = docs\imgs\Process-Overview.PNG
+		docs\imgs\Visual-Studio-Solution-Structure-Overview.PNG = docs\imgs\Visual-Studio-Solution-Structure-Overview.PNG
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetFunction.UnitTests", "test\DotNetFunction.UnitTests\DotNetFunction.UnitTests.csproj", "{F1674604-9FDC-4033-BF0E-ADE1AC5FAFBA}"
