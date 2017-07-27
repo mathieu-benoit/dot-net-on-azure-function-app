@@ -52,16 +52,17 @@ Here are the DevOps practices highlighted within this CD pipeline:
 - Deploy the Infrastructure as Code with the ARM Templates and the PowerShell scripts
 - Deploy the .NET method on the Azure serverless service: Azure Function App
 - Run IntegrationTests once the Function App is deployed on Staging
-- Use the Staging Slot mechanism with the associated Swap action to minimize downtime while upgrading the Production
+- Use the Staging Slot mechanism with the associated Swap action to minimize downtime while upgrading to Production
 - Securing the production environment by adding a Lock on the associated Azure Resource Group
 - Monitor the Function App by using Application Insights
+- Have a dedicated VSTS Release Environment defined for Rollback automated actions.
 
 # Other Misc DevOps practices implemented
 
 - GitHub as source control to leverage key features for collaboration such as feature-branch with pull request, etc.
 - CI/CD definitions as Code with the exported json file of the Build and Release Definitions
 
-# Alternatives and potantial further considerations
+# Alternatives and potential further considerations
 
 - Improvements
     - Instead of allowing 'anonymous' request you could/should setup another AuthorizationLevel, for security reason, and then [retrieve by ARM Template the key](https://stackoverflow.com/questions/43253453/get-function-host-keys-of-azure-function-in-powershell/44117841#44117841) or [by REST API](https://github.com/Azure/azure-webjobs-sdk-script/wiki/Key-management-API) for your URL ping test during your CD pipeline. I started that by trying to call later on the pipeline the [get-function-outputs.json template](/infra/templates/get-function-outputs.json) but it's not returning the correct Function Key. Still need to investigate around that...
