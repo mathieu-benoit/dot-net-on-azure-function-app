@@ -69,7 +69,8 @@ Here are the DevOps practices highlighted within this CD pipeline:
     - [Configure VSTS and Microsoft Teams](https://almvm.azurewebsites.net/labs/vsts/teams/) (or Slack or HipChat, etc.) to add more collaboration by setting up notifications once a work item is updated, a commit is done, a build or release or done, etc.
     - Instead of just having a Production environment with its staging slot, having a QA environment with its associated staging too.
 - Alternatives
-    - Instead of having a compiled .NET method/library, use static files with C#, NodeJS, etc. instead.
+    - Instead of having a compiled .NET method/library, use static files with C#, NodeJS, etc.
+    - Instead of hosting the Azure Function App in a [Consumption Plan, host it in an App Service Plan](https://docs.microsoft.com/en-us/azure/azure-functions/functions-scale).
 
 # Resources
 
