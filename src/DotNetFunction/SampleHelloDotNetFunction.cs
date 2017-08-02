@@ -1,31 +1,31 @@
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Host;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace DotNetFunction
 {
     public static class SampleHelloDotNetFunction
     {
-        [FunctionName("SampleHelloDotNetFunction")]
-        public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "SampleHelloDotNetFunction/{name}")]HttpRequestMessage request, string name, TraceWriter log)
+        [FunctionName("SampleHelloDotNetFunction2")]
+        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")]HttpRequestMessage request)
         {
-            var responseText = InternalSampleHelloDotNetFunction(name);
+            // parse query parameter
+            string name = request.GetQueryNameValuePairs()
+                .FirstOrDefault(q => string.Compare(q.Key, "name", true) == 0)
+                .Value;
 
-            log?.Info($"Response text: {responseText}");
+            // Get request body
+            dynamic data = await request.Content.ReadAsAsync<object>();
 
-            return request.CreateResponse(HttpStatusCode.OK, responseText);
-        }
+            // Set name to query string or body data
+            name = name ?? data?.name;
 
-        public static string InternalSampleHelloDotNetFunction(string name)
-        {
-            var responseText = "Hello, World!";
-
-            if (!string.IsNullOrEmpty(name))
-                responseText = $"Hello, {name}!";
-
-            return responseText;
+            return name == null
+                ? request.CreateResponse(HttpStatusCode.BadRequest, "Please pass a name on the query string or in the request body")
+                : request.CreateResponse(HttpStatusCode.OK, $"Hello, {name}!");
         }
     }
 }
