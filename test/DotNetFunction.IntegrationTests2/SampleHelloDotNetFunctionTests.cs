@@ -7,7 +7,7 @@ namespace DotNetFunction.IntegrationTests
 {
     public class Class1
     {
-        private string BaseUrl = "https://mabenoittest.azurewebsites.net/api/SampleHelloDotNetFunction";
+        private string BaseUrl = "https://localhost:7071/api/SampleHelloDotNetFunction";
 
         public Class1()
         {
