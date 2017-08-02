@@ -82,3 +82,4 @@ Here are the DevOps practices highlighted within this CD pipeline:
 - [Application Insights integration with Functions now in preview](https://blogs.msdn.microsoft.com/appserviceteam/2017/05/10/application-insights-integration-with-functions-now-in-preview/)
 - Deploying Azure Function App with Deployment Slots using ARM Templates - Blog series: [First](https://nascent.blog/2017/05/31/azure-function-app-deployment-slots-arm-template/), [Second](https://nascent.blog/2017/06/22/azure-functions-arm-templates-snags-1-http-triggers-keys/) and [Third](https://nascent.blog/2017/06/27/azure-functions-slots-arm-templates-snags-2-redeploy-causes-unwanted-swap/)
 - [Is Your Serverless Application Testable? – Azure Functions](https://blog.kloud.com.au/2017/07/22/is-your-serverless-application-testable-azure-functions/)
+- [Azure Functions Proxies Sample](https://github.com/Azure-Samples/functions-js-spa)
