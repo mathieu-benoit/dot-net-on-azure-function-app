@@ -58,10 +58,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nested", "nested", "{FF2F99
 		infra\templates\nested\FunctionAppSlot.json = infra\templates\nested\FunctionAppSlot.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetFunction.UnitTests2", "test\DotNetFunction.UnitTests2\DotNetFunction.UnitTests2.csproj", "{C17F344E-CCDA-4ED2-93C1-E7BD6D4507E4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetFunction.IntegrationTests2", "test\DotNetFunction.IntegrationTests2\DotNetFunction.IntegrationTests2.csproj", "{05254F4F-38FE-467D-9916-8679165CD921}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,14 +76,6 @@ Global
 		{A6398BE2-943A-4C33-B05D-E796CBB86CF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6398BE2-943A-4C33-B05D-E796CBB86CF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6398BE2-943A-4C33-B05D-E796CBB86CF4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C17F344E-CCDA-4ED2-93C1-E7BD6D4507E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C17F344E-CCDA-4ED2-93C1-E7BD6D4507E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C17F344E-CCDA-4ED2-93C1-E7BD6D4507E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C17F344E-CCDA-4ED2-93C1-E7BD6D4507E4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{05254F4F-38FE-467D-9916-8679165CD921}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{05254F4F-38FE-467D-9916-8679165CD921}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{05254F4F-38FE-467D-9916-8679165CD921}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{05254F4F-38FE-467D-9916-8679165CD921}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,8 +88,6 @@ Global
 		{539D6251-ED3A-4230-A448-081BB1435281} = {DFCFBD96-C773-4F03-BC03-DC327F730690}
 		{A6398BE2-943A-4C33-B05D-E796CBB86CF4} = {6CFE9AD3-1A52-48F6-BBFB-0E9F02FEF51B}
 		{FF2F9942-B9D2-438E-8340-2DF05D5C1FF9} = {539D6251-ED3A-4230-A448-081BB1435281}
-		{C17F344E-CCDA-4ED2-93C1-E7BD6D4507E4} = {6CFE9AD3-1A52-48F6-BBFB-0E9F02FEF51B}
-		{05254F4F-38FE-467D-9916-8679165CD921} = {6CFE9AD3-1A52-48F6-BBFB-0E9F02FEF51B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {593B5211-2ED0-4537-A624-24D38AA69DB1}
