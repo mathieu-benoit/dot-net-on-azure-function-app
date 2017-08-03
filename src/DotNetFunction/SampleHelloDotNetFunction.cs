@@ -9,23 +9,42 @@ namespace DotNetFunction
 {
     public static class SampleHelloDotNetFunction
     {
-        [FunctionName("SampleHelloDotNetFunction2")]
+        [FunctionName("SampleHelloDotNetFunction")]
         public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")]HttpRequestMessage request)
         {
-            // parse query parameter
-            string name = request.GetQueryNameValuePairs()
+            var name = request.GetQueryNameValuePairs()
                 .FirstOrDefault(q => string.Compare(q.Key, "name", true) == 0)
                 .Value;
 
-            // Get request body
             dynamic data = await request.Content.ReadAsAsync<object>();
 
-            // Set name to query string or body data
-            name = name ?? data?.name;
+            var responseMessage = string.Empty;
+            HttpStatusCode httpStatusCode = HttpStatusCode.OK;
+            if(!GetResponseMessage(name, data?.name, out responseMessage))
+            {
+                httpStatusCode = HttpStatusCode.BadRequest;
+            }
 
-            return name == null
-                ? request.CreateResponse(HttpStatusCode.BadRequest, "Please pass a name on the query string or in the request body")
-                : request.CreateResponse(HttpStatusCode.OK, $"Hello, {name}!");
+            return request.CreateResponse(httpStatusCode, responseMessage);
+        }
+
+        /// <summary>
+        /// Get the response message to display according the name value passed either in the query string or in the request body. 
+        /// Note: The query string has priority over the request body.
+        /// </summary>
+        /// <param name="nameInQueryString">The name value in the query string.</param>
+        /// <param name="nameInRequestBody">The name value in the request body.</param>
+        /// <param name="responseMessage">The out parameter containing the response message.</param>
+        /// <returns>Return true if an appropriate name was provided and set a response message accordingly. Otherwise return false and set an help message.</returns>
+        public static bool GetResponseMessage(string nameInQueryString, string nameInRequestBody, out string responseMessage)
+        {
+            var name = !string.IsNullOrWhiteSpace(nameInQueryString) ? nameInQueryString : nameInRequestBody;
+
+            responseMessage = string.IsNullOrWhiteSpace(name)
+                ? "Please pass a name on the query string or in the request body."
+                : $"Hello, {name}!";
+
+            return !string.IsNullOrWhiteSpace(name);
         }
     }
 }
