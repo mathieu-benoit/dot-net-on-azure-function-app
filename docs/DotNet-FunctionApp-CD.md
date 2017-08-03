@@ -34,6 +34,8 @@ TODO
 - Location = East US
 - ReleaseConfiguration = Release
 - ReleasePlatform = Any CPU
+- AppServiceUrl = 
+  - Empty, because it will be set by the "Deploy Function App on Staging" task and will be consumed by the "Replace tokens in IntegrationTests config file" task.
 
 ## Staging Environment
 
@@ -84,7 +86,7 @@ TODO
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
   - Version = 1.*
   - URL = https://$(ResourceGroupName)-$(SlotName).azurewebsites.net/api/SampleHelloDotNetFunction
-- Replace tokens in integration tests config file
+- Replace tokens in IntegrationTests config file
   - Type = [Replace Tokens](https://marketplace.visualstudio.com/items?itemName=qetza.replacetokens)
   - Version = 2.*
   - Target files = $(System.DefaultWorkingDirectory)/xUnit-CI/integration-tests/*.config
@@ -142,7 +144,7 @@ TODO
 - Check Production URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
   - Version = 1.*
-  - URL = https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction/test
+  - URL = https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction
 
 ### General remark
 
@@ -177,7 +179,7 @@ This environment should be used just if necessary when the bad things happened i
 - Check Production URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
   - Version = 1.*
-  - URL = https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction/test
+  - URL = https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction
 
 # Deploy to Azure buttons
 

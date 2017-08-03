@@ -7,13 +7,14 @@ namespace DotNetFunction.IntegrationTests
 {
     public class SampleHelloDotNetFunctionTests
     {
-        private string BaseUrl = "https://localhost:7071/api/SampleHelloDotNetFunction";
+        private string BaseUrl = "https://localhost:7071";
 
         public SampleHelloDotNetFunctionTests()
         {
             var appSettings = ConfigurationManager.AppSettings;
             var baseUrlParameter = appSettings["BaseUrl"];
             BaseUrl = string.IsNullOrEmpty(baseUrlParameter) || baseUrlParameter == "#{BaseUrl}#" ? BaseUrl : baseUrlParameter;
+            BaseUrl = BaseUrl + "/api/SampleHelloDotNetFunction";
         }
 
         [Fact]

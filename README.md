@@ -12,6 +12,7 @@ TOC
 
 # History of changes
 
+- August 2017 - Convert MSTest projects on to xUnit - PR #1
 - July 2017 - Initial setup.
 
 # Overview
