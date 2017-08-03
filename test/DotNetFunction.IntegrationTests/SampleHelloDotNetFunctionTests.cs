@@ -8,7 +8,7 @@ namespace DotNetFunction.IntegrationTests
 {
     public class SampleHelloDotNetFunctionTests
     {
-        private string BaseUrl = "http://mabenoittest-staging.azurewebsites.net";
+        private string BaseUrl = "https://localhost:7071";
 
         public SampleHelloDotNetFunctionTests()
         {
