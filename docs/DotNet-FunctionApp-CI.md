@@ -66,10 +66,13 @@ TODO
   - Select tests using = Test assemblies
   - Test assemblies = \**\$(BuildConfiguration)\*UnitTests.dll\n!**\obj\**
   - Search folder = $(System.DefaultWorkingDirectory)
-  - Test filter criteria = TestCategory=UnitTests
+  - Select test platform using = Version
+  - Test platform version = Latest
+  - Code coverage enabled = true
   - Test run title = UnitTests
   - Build Platform = $(BuildPlatform)
   - Build Configuration = $(BuildConfiguration)
+  - Upload test attachments = true
 - Validate ARM Templates: production
   - Type = Azure Resource Group Deployment
   - Version = 2.*

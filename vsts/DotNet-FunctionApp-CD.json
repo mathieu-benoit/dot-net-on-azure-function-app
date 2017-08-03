@@ -1,7 +1,7 @@
 {
     "source": 2,
     "id": 1,
-    "revision": 50,
+    "revision": 53,
     "name": "DotNet-FunctionApp-CD",
     "description": null,
     "createdBy": {
@@ -19,7 +19,7 @@
         "url": "https://app.vssps.visualstudio.com/A6d1a4ff8-9a1f-46cb-bd61-54cb9a797939/_apis/Identities/17256fe4-f2a3-4370-b081-ec283edb6a77",
         "imageUrl": "https://mabenoit-ms.visualstudio.com/_api/_common/identityImage?id=17256fe4-f2a3-4370-b081-ec283edb6a77"
     },
-    "modifiedOn": "2017-07-26T19:59:48.017Z",
+    "modifiedOn": "2017-08-03T18:29:34.553Z",
     "path": "\\",
     "variables": {
         "Location": {
@@ -222,6 +222,30 @@
                             }
                         },
                         {
+                            "taskId": "a8515ec8-7254-4ffd-912c-86772e2b5962",
+                            "version": "2.*",
+                            "name": "Replace tokens in integration tests config file",
+                            "refName": "replacetokens1",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "rootDirectory": "",
+                                "targetFiles": "$(System.DefaultWorkingDirectory)/xUnit-CI/integration-tests/*.config",
+                                "encoding": "auto",
+                                "writeBOM": "true",
+                                "actionOnMissing": "warn",
+                                "keepToken": "true",
+                                "tokenPrefix": "#{",
+                                "tokenSuffix": "}#",
+                                "emptyValue": "(empty)"
+                            }
+                        },
+                        {
                             "taskId": "ef087383-ee5e-42c7-9a53-ab56c98420f9",
                             "version": "2.*",
                             "name": "Run IntegrationTests",
@@ -241,15 +265,15 @@
                                 "testConfiguration": "",
                                 "tcmTestRun": "$(test.RunId)",
                                 "searchFolder": "$(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/integration-tests",
-                                "testFiltercriteria": "TestCategory=IntegrationTests",
+                                "testFiltercriteria": "",
                                 "runOnlyImpactedTests": "False",
                                 "runAllTestsAfterXBuilds": "50",
                                 "uiTests": "false",
                                 "vstestLocationMethod": "version",
                                 "vsTestVersion": "latest",
                                 "vstestLocation": "",
-                                "runSettingsFile": "$(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/integration-tests/TestRunParameters.runsettings",
-                                "overrideTestrunParameters": "-BaseUrl https://$(ResourceGroupName)-$(SlotName).azurewebsites.net/api/SampleHelloDotNetFunction",
+                                "runSettingsFile": "",
+                                "overrideTestrunParameters": "",
                                 "runInParallel": "False",
                                 "runTestsInIsolation": "False",
                                 "pathtoCustomTestAdapters": "",
@@ -558,7 +582,7 @@
                         {
                             "taskId": "2a1711d0-b4a4-11e6-a3c2-edf36ba3fddc",
                             "version": "1.*",
-                            "name": "CheckUrl Production URL",
+                            "name": "Check Production URL",
                             "refName": "check-url2",
                             "enabled": true,
                             "alwaysRun": false,

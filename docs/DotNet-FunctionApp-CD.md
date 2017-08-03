@@ -71,7 +71,7 @@ TODO
   - Override Template Parameters = -functionAppName $(ResourceGroupName) -slotName $(SlotName)
   - Deployment Mode = Incremental
 - Deploy Function App on Staging
-  - Type = Deploy Staging
+  - Type = Azure App Service Deploy
   - Version = 3.*
   - Azure Subscription = set appropriate
   - App Service Name = $(ResourceGroupName)
@@ -80,20 +80,28 @@ TODO
   - Slot = $(SlotName)
   - Package or Folder = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/function
   - Publish using Web Deploy = true
-- Check Production URL
+- Check Staging URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
-  - URL = https://$(ResourceGroupName)-$(SlotName).azurewebsites.net/api/SampleHelloDotNetFunction/test
+  - Version = 1.*
+  - URL = https://$(ResourceGroupName)-$(SlotName).azurewebsites.net/api/SampleHelloDotNetFunction
+- Replace tokens in integration tests config file
+  - Type = [Replace Tokens](https://marketplace.visualstudio.com/items?itemName=qetza.replacetokens)
+  - Version = 2.*
+  - Target files = $(System.DefaultWorkingDirectory)/xUnit-CI/integration-tests/*.config
+  - Files encoding = auto
+  - Write unicode BOM = true
+  - Action (Missing variables) = log warning
+  - Keep token = true
+  - Token prefix = #{
+  - Token suffix = }#
 - Run IntegrationTests
   - Type = Visual Studio Test
   - Version = 2.*
   - Select tests using = Test assemblies
   - Test assemblies = *IntegrationTests.dll
   - Search folder = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/integration-tests
-  - Test filter criteria = TestCategory=IntegrationTests
   - Select test platform using = Version
   - Test paltform version = Latest
-  - Settings file = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/integration-tests/TestRunParameters.runsettings
-  - Override test run parameters = -BaseUrl https://$(ResourceGroupName)-$(SlotName).azurewebsites.net/api/SampleHelloDotNetFunction
   - Test run title = IntegrationTests
   - Build Platform = $(ReleasePlatform)
   - Build Configuration = $(ReleaseConfiguration)
@@ -133,6 +141,7 @@ TODO
   - Script Arguments = -ResourceGroupName $(ResourceGroupName)
 - Check Production URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
+  - Version = 1.*
   - URL = https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction/test
 
 ### General remark
@@ -167,6 +176,7 @@ This environment should be used just if necessary when the bad things happened i
   - Swap with Production = true
 - Check Production URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
+  - Version = 1.*
   - URL = https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction/test
 
 # Deploy to Azure buttons
