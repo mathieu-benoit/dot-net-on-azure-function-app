@@ -20,7 +20,7 @@ namespace DotNetFunction.UnitTests
 
             //Assert
             Assert.False(result);
-            Assert.Equal(responseMessage, "Please pass a name on the query string or in the request body.");
+            Assert.Equal("Please pass a name on the query string or in the request body.", responseMessage);
         }
 
         [Theory]
@@ -37,7 +37,7 @@ namespace DotNetFunction.UnitTests
 
             //Assert
             Assert.True(result);
-            Assert.Equal(responseMessage, $"Hello, {nameInRequestBody}!");
+            Assert.Equal($"Hello, {nameInRequestBody}!", responseMessage);
         }
 
         [Theory]
@@ -54,7 +54,7 @@ namespace DotNetFunction.UnitTests
 
             //Assert
             Assert.True(result);
-            Assert.Equal(responseMessage, $"Hello, {nameInQueryString}!");
+            Assert.Equal($"Hello, {nameInQueryString}!", responseMessage);
         }
 
         [Theory]
@@ -70,7 +70,7 @@ namespace DotNetFunction.UnitTests
 
             //Assert
             Assert.True(result);
-            Assert.Equal(responseMessage, $"Hello, {nameInQueryString}!");
+            Assert.Equal($"Hello, {nameInQueryString}!", responseMessage);
         }
     }
 }

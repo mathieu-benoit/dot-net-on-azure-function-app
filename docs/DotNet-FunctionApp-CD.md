@@ -82,17 +82,18 @@ TODO
   - Slot = $(SlotName)
   - Package or Folder = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/function
   - Publish using Web Deploy = true
+  - App Service URL = BaseUrl
 - Check Staging URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
   - Version = 1.*
-  - URL = https://$(ResourceGroupName)-$(SlotName).azurewebsites.net/api/SampleHelloDotNetFunction
+  - URL = https://$(ResourceGroupName)-$(SlotName).azurewebsites.net/api/SampleHelloDotNetFunction?name=test
 - Replace tokens in IntegrationTests config file
   - Type = [Replace Tokens](https://marketplace.visualstudio.com/items?itemName=qetza.replacetokens)
   - Version = 2.*
-  - Target files = $(System.DefaultWorkingDirectory)/xUnit-CI/integration-tests/*.config
+  - Target files = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/integration-tests/*.config
   - Files encoding = auto
   - Write unicode BOM = true
-  - Action (Missing variables) = log warning
+  - Action (Missing variables) = fail
   - Keep token = true
   - Token prefix = #{
   - Token suffix = }#
@@ -144,7 +145,7 @@ TODO
 - Check Production URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
   - Version = 1.*
-  - URL = https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction
+  - URL = https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction?name=test
 
 ### General remark
 
@@ -179,7 +180,7 @@ This environment should be used just if necessary when the bad things happened i
 - Check Production URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
   - Version = 1.*
-  - URL = https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction
+  - URL = https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction?name=test
 
 # Deploy to Azure buttons
 
