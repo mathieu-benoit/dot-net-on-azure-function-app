@@ -30,12 +30,15 @@ TODO
 
 - ResourceGroupName = set appropriate
 - SlotName = staging
-- SlotToSwap = staging
 - Location = East US
 - ReleaseConfiguration = Release
 - ReleasePlatform = Any CPU
 - AppServiceUrl = 
   - Empty, because it will be set by the "Deploy Function App on Staging" task and will be consumed by the "Replace tokens in IntegrationTests config file" task.
+- FunctionAppName = set appropriate
+- FunctionName = SampleHelloDotNetFunction
+
+![Release Variables](/docs/imgs/DotNet-FunctionApp-CD-Variables.PNG)
 
 ## Staging Environment
 
@@ -59,7 +62,7 @@ TODO
   - Location = $(Location)
   - Template location = Linked artifact
   - Template = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/infra/[deploy.json](../infra/templates/deploy.json)
-  - Override Template Parameters = -functionAppName $(ResourceGroupName)
+  - Override Template Parameters = -functionAppName $(FunctionAppName)
   - Deployment Mode = Incremental
 - Provision Staging
   - Type = Azure Resource Group Deployment
@@ -70,13 +73,13 @@ TODO
   - Location = $(Location)
   - Template location = Linked artifact
   - Template = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/infra/[deplo-slot.json](../infra/templates/deploy-slot.json)
-  - Override Template Parameters = -functionAppName $(ResourceGroupName) -slotName $(SlotName)
+  - Override Template Parameters = -functionAppName $(FunctionAppName) -slotName $(SlotName)
   - Deployment Mode = Incremental
 - Deploy Function App on Staging
   - Type = Azure App Service Deploy
   - Version = 3.*
   - Azure Subscription = set appropriate
-  - App Service Name = $(ResourceGroupName)
+  - App Service Name = $(FunctionAppName)
   - Deploy to Slot = true
   - Resource Group = $(ResourceGroupName)
   - Slot = $(SlotName)
@@ -86,7 +89,7 @@ TODO
 - Check Staging URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
   - Version = 1.*
-  - URL = https://$(ResourceGroupName)-$(SlotName).azurewebsites.net/api/SampleHelloDotNetFunction?name=test
+  - URL = https://$(FunctionAppName)-$(SlotName).azurewebsites.net/api/$(FunctionName)?name=test
 - Replace tokens in IntegrationTests config file
   - Type = [Replace Tokens](https://marketplace.visualstudio.com/items?itemName=qetza.replacetokens)
   - Version = 2.*
@@ -130,9 +133,9 @@ TODO
   - Version = 0.*
   - Azure Subscription = set appropriate
   - Action = Swap Slots
-  - App Service Name = $(ResourceGroupName)
+  - App Service Name = $(FunctionAppName)
   - Resource Group = $(ResourceGroupName)
-  - Source Slot = $(SlotToSwap)
+  - Source Slot = $(SlotName)
   - Swap with Production = true
 - Set Resource Group Lock
   - Type = Azure PowerShell
@@ -145,7 +148,7 @@ TODO
 - Check Production URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
   - Version = 1.*
-  - URL = https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction?name=test
+  - URL = https://$(FunctionAppName).azurewebsites.net/api/$(FunctionName)?name=test
 
 ### General remark
 
@@ -173,14 +176,14 @@ This environment should be used just if necessary when the bad things happened i
   - Version = 0.*
   - Azure Subscription = set appropriate
   - Action = Swap Slots
-  - App Service Name = $(ResourceGroupName)
+  - App Service Name = $(FunctionAppName)
   - Resource Group = $(ResourceGroupName)
-  - Source Slot = $(SlotToSwap)
+  - Source Slot = $(SlotName)
   - Swap with Production = true
 - Check Production URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
   - Version = 1.*
-  - URL = https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction?name=test
+  - URL = https://$(FunctionAppName).azurewebsites.net/api/$(FunctionName)?name=test
 
 # Deploy to Azure buttons
 
