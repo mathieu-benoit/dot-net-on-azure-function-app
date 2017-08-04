@@ -1,7 +1,7 @@
 {
     "source": 2,
     "id": 1,
-    "revision": 71,
+    "revision": 74,
     "name": "DotNet-FunctionApp-CD",
     "description": null,
     "createdBy": {
@@ -19,7 +19,7 @@
         "url": "https://app.vssps.visualstudio.com/A6d1a4ff8-9a1f-46cb-bd61-54cb9a797939/_apis/Identities/17256fe4-f2a3-4370-b081-ec283edb6a77",
         "imageUrl": "https://mabenoit-ms.visualstudio.com/_api/_common/identityImage?id=17256fe4-f2a3-4370-b081-ec283edb6a77"
     },
-    "modifiedOn": "2017-08-04T13:33:35.927Z",
+    "modifiedOn": "2017-08-04T17:09:54.147Z",
     "path": "\\",
     "variables": {
         "BaseUrl": {
@@ -105,6 +105,50 @@
                     "phaseType": 1,
                     "name": "Run on agent",
                     "workflowTasks": [
+                        {
+                            "taskId": "72a1931b-effb-4d2e-8fd8-f8472a07cb62",
+                            "version": "1.*",
+                            "name": "Set Resource Group ResourceTypes policy",
+                            "refName": "AzurePowerShell1",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "ConnectedServiceNameSelector": "ConnectedServiceNameARM",
+                                "ConnectedServiceName": "",
+                                "ConnectedServiceNameARM": "120887e6-de63-4d53-b184-c46f2e17f1e7",
+                                "ScriptType": "FilePath",
+                                "ScriptPath": "$(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/AddResourceGroupAllowedResourceTypesPolicy.ps1",
+                                "Inline": "# You can write your azure powershell scripts inline here. \n# You can also pass predefined and custom variables to this script using arguments",
+                                "ScriptArguments": "-ResourceGroupName $(ResourceGroupName)"
+                            }
+                        },
+                        {
+                            "taskId": "72a1931b-effb-4d2e-8fd8-f8472a07cb62",
+                            "version": "1.*",
+                            "name": "Set Resource Group ResourceLocations policy",
+                            "refName": "ClonedAzurePowerShell12",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "ConnectedServiceNameSelector": "ConnectedServiceNameARM",
+                                "ConnectedServiceName": "",
+                                "ConnectedServiceNameARM": "120887e6-de63-4d53-b184-c46f2e17f1e7",
+                                "ScriptType": "FilePath",
+                                "ScriptPath": "$(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/AddResourceGroupAllowedResourceLocationsPolicy.ps1",
+                                "Inline": "# You can write your azure powershell scripts inline here. \n# You can also pass predefined and custom variables to this script using arguments",
+                                "ScriptArguments": "-ResourceGroupName $(ResourceGroupName)"
+                            }
+                        },
                         {
                             "taskId": "94a74903-f93f-4075-884f-dc11f34058b4",
                             "version": "2.*",
@@ -436,7 +480,7 @@
                                 "ConnectedServiceName": "",
                                 "ConnectedServiceNameARM": "120887e6-de63-4d53-b184-c46f2e17f1e7",
                                 "ScriptType": "FilePath",
-                                "ScriptPath": "$(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/AddResourceGroupLock.ps1",
+                                "ScriptPath": "$(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/AddResourceGroupDoNotDeleteLock.ps1",
                                 "Inline": "# You can write your azure powershell scripts inline here. \n# You can also pass predefined and custom variables to this script using arguments",
                                 "ScriptArguments": "-ResourceGroupName $(ResourceGroupName)"
                             }

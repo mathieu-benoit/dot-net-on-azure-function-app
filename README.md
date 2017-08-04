@@ -12,8 +12,10 @@ TOC
 
 # History of changes
 
-- August 2017 - Convert MSTest projects on to xUnit - PR #1
-- July 2017 - Initial setup.
+- August 2017
+    - Convert MSTest projects on to xUnit - [PR#1](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/1)
+- July 2017
+    - Initial setup.
 
 # Overview
 
