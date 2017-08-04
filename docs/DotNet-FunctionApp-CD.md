@@ -44,7 +44,7 @@ TODO
 
 ![Staging Release Overview](/docs/imgs/DotNet-FunctionApp-CD-Staging.PNG)
 
-### Pre-deploymnet conditions
+### Pre-deployment conditions
 
 - Triggers
   - Select the source of the trigger = Release
@@ -117,7 +117,7 @@ TODO
 
 ![Production Release Overview](/docs/imgs/DotNet-FunctionApp-CD-Production.PNG)
 
-### Pre-deploymnet conditions
+### Pre-deployment conditions
 
 - Triggers
   - Select the source of the trigger = Environment
@@ -160,7 +160,7 @@ This environment should be used just if necessary when the bad things happened i
 
 ![Rollback Release Overview](/docs/imgs/DotNet-FunctionApp-CD-Rollback.PNG)
 
-### Pre-deploymnet conditions
+### Pre-deployment conditions
 
 - Triggers
   - Select the source of the trigger = Environment
