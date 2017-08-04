@@ -56,7 +56,7 @@ Here are the DevOps practices highlighted within this CD pipeline:
 - Deploy the .NET method on the Azure serverless service: Azure Function App
 - Run IntegrationTests once the Function App is deployed on Staging
 - Use the Staging Slot mechanism with the associated Swap action to minimize downtime while upgrading to Production
-- Securing the production environment by adding a Lock on the associated Azure Resource Group
+- Protect the production environment by adding a Lock and Policies on the associated Azure Resource Group
 - Monitor the Function App by using Application Insights
 - Have a dedicated VSTS Release Environment defined for Rollback automated actions.
 
