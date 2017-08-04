@@ -6,10 +6,10 @@ Param(
     [string] $TemplateFile = '..\templates\deploy-slot.json'
 )
 
-#Login-AzureRmAccount
+#Login-AzureRmAccount;
 #Select-AzureRmSubscription -SubscriptionId $SubscriptionId;
-New-AzureRmResourceGroup -Name $ResourceGroupName -Location $ResourceGroupLocation
+New-AzureRmResourceGroup -Name $ResourceGroupName -Location $ResourceGroupLocation;
 New-AzureRmResourceGroupDeployment -Name $ResourceGroupName `
                                        -ResourceGroupName $ResourceGroupName `
                                        -TemplateFile $TemplateFile `
-									   -Force -Verbose
+									   -Force -Verbose;

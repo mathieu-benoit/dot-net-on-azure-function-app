@@ -28,6 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "imgs", "imgs", "{B0E410F8-E
 		docs\imgs\DotNet-FunctionApp-CD-Production.PNG = docs\imgs\DotNet-FunctionApp-CD-Production.PNG
 		docs\imgs\DotNet-FunctionApp-CD-Rollback.PNG = docs\imgs\DotNet-FunctionApp-CD-Rollback.PNG
 		docs\imgs\DotNet-FunctionApp-CD-Staging.PNG = docs\imgs\DotNet-FunctionApp-CD-Staging.PNG
+		docs\imgs\DotNet-FunctionApp-CD-Variables.PNG = docs\imgs\DotNet-FunctionApp-CD-Variables.PNG
 		docs\imgs\DotNet-FunctionApp-CD.PNG = docs\imgs\DotNet-FunctionApp-CD.PNG
 		docs\imgs\DotNet-FunctionApp-CI.PNG = docs\imgs\DotNet-FunctionApp-CI.PNG
 		docs\imgs\Process-Overview.PNG = docs\imgs\Process-Overview.PNG
@@ -38,15 +39,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetFunction.UnitTests", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{909C4A6F-C429-46C9-8B78-4E6E3A26C608}"
 	ProjectSection(SolutionItems) = preProject
-		infra\scripts\AddResourceGroupLock.ps1 = infra\scripts\AddResourceGroupLock.ps1
-		infra\scripts\DeployARMTemplate.ps1 = infra\scripts\DeployARMTemplate.ps1
-		infra\scripts\TestARMTemplate.ps1 = infra\scripts\TestARMTemplate.ps1
+		infra\scripts\AddResourceGroupAllowedLocationsPolicy.ps1 = infra\scripts\AddResourceGroupAllowedLocationsPolicy.ps1
+		infra\scripts\AddResourceGroupDoNotDeleteLock.ps1 = infra\scripts\AddResourceGroupDoNotDeleteLock.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{539D6251-ED3A-4230-A448-081BB1435281}"
 	ProjectSection(SolutionItems) = preProject
 		infra\templates\deploy-slot.json = infra\templates\deploy-slot.json
 		infra\templates\deploy.json = infra\templates\deploy.json
+		infra\templates\get-function-outputs.json = infra\templates\get-function-outputs.json
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetFunction.IntegrationTests", "test\DotNetFunction.IntegrationTests\DotNetFunction.IntegrationTests.csproj", "{A6398BE2-943A-4C33-B05D-E796CBB86CF4}"
@@ -56,6 +57,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nested", "nested", "{FF2F99
 		infra\templates\nested\ApplicationInsights.json = infra\templates\nested\ApplicationInsights.json
 		infra\templates\nested\FunctionApp.json = infra\templates\nested\FunctionApp.json
 		infra\templates\nested\FunctionAppSlot.json = infra\templates\nested\FunctionAppSlot.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "local", "local", "{AE71B1D9-16B9-429E-AC52-9E164CF42BF7}"
+	ProjectSection(SolutionItems) = preProject
+		infra\scripts\local\DeployARMTemplate.ps1 = infra\scripts\local\DeployARMTemplate.ps1
+		infra\scripts\local\TestARMTemplate.ps1 = infra\scripts\local\TestARMTemplate.ps1
 	EndProjectSection
 EndProject
 Global
@@ -88,6 +95,7 @@ Global
 		{539D6251-ED3A-4230-A448-081BB1435281} = {DFCFBD96-C773-4F03-BC03-DC327F730690}
 		{A6398BE2-943A-4C33-B05D-E796CBB86CF4} = {6CFE9AD3-1A52-48F6-BBFB-0E9F02FEF51B}
 		{FF2F9942-B9D2-438E-8340-2DF05D5C1FF9} = {539D6251-ED3A-4230-A448-081BB1435281}
+		{AE71B1D9-16B9-429E-AC52-9E164CF42BF7} = {909C4A6F-C429-46C9-8B78-4E6E3A26C608}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {593B5211-2ED0-4537-A624-24D38AA69DB1}

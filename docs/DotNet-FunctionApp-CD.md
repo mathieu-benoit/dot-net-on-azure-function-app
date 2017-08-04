@@ -53,6 +53,22 @@ TODO
 
 ### Tasks 
 
+- Set Resource Group ResourceTypes policy
+  - Type = Azure PowerShell
+  - Version = 1.*
+  - Azure Connection Type = Azure Resource Manager
+  - Azure Subscription = set appropriate
+  - Script Type = Script File Path
+  - Script Path = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/[AddResourceGroupAllowedResourceTypesPolicy.ps1](../infra/scripts/AddResourceGroupAllowedResourceTypesPolicy.ps1)
+  - Script Arguments = -ResourceGroupName $(ResourceGroupName)
+- Set Resource Group ResourceLocations policy
+  - Type = Azure PowerShell
+  - Version = 1.*
+  - Azure Connection Type = Azure Resource Manager
+  - Azure Subscription = set appropriate
+  - Script Type = Script File Path
+  - Script Path = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/[AddResourceGroupAllowedResourceLocationsPolicy.ps1](../infra/scripts/AddResourceGroupAllowedResourceLocationsPolicy.ps1)
+  - Script Arguments = -ResourceGroupName $(ResourceGroupName)
 - Ensure Production Function App exists
   - Type = Azure Resource Group Deployment
   - Version = 2.*
@@ -143,7 +159,7 @@ TODO
   - Azure Connection Type = Azure Resource Manager
   - Azure Subscription = set appropriate
   - Script Type = Script File Path
-  - Script Path = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/[AddResourceGroupLock.ps1](../infra/scripts/AddResourceGroupLock.ps1)
+  - Script Path = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/[AddResourceGroupDoNotDeleteLock.ps1](../infra/scripts/AddResourceGroupDoNotDeleteLock.ps1)
   - Script Arguments = -ResourceGroupName $(ResourceGroupName)
 - Check Production URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
