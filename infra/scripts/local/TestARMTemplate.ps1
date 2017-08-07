@@ -2,7 +2,7 @@
 
 Param(
     [string] $ResourceGroupLocation = 'East US',
-    [string] $TemplateFile = '..\templates\deploy.json'
+    [string] $TemplateFile = '..\..\templates\deploy.json'
 )
 
 $temporaryResourceGroupName = "tmp-rg-for-templates-validation"

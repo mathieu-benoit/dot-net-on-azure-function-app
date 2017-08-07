@@ -13,6 +13,7 @@ TOC
 # History of changes
 
 - August 2017
+    - Take into account the code query string parameter in the IntegrationTests [PR#3](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/2)
     - Add more operational protection with Resource Group Policies - [PR#2](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/2)
     - Convert MSTest projects on to xUnit - [PR#1](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/1)
 - July 2017
@@ -70,7 +71,7 @@ Here are the DevOps practices highlighted within this CD pipeline:
 
 - Improvements
     - Implement [https://aka.ms/armconditions](https://aka.ms/armconditions) for the first Staging/CD's VSTS task to avoid deploying Production if it already exists.
-    - Instead of allowing 'anonymous' request you could/should setup another AuthorizationLevel, for security reason, and then [retrieve by ARM Template the key](https://stackoverflow.com/questions/43253453/get-function-host-keys-of-azure-function-in-powershell/44117841#44117841) or [by REST API](https://github.com/Azure/azure-webjobs-sdk-script/wiki/Key-management-API) for your URL ping test during your CD pipeline. I started that by trying to call later on the pipeline the [get-function-outputs.json template](/infra/templates/get-function-outputs.json) but it's not returning the correct Function Key. The associated known issue is logged [here](https://github.com/Azure/azure-webjobs-sdk-script/issues/1752).
+    - Instead of allowing 'anonymous' request you could/should setup another AuthorizationLevel for security reason. There is an associated known issue logged [here](https://github.com/Azure/azure-webjobs-sdk-script/issues/1752).
     - [Configure VSTS and Microsoft Teams](https://almvm.azurewebsites.net/labs/vsts/teams/) (or Slack or HipChat, etc.) to add more collaboration by setting up notifications once a work item is updated, a commit is done, a build or release or done, etc.
     - Instead of just having a Production environment with its staging slot, having a QA environment with its associated staging too.
 - Alternatives
@@ -88,3 +89,4 @@ Here are the DevOps practices highlighted within this CD pipeline:
 - Deploying Azure Function App with Deployment Slots using ARM Templates - Blog series: [First](https://nascent.blog/2017/05/31/azure-function-app-deployment-slots-arm-template/), [Second](https://nascent.blog/2017/06/22/azure-functions-arm-templates-snags-1-http-triggers-keys/) and [Third](https://nascent.blog/2017/06/27/azure-functions-slots-arm-templates-snags-2-redeploy-causes-unwanted-swap/)
 - [Is Your Serverless Application Testable? – Azure Functions](https://blog.kloud.com.au/2017/07/22/is-your-serverless-application-testable-azure-functions/)
 - [Azure Functions Proxies Sample](https://github.com/Azure-Samples/functions-js-spa)
+- [Azure Functions - Samples and Content](https://github.com/Azure/Azure-Functions/wiki/Samples-and-content)

@@ -33,10 +33,11 @@ TODO
 - Location = East US
 - ReleaseConfiguration = Release
 - ReleasePlatform = Any CPU
-- AppServiceUrl = 
-  - Empty, because it will be set by the "Deploy Function App on Staging" task and will be consumed by the "Replace tokens in IntegrationTests config file" task.
+- functionUrl = 
+  - Empty, because it will be set by the "Get FunctionUrl" task.
 - FunctionAppName = set appropriate
 - FunctionName = SampleHelloDotNetFunction
+- FunctionUrlTestQueryString = &name=test
 
 ![Release Variables](/docs/imgs/DotNet-FunctionApp-CD-Variables.PNG)
 
@@ -102,10 +103,28 @@ TODO
   - Package or Folder = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/function
   - Publish using Web Deploy = true
   - App Service URL = BaseUrl
+- Get Function Outputs
+  - Type = Azure Resource Group Deployment
+  - Version = 2.*
+  - Azure Subscription = set appropriate
+  - Action = Create Or Update Resource Group
+  - Resource Group = $(ResourceGroupName)
+  - Location = $(Location)
+  - Template location = Linked artifact
+  - Template = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/infra/[get-function-outputs-slot.json](../infra/templates/get-function-outputs-slot.json)
+  - Override Template Parameters = -functionAppName $(FunctionAppName) -functionName $(FunctionName) -slotName $(SlotName)
+  - Deployment Mode = Incremental
+- Get functionUrl
+  - Type = [ARM Outputs](https://marketplace.visualstudio.com/items?itemName=keesschollaart.arm-outputs)
+  - Version = 1.*
+  - Azure Connection Type = Azure Resource Manager
+  - AzureRM Subscription = set appropriate
+  - Resource Group = $(ResourceGroupName)
+  - Outputs to process = functionUrl
 - Check Staging URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
   - Version = 1.*
-  - URL = https://$(FunctionAppName)-$(SlotName).azurewebsites.net/api/$(FunctionName)?name=test
+  - URL = $(FunctionUrl)$(FunctionUrlTestQueryString)
 - Replace tokens in IntegrationTests config file
   - Type = [Replace Tokens](https://marketplace.visualstudio.com/items?itemName=qetza.replacetokens)
   - Version = 2.*
@@ -153,7 +172,7 @@ TODO
   - Resource Group = $(ResourceGroupName)
   - Source Slot = $(SlotName)
   - Swap with Production = true
-- Set Resource Group Lock
+- Set Resource Group DoNotDelete Lock
   - Type = Azure PowerShell
   - Version = 1.*
   - Azure Connection Type = Azure Resource Manager
@@ -161,14 +180,32 @@ TODO
   - Script Type = Script File Path
   - Script Path = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/[AddResourceGroupDoNotDeleteLock.ps1](../infra/scripts/AddResourceGroupDoNotDeleteLock.ps1)
   - Script Arguments = -ResourceGroupName $(ResourceGroupName)
+- Get Function Outputs
+  - Type = Azure Resource Group Deployment
+  - Version = 2.*
+  - Azure Subscription = set appropriate
+  - Action = Create Or Update Resource Group
+  - Resource Group = $(ResourceGroupName)
+  - Location = $(Location)
+  - Template location = Linked artifact
+  - Template = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/infra/[get-function-outputs.json](../infra/templates/get-function-outputs.json)
+  - Override Template Parameters = -functionAppName $(FunctionAppName) -functionName $(FunctionName)
+  - Deployment Mode = Incremental
+- Get functionUrl
+  - Type = [ARM Outputs](https://marketplace.visualstudio.com/items?itemName=keesschollaart.arm-outputs)
+  - Version = 1.*
+  - Azure Connection Type = Azure Resource Manager
+  - AzureRM Subscription = set appropriate
+  - Resource Group = $(ResourceGroupName)
+  - Outputs to process = functionUrl
 - Check Production URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
   - Version = 1.*
-  - URL = https://$(FunctionAppName).azurewebsites.net/api/$(FunctionName)?name=test
+  - URL = $(FunctionUrl)$(FunctionUrlTestQueryString)
 
 ### General remark
 
-  For the "Set Resource Group Lock" step, you will need to make sure that your default Service Principal user created by VSTS (during the Azure RM service endpoint creation) has the Owner role and not by default the Contributor role. Otherwise this task will fail. To assign the Owner role, you could go to the Access control (IAM) blade of your Azure subscription within the new Azure portal and then Assign (Add button) the associated VisualStudioSPN... user to the Owner role.
+  For the "Set Resource Group DoNotDelete Lock", "Set Resource Group ResourceTypes policy" and "Set Resource Group Locations policy" steps, you will need to make sure that your default Service Principal user created by VSTS (during the Azure RM service endpoint creation) has the Owner role and not by default the Contributor role. Otherwise this task will fail. To assign the Owner role, you could go to the Access control (IAM) blade of your Azure subscription within the new Azure portal and then Assign (Add button) the associated VisualStudioSPN... user to the Owner role.
 
 ## Rollback Environment
 

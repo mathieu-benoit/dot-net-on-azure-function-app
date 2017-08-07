@@ -1,7 +1,7 @@
 {
     "source": 2,
     "id": 1,
-    "revision": 75,
+    "revision": 91,
     "name": "DotNet-FunctionApp-CD",
     "description": null,
     "createdBy": {
@@ -19,17 +19,20 @@
         "url": "https://app.vssps.visualstudio.com/A6d1a4ff8-9a1f-46cb-bd61-54cb9a797939/_apis/Identities/17256fe4-f2a3-4370-b081-ec283edb6a77",
         "imageUrl": "https://mabenoit-ms.visualstudio.com/_api/_common/identityImage?id=17256fe4-f2a3-4370-b081-ec283edb6a77"
     },
-    "modifiedOn": "2017-08-04T17:27:35.200Z",
+    "modifiedOn": "2017-08-07T22:01:35.900Z",
     "path": "\\",
     "variables": {
-        "BaseUrl": {
-            "value": ""
-        },
         "FunctionAppName": {
             "value": "mabenoittest"
         },
         "FunctionName": {
             "value": "SampleHelloDotNetFunction"
+        },
+        "functionUrl": {
+            "value": ""
+        },
+        "FunctionUrlTestQueryString": {
+            "value": "&name=test"
         },
         "Location": {
             "value": "East US"
@@ -238,7 +241,7 @@
                                 "StartupCommand": "",
                                 "VirtualApplication": "",
                                 "Package": "$(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/function",
-                                "WebAppUri": "BaseUrl",
+                                "WebAppUri": "",
                                 "ScriptType": "",
                                 "InlineScript": "",
                                 "ScriptPath": "",
@@ -258,6 +261,58 @@
                             }
                         },
                         {
+                            "taskId": "94a74903-f93f-4075-884f-dc11f34058b4",
+                            "version": "2.*",
+                            "name": "Get Function Outputs",
+                            "refName": "AzureResourceGroupDeployment1",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "ConnectedServiceName": "120887e6-de63-4d53-b184-c46f2e17f1e7",
+                                "action": "Create Or Update Resource Group",
+                                "resourceGroupName": "$(ResourceGroupName)",
+                                "location": "$(Location)",
+                                "templateLocation": "Linked artifact",
+                                "csmFileLink": "",
+                                "csmParametersFileLink": "",
+                                "csmFile": "$(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/infra/get-function-outputs-slot.json",
+                                "csmParametersFile": "",
+                                "overrideParameters": "-functionAppName $(FunctionAppName) -functionName $(FunctionName)",
+                                "deploymentMode": "Incremental",
+                                "enableDeploymentPrerequisites": "None",
+                                "deploymentGroupEndpoint": "",
+                                "project": "",
+                                "deploymentGroupName": "",
+                                "copyAzureVMTags": "true",
+                                "outputVariable": ""
+                            }
+                        },
+                        {
+                            "taskId": "584bcff2-3353-4f11-872b-6ba01267a972",
+                            "version": "1.*",
+                            "name": "Get functionUrl",
+                            "refName": "ARMOutputs1",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "ConnectedServiceNameSelector": "ConnectedServiceNameARM",
+                                "ConnectedServiceNameARM": "120887e6-de63-4d53-b184-c46f2e17f1e7",
+                                "resourceGroupName": "$(ResourceGroupName)",
+                                "prefix": "",
+                                "outputNames": "functionUrl"
+                            }
+                        },
+                        {
                             "taskId": "2a1711d0-b4a4-11e6-a3c2-edf36ba3fddc",
                             "version": "1.*",
                             "name": "Check Staging URL",
@@ -270,7 +325,7 @@
                             "overrideInputs": {},
                             "condition": "succeeded()",
                             "inputs": {
-                                "url": "https://$(FunctionAppName)-$(SlotName).azurewebsites.net/api/$(FunctionName)?name=test"
+                                "url": "$(FunctionUrl)$(FunctionUrlTestQueryString)"
                             }
                         },
                         {
@@ -466,7 +521,7 @@
                         {
                             "taskId": "72a1931b-effb-4d2e-8fd8-f8472a07cb62",
                             "version": "1.*",
-                            "name": "Set Resource Group Lock",
+                            "name": "Set Resource Group DoNotDelete Lock",
                             "refName": "AzurePowerShell_1",
                             "enabled": true,
                             "alwaysRun": false,
@@ -486,6 +541,58 @@
                             }
                         },
                         {
+                            "taskId": "94a74903-f93f-4075-884f-dc11f34058b4",
+                            "version": "2.*",
+                            "name": "Get Function Outputs",
+                            "refName": "AzureResourceGroupDeployment1",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "ConnectedServiceName": "120887e6-de63-4d53-b184-c46f2e17f1e7",
+                                "action": "Create Or Update Resource Group",
+                                "resourceGroupName": "$(ResourceGroupName)",
+                                "location": "$(Location)",
+                                "templateLocation": "Linked artifact",
+                                "csmFileLink": "",
+                                "csmParametersFileLink": "",
+                                "csmFile": "$(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/infra/get-function-outputs.json",
+                                "csmParametersFile": "",
+                                "overrideParameters": "-functionAppName $(FunctionAppName) -functionName $(FunctionName)",
+                                "deploymentMode": "Incremental",
+                                "enableDeploymentPrerequisites": "None",
+                                "deploymentGroupEndpoint": "",
+                                "project": "",
+                                "deploymentGroupName": "",
+                                "copyAzureVMTags": "true",
+                                "outputVariable": ""
+                            }
+                        },
+                        {
+                            "taskId": "584bcff2-3353-4f11-872b-6ba01267a972",
+                            "version": "1.*",
+                            "name": "ARM Outputs",
+                            "refName": "ARMOutputs2",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "ConnectedServiceNameSelector": "ConnectedServiceNameARM",
+                                "ConnectedServiceNameARM": "120887e6-de63-4d53-b184-c46f2e17f1e7",
+                                "resourceGroupName": "$(ResourceGroupName)",
+                                "prefix": "",
+                                "outputNames": "functionUrl"
+                            }
+                        },
+                        {
                             "taskId": "2a1711d0-b4a4-11e6-a3c2-edf36ba3fddc",
                             "version": "1.*",
                             "name": "Check Production URL",
@@ -498,7 +605,7 @@
                             "overrideInputs": {},
                             "condition": "succeeded()",
                             "inputs": {
-                                "url": "https://$(ResourceGroupName).azurewebsites.net/api/$(FunctionName)?name=test"
+                                "url": "$(FunctionUrl)$(FunctionUrlTestQueryString)"
                             }
                         }
                     ]
@@ -628,6 +735,58 @@
                             }
                         },
                         {
+                            "taskId": "94a74903-f93f-4075-884f-dc11f34058b4",
+                            "version": "2.*",
+                            "name": "Get Function Outputs",
+                            "refName": "AzureResourceGroupDeployment2",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "ConnectedServiceName": "120887e6-de63-4d53-b184-c46f2e17f1e7",
+                                "action": "Create Or Update Resource Group",
+                                "resourceGroupName": "$(ResourceGroupName)",
+                                "location": "$(Location)",
+                                "templateLocation": "Linked artifact",
+                                "csmFileLink": "",
+                                "csmParametersFileLink": "",
+                                "csmFile": "$(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/infra/get-function-outputs.json",
+                                "csmParametersFile": "",
+                                "overrideParameters": "-functionAppName $(FunctionAppName) -functionName $(FunctionName)",
+                                "deploymentMode": "Incremental",
+                                "enableDeploymentPrerequisites": "None",
+                                "deploymentGroupEndpoint": "",
+                                "project": "",
+                                "deploymentGroupName": "",
+                                "copyAzureVMTags": "true",
+                                "outputVariable": ""
+                            }
+                        },
+                        {
+                            "taskId": "584bcff2-3353-4f11-872b-6ba01267a972",
+                            "version": "1.*",
+                            "name": "Get functionUrl",
+                            "refName": "ARMOutputs1",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "ConnectedServiceNameSelector": "ConnectedServiceNameARM",
+                                "ConnectedServiceNameARM": "120887e6-de63-4d53-b184-c46f2e17f1e7",
+                                "resourceGroupName": "$(ResourceGroupName)",
+                                "prefix": "",
+                                "outputNames": "functionUrl"
+                            }
+                        },
+                        {
                             "taskId": "2a1711d0-b4a4-11e6-a3c2-edf36ba3fddc",
                             "version": "1.*",
                             "name": "Check Production URL",
@@ -640,7 +799,7 @@
                             "overrideInputs": {},
                             "condition": "succeeded()",
                             "inputs": {
-                                "url": "https://$(ResourceGroupName).azurewebsites.net/api/SampleHelloDotNetFunction?name=test"
+                                "url": "$(FunctionUrl)$(FunctionUrlTestQueryString)"
                             }
                         }
                     ]
