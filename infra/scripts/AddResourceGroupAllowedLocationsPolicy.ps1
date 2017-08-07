@@ -3,7 +3,7 @@
 
 Param(
     [string] [Parameter(Mandatory=$true)] $ResourceGroupName,
-    [string] $Location = 'East US'
+    [string] $Location = 'eastus'
 )
 
 $allowedLocationsPolicy = '{
