@@ -9,6 +9,10 @@
     "functionName": {
       "type": "string",
       "minLength": 1
+    },
+    "slotName": {
+      "type": "string",
+      "minLength": 1
     }
   },
   "variables": {},
@@ -16,14 +20,11 @@
   "outputs": {
     "functionKey": {
       "type": "string",
-      "value": "[listsecrets(resourceId('Microsoft.Web/sites/functions', parameters('functionAppName'), parameters('functionName')),'2015-08-01').key]"
+      "value": "[listsecrets(resourceId('Microsoft.Web/sites/slots/functions', parameters('functionAppName'), parameters('slotName'), parameters('functionName')),'2015-08-01').key]"
     },
     "functionUrl": {
       "type": "string",
-      "value": "[listsecrets(resourceId('Microsoft.Web/sites/functions', parameters('functionAppName'), parameters('functionName')),'2015-08-01').trigger_url]"
+            "value": "[listsecrets(resourceId('Microsoft.Web/sites/slots/functions', parameters('functionAppName'), parameters('slotName'), parameters('functionName')),'2015-08-01').trigger_url]"
     }
-    [resourceId('Microsoft.Web/sites/slots', parameters('functionAppName'), parameters('slotName'))]
-    /subscriptions/
-0bd042ec-b6bc-4162-8385-c05a21d55572/resourceGroups/mabenoittest/providers/Microsoft.Web/sites/mabenoittest/slots/staging/functions/admin/token?api-version=2016-08-01
   }
 }

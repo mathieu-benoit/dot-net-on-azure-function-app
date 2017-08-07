@@ -13,7 +13,6 @@ TOC
 # History of changes
 
 - August 2017
-    - Take into account the code query string parameter in the IntegrationTests [PR#3](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/2)
     - Add more operational protection with Resource Group Policies - [PR#2](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/2)
     - Convert MSTest projects on to xUnit - [PR#1](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/1)
 - July 2017
