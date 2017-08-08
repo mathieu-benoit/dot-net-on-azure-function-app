@@ -9,7 +9,7 @@ namespace DotNetFunction
     public static class SampleHelloDotNetFunction
     {
         [FunctionName("SampleHelloDotNetFunction")]
-        public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")]HttpRequestMessage request)
+        public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Function, "get")]HttpRequestMessage request)
         {
             var name = request.GetQueryNameValuePairs()
                 .FirstOrDefault(q => string.Compare(q.Key, "name", true) == 0)

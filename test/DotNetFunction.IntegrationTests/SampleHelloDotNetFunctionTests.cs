@@ -30,8 +30,7 @@ namespace DotNetFunction.IntegrationTests
             var response = await httpClient.GetAsync(urlTested);
 
             //Assert
-            //Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);//TMP: should be replaced by the line above when this issue will be fixed: https://github.com/Azure/azure-webjobs-sdk-script/issues/1752
+            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         }
 
         [Fact]
