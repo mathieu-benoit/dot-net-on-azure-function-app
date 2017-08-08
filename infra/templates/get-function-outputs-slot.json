@@ -24,7 +24,7 @@
     },
     "functionUrl": {
       "type": "string",
-            "value": "[listsecrets(resourceId('Microsoft.Web/sites/slots/functions', parameters('functionAppName'), parameters('slotName'), parameters('functionName')),'2015-08-01').trigger_url]"
+      "value": "[listsecrets(resourceId('Microsoft.Web/sites/slots/functions', parameters('functionAppName'), parameters('slotName'), parameters('functionName')),'2015-08-01').trigger_url]"
     }
   }
 }

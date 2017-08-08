@@ -40,6 +40,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{909C4A6F-C429-46C9-8B78-4E6E3A26C608}"
 	ProjectSection(SolutionItems) = preProject
 		infra\scripts\AddResourceGroupAllowedLocationsPolicy.ps1 = infra\scripts\AddResourceGroupAllowedLocationsPolicy.ps1
+		infra\scripts\AddResourceGroupAllowedResourceTypesPolicy.ps1 = infra\scripts\AddResourceGroupAllowedResourceTypesPolicy.ps1
 		infra\scripts\AddResourceGroupDoNotDeleteLock.ps1 = infra\scripts\AddResourceGroupDoNotDeleteLock.ps1
 	EndProjectSection
 EndProject
@@ -47,6 +48,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{
 	ProjectSection(SolutionItems) = preProject
 		infra\templates\deploy-slot.json = infra\templates\deploy-slot.json
 		infra\templates\deploy.json = infra\templates\deploy.json
+		infra\templates\get-function-outputs-slot.json = infra\templates\get-function-outputs-slot.json
 		infra\templates\get-function-outputs.json = infra\templates\get-function-outputs.json
 	EndProjectSection
 EndProject
