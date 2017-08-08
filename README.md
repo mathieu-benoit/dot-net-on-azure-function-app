@@ -70,7 +70,7 @@ Here are the DevOps practices highlighted within this CD pipeline:
 
 - Improvements
     - Implement [https://aka.ms/armconditions](https://aka.ms/armconditions) for the first Staging/CD's VSTS task to avoid deploying Production if it already exists.
-    - Instead of allowing 'anonymous' request you could/should setup another AuthorizationLevel for security reason. There is an associated known issue logged [here](https://github.com/Azure/azure-webjobs-sdk-script/issues/1752).
+    - Instead of allowing 'anonymous' request, setup another AuthorizationLevel for security reason. There is an associated known issue logged [here](https://github.com/Azure/azure-webjobs-sdk-script/issues/1752). See my associated stand-by [PR#3](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/3).
     - [Configure VSTS and Microsoft Teams](https://almvm.azurewebsites.net/labs/vsts/teams/) (or Slack or HipChat, etc.) to add more collaboration by setting up notifications once a work item is updated, a commit is done, a build or release or done, etc.
     - Instead of just having a Production environment with its staging slot, having a QA environment with its associated staging too.
 - Alternatives
