@@ -13,7 +13,7 @@ TOC
 # History of changes
 
 - August 2017
-    - Implement [https://aka.ms/armconditions](https://aka.ms/armconditions) for the first Staging/CD's VSTS task to avoid deploying Production if it already exists. We don't want to impact existing Production while we are taking care about Staging.
+    - Implement [https://aka.ms/armconditions](https://aka.ms/armconditions) for the first Staging/CD's VSTS task to avoid deploying Production if it already exists. We don't want to impact existing Production while we are taking care about Staging - - [PR#4](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/4)
     - Add more operational protection with Resource Group Policies - [PR#2](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/2)
     - Convert MSTest projects to xUnit - [PR#1](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/1)
 - July 2017
