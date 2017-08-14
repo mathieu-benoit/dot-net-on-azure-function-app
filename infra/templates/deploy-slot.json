@@ -38,9 +38,9 @@
     }
   },
   "variables": {
-    "productionDeploymentName": "[concat(deployment().name, '-functionAppProduction')]",
-    "applicationInsightsDeploymentName": "[concat(deployment().name, '-applicationInsightsSlot')]",
-    "functionAppDeploymentName": "[concat(deployment().name, '-functionAppSlot')]"
+    "productionDeploymentName": "[concat(deployment().name, '-faprod')]",
+    "applicationInsightsDeploymentName": "[concat(deployment().name, '-aislot')]",
+    "functionAppDeploymentName": "[concat(deployment().name, '-faslot')]"
   },
   "resources": [
     {

@@ -29,8 +29,8 @@
     }
   },
   "variables": {
-    "applicationInsightsDeploymentName": "[concat(deployment().name, '-applicationInsights')]",
-    "functionAppDeploymentName": "[concat(deployment().name, '-functionApp')]"
+    "applicationInsightsDeploymentName": "[concat(deployment().name, '-ai')]",
+    "functionAppDeploymentName": "[concat(deployment().name, '-fa')]"
   },
   "resources": [
     {
