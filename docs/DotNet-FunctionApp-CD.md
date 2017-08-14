@@ -56,22 +56,6 @@ TODO
 
 ### Tasks 
 
-- Set Resource Group ResourceTypes policy
-  - Type = Azure PowerShell
-  - Version = 1.*
-  - Azure Connection Type = Azure Resource Manager
-  - Azure Subscription = set appropriate
-  - Script Type = Script File Path
-  - Script Path = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/[AddResourceGroupAllowedResourceTypesPolicy.ps1](../infra/scripts/AddResourceGroupAllowedResourceTypesPolicy.ps1)
-  - Script Arguments = -ResourceGroupName $(ResourceGroupName)
-- Set Resource Group Locations policy
-  - Type = Azure PowerShell
-  - Version = 1.*
-  - Azure Connection Type = Azure Resource Manager
-  - Azure Subscription = set appropriate
-  - Script Type = Script File Path
-  - Script Path = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/[AddResourceGroupAllowedLocationsPolicy.ps1](../infra/scripts/AddResourceGroupAllowedLocationsPolicy.ps1)
-  - Script Arguments = -ResourceGroupName $(ResourceGroupName)
 - Set deployProductionWhileDeployingStaging variable
   - Type = Azure PowerShell
   - Version = 1.*
@@ -91,6 +75,22 @@ TODO
   - Template = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/infra/[deplo-slot.json](../infra/templates/deploy-slot.json)
   - Override Template Parameters = -functionAppName $(FunctionAppName) -slotName $(SlotName)
   - Deployment Mode = Incremental
+- Set Resource Group ResourceTypes policy
+  - Type = Azure PowerShell
+  - Version = 1.*
+  - Azure Connection Type = Azure Resource Manager
+  - Azure Subscription = set appropriate
+  - Script Type = Script File Path
+  - Script Path = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/[AddResourceGroupAllowedResourceTypesPolicy.ps1](../infra/scripts/AddResourceGroupAllowedResourceTypesPolicy.ps1)
+  - Script Arguments = -ResourceGroupName $(ResourceGroupName)
+- Set Resource Group Locations policy
+  - Type = Azure PowerShell
+  - Version = 1.*
+  - Azure Connection Type = Azure Resource Manager
+  - Azure Subscription = set appropriate
+  - Script Type = Script File Path
+  - Script Path = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/[AddResourceGroupAllowedLocationsPolicy.ps1](../infra/scripts/AddResourceGroupAllowedLocationsPolicy.ps1)
+  - Script Arguments = -ResourceGroupName $(ResourceGroupName)
 - Deploy Function App on Staging
   - Type = Azure App Service Deploy
   - Version = 3.*
