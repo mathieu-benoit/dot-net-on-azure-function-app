@@ -34,7 +34,9 @@ TODO
 - ReleaseConfiguration = Release
 - ReleasePlatform = Any CPU
 - functionUrl = 
-  - Empty, because it will be set by the "Get FunctionUrl" task.
+  - Empty, because it will be set by the "Set functionUrl variable" task.
+- deployProductionWhileDeployingStaging = 
+  - Empty, because it will be set by the "Set deployProductionWhileDeployingStaging variable" task.
 - FunctionAppName = set appropriate
 - FunctionName = SampleHelloDotNetFunction
 - FunctionUrlTestQueryString = &name=test
@@ -70,17 +72,14 @@ TODO
   - Script Type = Script File Path
   - Script Path = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/[AddResourceGroupAllowedLocationsPolicy.ps1](../infra/scripts/AddResourceGroupAllowedLocationsPolicy.ps1)
   - Script Arguments = -ResourceGroupName $(ResourceGroupName)
-- Ensure Production Function App exists
-  - Type = Azure Resource Group Deployment
-  - Version = 2.*
+- Set deployProductionWhileDeployingStaging variable
+  - Type = Azure PowerShell
+  - Version = 1.*
+  - Azure Connection Type = Azure Resource Manager
   - Azure Subscription = set appropriate
-  - Action = Create Or Update Resource Group
-  - Resource Group = $(ResourceGroupName)
-  - Location = $(Location)
-  - Template location = Linked artifact
-  - Template = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/infra/[deploy.json](../infra/templates/deploy.json)
-  - Override Template Parameters = -functionAppName $(FunctionAppName)
-  - Deployment Mode = Incremental
+  - Script Type = Script File Path
+  - Script Path = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/scripts/[SetDeployProductionWhileDeployingStagingVariableValue.ps1](../infra/scripts/SetDeployProductionWhileDeployingStagingVariableValue.ps1)
+  - Script Arguments = -WebAppName $(ResourceGroupName)
 - Provision Staging
   - Type = Azure Resource Group Deployment
   - Version = 2.*
@@ -114,7 +113,7 @@ TODO
   - Template = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/infra/[get-function-outputs-slot.json](../infra/templates/get-function-outputs-slot.json)
   - Override Template Parameters = -functionAppName $(FunctionAppName) -functionName $(FunctionName) -slotName $(SlotName)
   - Deployment Mode = Incremental
-- Get functionUrl
+- Set functionUrl variable
   - Type = [ARM Outputs](https://marketplace.visualstudio.com/items?itemName=keesschollaart.arm-outputs)
   - Version = 1.*
   - Azure Connection Type = Azure Resource Manager
@@ -124,7 +123,7 @@ TODO
 - Check Staging URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
   - Version = 1.*
-  - URL = $(FunctionUrl)$(FunctionUrlTestQueryString)
+  - URL = $(functionUrl)$(FunctionUrlTestQueryString)
 - Replace tokens in IntegrationTests config file
   - Type = [Replace Tokens](https://marketplace.visualstudio.com/items?itemName=qetza.replacetokens)
   - Version = 2.*
@@ -191,7 +190,7 @@ TODO
   - Template = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/infra/[get-function-outputs.json](../infra/templates/get-function-outputs.json)
   - Override Template Parameters = -functionAppName $(FunctionAppName) -functionName $(FunctionName)
   - Deployment Mode = Incremental
-- Get functionUrl
+- Set functionUrl variable
   - Type = [ARM Outputs](https://marketplace.visualstudio.com/items?itemName=keesschollaart.arm-outputs)
   - Version = 1.*
   - Azure Connection Type = Azure Resource Manager
@@ -201,7 +200,7 @@ TODO
 - Check Production URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
   - Version = 1.*
-  - URL = $(FunctionUrl)$(FunctionUrlTestQueryString)
+  - URL = $(functionUrl)$(FunctionUrlTestQueryString)
 
 ### General remark
 
@@ -233,10 +232,28 @@ This environment should be used just if necessary when the bad things happened i
   - Resource Group = $(ResourceGroupName)
   - Source Slot = $(SlotName)
   - Swap with Production = true
+- Get Function Outputs
+  - Type = Azure Resource Group Deployment
+  - Version = 2.*
+  - Azure Subscription = set appropriate
+  - Action = Create Or Update Resource Group
+  - Resource Group = $(ResourceGroupName)
+  - Location = $(Location)
+  - Template location = Linked artifact
+  - Template = $(System.DefaultWorkingDirectory)/DotNet-FunctionApp-CI/infra/[get-function-outputs.json](../infra/templates/get-function-outputs.json)
+  - Override Template Parameters = -functionAppName $(FunctionAppName) -functionName $(FunctionName)
+  - Deployment Mode = Incremental
+- Set functionUrl variable
+  - Type = [ARM Outputs](https://marketplace.visualstudio.com/items?itemName=keesschollaart.arm-outputs)
+  - Version = 1.*
+  - Azure Connection Type = Azure Resource Manager
+  - AzureRM Subscription = set appropriate
+  - Resource Group = $(ResourceGroupName)
+  - Outputs to process = functionUrl
 - Check Production URL
   - Type = [Check URL Status](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl)
   - Version = 1.*
-  - URL = https://$(FunctionAppName).azurewebsites.net/api/$(FunctionName)?name=test
+  - URL = $(functionUrl)$(FunctionUrlTestQueryString)
 
 # Deploy to Azure buttons
 
