@@ -22,6 +22,15 @@
       "minLength": 1,
       "defaultValue": "[concat(resourceGroup().name, '-', parameters('slotName'))]"
     },
+    "deployProductionSlotAsWell": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "false",
+      "allowedValues": [
+        "true",
+        "false"
+      ]
+    },
     "templateLinkBase": {
       "type": "string",
       "minLength": 1,
@@ -29,14 +38,44 @@
     }
   },
   "variables": {
+    "productionDeploymentName": "[concat(deployment().name, '-functionAppProduction')]",
     "applicationInsightsDeploymentName": "[concat(deployment().name, '-applicationInsightsSlot')]",
     "functionAppDeploymentName": "[concat(deployment().name, '-functionAppSlot')]"
   },
   "resources": [
     {
+      "condition": "[equals(parameters('deployProductionSlotAsWell'),'true')]",
+      "apiVersion": "2015-01-01",
+      "name": "[variables('productionDeploymentName')]",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('templateLinkBase'), 'deploy.json')]"
+        },
+        "parameters": {
+          "hostingPlanName": {
+            "value": "[resourceGroup().name]"
+          },
+          "functionAppName": {
+            "value": "[parameters('functionAppName')]"
+          },
+          "appInsightsName": {
+            "value": "[resourceGroup().name]"
+          },
+          "storageName": {
+            "value": "[parameters('storageName')]"
+          }
+        }
+      }
+    },
+    {
       "apiVersion": "2015-01-01",
       "name": "[variables('applicationInsightsDeploymentName')]",
       "type": "Microsoft.Resources/deployments",
+      "dependsOn": [
+        "[concat('Microsoft.Resources/deployments/', variables('productionDeploymentName'))]"
+      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {

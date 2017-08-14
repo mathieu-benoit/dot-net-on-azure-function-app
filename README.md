@@ -13,8 +13,9 @@ TOC
 # History of changes
 
 - August 2017
+    - Implement [https://aka.ms/armconditions](https://aka.ms/armconditions) for the first Staging/CD's VSTS task to avoid deploying Production if it already exists. We don't want to impact existing Production while we are taking care about Staging.
     - Add more operational protection with Resource Group Policies - [PR#2](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/2)
-    - Convert MSTest projects on to xUnit - [PR#1](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/1)
+    - Convert MSTest projects to xUnit - [PR#1](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/1)
 - July 2017
     - Initial setup.
 
@@ -69,7 +70,6 @@ Here are the DevOps practices highlighted within this CD pipeline:
 # Alternatives and potential further considerations
 
 - Improvements
-    - Implement [https://aka.ms/armconditions](https://aka.ms/armconditions) for the first Staging/CD's VSTS task to avoid deploying Production if it already exists.
     - Instead of allowing 'anonymous' request, setup another AuthorizationLevel for security reason. There is an associated known issue logged [here](https://github.com/Azure/azure-webjobs-sdk-script/issues/1752). See my associated stand-by [PR#3](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/3).
     - [Configure VSTS and Microsoft Teams](https://almvm.azurewebsites.net/labs/vsts/teams/) (or Slack or HipChat, etc.) to add more collaboration by setting up notifications once a work item is updated, a commit is done, a build or release or done, etc.
     - Instead of just having a Production environment with its staging slot, having a QA environment with its associated staging too.
