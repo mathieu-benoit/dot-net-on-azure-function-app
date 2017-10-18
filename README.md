@@ -12,6 +12,8 @@ TOC
 
 # History of changes
 
+- October 2017
+    - Microsoft.NET.Sdk.Functions - 1.0.6 + xunit 2.3.0 updates
 - August 2017
     - Implement [https://aka.ms/armconditions](https://aka.ms/armconditions) for the first Staging/CD's VSTS task to avoid deploying Production if it already exists. We don't want to impact existing Production while we are taking care about Staging - - [PR#4](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/4)
     - Add more operational protection with Resource Group Policies - [PR#2](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/2)
@@ -25,7 +27,7 @@ TOC
 
 The goal of this GitHub repository is to demonstrate and use DevOps practices by leveraging a very simple compiled .NET method on Azure Function Apps (this Function is just an HttpTrigger saying "Hello" to the name passed in the querystring parameter).
 
-Locally you will need to configure [Visual Studio 2017 Preview version 15.3 with the Azure Functions Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-your-first-function-visual-studio).
+Locally you will need to make sure your [Visual Studio 2017 has the Azure Functions Tools extension](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs#prerequisites).
 
 By opening the .sln with Visual Studio you should see the structure of the solution like this:
 
