@@ -7,13 +7,15 @@ TOC
 - [Build Definition with VSTS](#build-definition-with-vsts)
 - [Release Definition with VSTS](#release-definition-with-vsts)
 - [Other Misc DevOps practices implemented](#other-misc-devops-practices-implemented)
-- [Alternatives and potantial further considerations](#alternatives-and-potantial-further-considerations)
+- [Alternatives and potential further considerations](#alternatives-and-potential-further-considerations)
 - [Resources](#resources)
 
 # History of changes
 
+- November 2017
+    - Implement CI definition as YAML file [PR#5](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/5)
 - October 2017
-    - Microsoft.NET.Sdk.Functions - 1.0.6 + xunit 2.3.0 updates
+    - Update Microsoft.NET.Sdk.Functions to 1.0.6 and xunit to 2.3.0
 - August 2017
     - Implement [https://aka.ms/armconditions](https://aka.ms/armconditions) for the first Staging/CD's VSTS task to avoid deploying Production if it already exists. We don't want to impact existing Production while we are taking care about Staging - - [PR#4](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/4)
     - Add more operational protection with Resource Group Policies - [PR#2](https://github.com/mathieu-benoit/dot-net-on-azure-function-app/pull/2)
@@ -46,7 +48,6 @@ Here are the DevOps practices highlighted within this CI pipeline:
 - Compile the .NET library
 - Run Unit tests of the .NET method
 - Infrastructure as Code with the ARM Templates and the PowerShell scripts
-- Run ARM Templates validation
 - Expose artifacts to be used then by the CD pipeline (.NET library, ARM Templates, PowerShell scripts and Integration tests dlls)
 - Create a bug work item on build failure (assign to requestor)
 
@@ -67,7 +68,7 @@ Here are the DevOps practices highlighted within this CD pipeline:
 # Other Misc DevOps practices implemented
 
 - GitHub as source control to leverage key features for collaboration such as feature-branch with pull request, etc.
-- CI/CD definitions as Code with the exported json file of the Build and Release Definitions
+- CI/CD definitions as Code with the exported yaml/json file of the Build and Release Definitions respectively
 
 # Alternatives and potential further considerations
 

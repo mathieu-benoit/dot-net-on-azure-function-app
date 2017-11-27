@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.0
+VisualStudioVersion = 15.0.27110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetFunction", "src\DotNetFunction\DotNetFunction.csproj", "{E82A3F5E-9CA6-4E2E-8D51-A938DD62A363}"
 EndProject
@@ -20,7 +20,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vsts", "vsts", "{9D7CF83C-C93B-4266-B6BC-87FB17216CC2}"
 	ProjectSection(SolutionItems) = preProject
 		vsts\DotNet-FunctionApp-CD.json = vsts\DotNet-FunctionApp-CD.json
-		vsts\DotNet-FunctionApp-CI.json = vsts\DotNet-FunctionApp-CI.json
+		vsts\DotNet-FunctionApp-CI.yml = vsts\DotNet-FunctionApp-CI.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "imgs", "imgs", "{B0E410F8-E7BE-46D7-84FB-4749F19392D4}"
@@ -42,6 +42,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{909C
 		infra\scripts\AddResourceGroupAllowedLocationsPolicy.ps1 = infra\scripts\AddResourceGroupAllowedLocationsPolicy.ps1
 		infra\scripts\AddResourceGroupAllowedResourceTypesPolicy.ps1 = infra\scripts\AddResourceGroupAllowedResourceTypesPolicy.ps1
 		infra\scripts\AddResourceGroupDoNotDeleteLock.ps1 = infra\scripts\AddResourceGroupDoNotDeleteLock.ps1
+		infra\scripts\SetDeployProductionWhileDeployingStagingVariableValue.ps1 = infra\scripts\SetDeployProductionWhileDeployingStagingVariableValue.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{539D6251-ED3A-4230-A448-081BB1435281}"
