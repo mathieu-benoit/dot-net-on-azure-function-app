@@ -8,10 +8,10 @@ steps:
     command: restore 
     solution: "**/*.sln"
   displayName: "NuGet restore"
-- task: MSBuild@1
+- task: VSBuild@1
   inputs:
     solution: "**/*.sln"
-    msbuildVersion: latest
+    vsVersion: latest
     configuration: $(BuildConfiguration)
     platform: $(BuildPlatform)
   displayName: "Build solution"
