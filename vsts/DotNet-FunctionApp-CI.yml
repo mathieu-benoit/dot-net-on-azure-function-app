@@ -20,7 +20,7 @@ steps:
 - task: VSTest@2
   inputs:
     testSelector: testAssemblies
-    testAssemblyVer2: "**/$(BuildConfiguration)/*UnitTests.dll\\n!**/obj/**"
+    testAssemblyVer2: "**\\$(BuildConfiguration)\\*UnitTests.dll"
     searchFolder: $(System.DefaultWorkingDirectory)
     vsTestVersion: latest
     codeCoverageEnabled: true
