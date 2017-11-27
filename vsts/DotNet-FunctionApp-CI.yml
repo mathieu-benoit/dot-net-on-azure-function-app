@@ -6,17 +6,19 @@ steps:
 - task: NuGetCommand@0
   inputs:
     command: restore 
-    solution: "**\\*.sln"
+    solution: "**/*.sln"
   displayName: "NuGet restore"
 - task: MSBuild@1
   inputs:
-    solution: "**\\*.sln"
+    solution: "**/*.sln"
+    msbuildVersion: latest
     configuration: $(BuildConfiguration)
+    platform: $(BuildPlatform)
   displayName: "Build solution"
 - task: VSTest@2
   inputs:
     testSelector: testAssemblies
-    testAssemblyVer2: "**\\$(BuildConfiguration)\\*UnitTests.dll\\n!**\\obj\\**"
+    testAssemblyVer2: "**/$(BuildConfiguration)/*UnitTests.dll\\n!**/obj/**"
     searchFolder: $(System.DefaultWorkingDirectory)
     vsTestVersion: latest
     codeCoverageEnabled: true
