@@ -7,6 +7,8 @@ steps:
   inputs:
     command: restore 
     solution: "**/*.sln"
+    noCache: false
+    nuGetVersion: "4.0.0.2283"
   displayName: "NuGet restore"
 - task: VSBuild@1
   inputs:

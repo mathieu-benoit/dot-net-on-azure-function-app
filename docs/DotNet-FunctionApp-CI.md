@@ -2,8 +2,8 @@ Here is one example to Build a .NET method to be deployed as an Azure Function A
 
 2 ways to create the associated Build Definition:
 
-- [Import the Build Definition](#import-the-build-definition)
-- [Create manually the Build Definition](#create-manually-the-build-definition)
+- [Create a YAML Build Definition](#create-a-yaml-build-definition)
+- [Create a manual Build Definition](#create-a-manual-build-definition)
   - [Variables](#variables)
   - [Repository](#repository)
   - [Triggers](#triggers)
@@ -13,13 +13,13 @@ Here is one example to Build a .NET method to be deployed as an Azure Function A
 
 ![Build Overview](/docs/imgs/DotNet-FunctionApp-CI.PNG)
 
-# Import the Build Definition
+# Create a YAML Build Definition
 
 You could import [the associated Build Definition stored in this repository](/vsts/DotNet-FunctionApp-CI.json) and then follow these steps to adapt it to your current project, credentials, etc.:
 
 TODO
 
-# Create manually the Build Definition
+# Create a manual Build Definition
 
 ## Variables
 
