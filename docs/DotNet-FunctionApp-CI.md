@@ -2,30 +2,36 @@ Here is one example to Build a .NET method to be deployed as an Azure Function A
 
 2 ways to create the associated Build Definition:
 
-- [Import the Build Definition](#import-the-build-definition)
-- [Create manually the Build Definition](#create-manually-the-build-definition)
+- [Create a YAML Build Definition](#create-a-yaml-build-definition)
+- [Create a manual Build Definition](#create-a-manual-build-definition)
+  - [Variables](#variables)
+  - [Repository](#repository)
+  - [Triggers](#triggers)
+  - [Options](#options)
+  - [Process - Build process](#process---build-process)
+  - [Tasks](#tasks)
 
 ![Build Overview](/docs/imgs/DotNet-FunctionApp-CI.PNG)
 
-# Import the Build Definition
+# Create a YAML Build Definition
 
-You could import [the associated Build Definition stored in this repository](/vsts/DotNet-FunctionApp-CI.json) and then follow these steps to adapt it to your current project, credentials, etc.:
+You could import [create a YAML build definition](https://docs.microsoft.com/en-us/vsts/build-release/actions/build-yaml#manually-create-a-yaml-build-definition).
 
-TODO
+For the **Default agent queue**, select `Hosted VS2017` and for the **YAML path**, select the `vsts/DotNet-FunctionApp-CI.yml` file.
 
-# Create manually the Build Definition
+# Create a manual Build Definition
 
 ## Variables
 
 - BuildConfiguration = release
-- ValidateTemplatesResourceGroup = validate-templates-rg
+- BuildPlatform = any cpu
 
 ## Repository
 
 - Repository Type = GitHub
 - Connection = set appropriate
-- Repository = mathieu-benoit/dot-net-on-azure-function-app
-- Default branch = master
+- Repository = `mathieu-benoit/dot-net-on-azure-function-app`
+- Default branch = `master`
 
 ## Triggers
 
@@ -36,104 +42,17 @@ TODO
 
 ## Options
 
+*For now, not available with the YAML build definition.*
+
 - Create work item on failure = Enabled
   - Type = Bug
   - Assign to requestor = true
 
 ## Process - Build process
 
-- Name = DotNet-FunctionApp-CI
-- Default agent queue = Hosted VS2017
+- Name = `DotNetMethodOnFunctionApp-CI`
+- Default agent queue = `Hosted VS2017`
 
 ## Tasks 
 
-- NuGet restore
-  - Type = NuGet Installer
-  - Version = 0.*
-  - Path to solution or packages.config = **\*.sln
-  - Installation type = Restore
-  - NuGet Version (Advanced) = 4.0.0
-- Build solution **\*.sln
-  - Type = Visual Studio Build
-  - Version = 1.*
-  - Solution = **\.sln
-  - Visual Studio Version = Latest
-  - Platform = $(BuildPlatform)
-  - Configuration = $(BuildConfiguration)
-- Run UnitTests
-  - Type = Visual Studio Test
-  - Version = 2.*
-  - Select tests using = Test assemblies
-  - Test assemblies = \**\$(BuildConfiguration)\*UnitTests.dll\n!**\obj\**
-  - Search folder = $(System.DefaultWorkingDirectory)
-  - Select test platform using = Version
-  - Test platform version = Latest
-  - Code coverage enabled = true
-  - Test run title = UnitTests
-  - Build Platform = $(BuildPlatform)
-  - Build Configuration = $(BuildConfiguration)
-  - Upload test attachments = true
-- Validate ARM Templates: production
-  - Type = Azure Resource Group Deployment
-  - Version = 2.*
-  - Azure subscription = set appropriate
-  - Action = Create or update resource group
-  - Resource group = $(ValidateTemplatesResourceGroup)
-  - Location = East US
-  - Template location = Linked artifact
-  - Template = infra/templates/deploy.json
-  - Override template parameters = -functionAppName tmpforvalidation
-  - Deployment mode = Validation only
-- Validate ARM Templates: staging
-  - Type = Azure Resource Group Deployment
-  - Version = 2.*
-  - Azure subscription = set appropriate
-  - Action = Create or update resource group
-  - Resource group = $(ValidateTemplatesResourceGroup)
-  - Location = East US
-  - Template location = Linked artifact
-  - Template = infra/templates/deploy-slot.json
-  - Override template parameters = -functionAppName tmpforvalidation
-  - Deployment mode = Validation only
-- Remove temporary ValidateTemplatesResourceGroup
-  - Type = Azure Resource Group Deployment
-  - Version = 2.*
-  - Azure subscription = set appropriate
-  - Action = Delete resource group
-  - Resource group = $(ValidateTemplatesResourceGroup)
-- Copy Files: function
-  - Type = Copy Files
-  - Version = 2.*
-  - Source Folder = $(build.sourcesdirectory)/src/DotNetFunction/bin/$(BuildConfiguration)/net461
-  - Content = **
-  - Target Folder = $(build.artifactstagingdirectory)/function
-- Publish Artifact: function
-  - Type = Publish Build Artifacts
-  - Version = 1.*
-  - Path to Publish = $(build.artifactstagingdirectory)/function
-  - Artifact Name = function
-  - Artifact Type = Server
-- Publish Artifact: infra
-  - Type = Publish Build Artifacts
-  - Version = 1.*
-  - Path to Publish = infra/templates
-  - Artifact Name = infra
-  - Artifact Type = Server
-- Publish Artifact: scripts
-  - Type = Publish Build Artifacts
-  - Version = 1.*
-  - Path to Publish = infra/scripts
-  - Artifact Name = scripts
-  - Artifact Type = Server
-- Copy Files: integration-tests
-  - Type = Copy Files
-  - Version = 2.*
-  - Source Folder = $(build.sourcesdirectory)/test/DotNetFunction.IntegrationTests/bin/$(BuildConfiguration)
-  - Content = **
-  - Target Folder = $(build.artifactstagingdirectory)/integration-tests
-- Publish Artifact: integration-tests
-  - Type = Publish Build Artifacts
-  - Version = 1.*
-  - Path to Publish = $(build.artifactstagingdirectory)/integration-tests
-  - Artifact Name = integration-tests
-  - Artifact Type = Server
+Add manually the tasks and associated values according [this YAML definition file](../vsts/DotNet-FunctionApp-CI.yml).

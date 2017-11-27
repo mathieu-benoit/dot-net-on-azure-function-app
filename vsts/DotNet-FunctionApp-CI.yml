@@ -1,0 +1,55 @@
+queue: Hosted VS2017
+variables:
+  BuildConfiguration: release
+  BuildPlatform: "any cpu"
+steps:
+- task: NuGetCommand@0
+  inputs:
+    command: restore 
+    solution: "**/*.sln"
+    noCache: false
+    nuGetVersion: "4.0.0.2283"
+  displayName: "NuGet restore"
+- task: VSBuild@1
+  inputs:
+    solution: "**/*.sln"
+    vsVersion: latest
+    configuration: $(BuildConfiguration)
+    platform: $(BuildPlatform)
+  displayName: "Build solution"
+- task: VSTest@2
+  inputs:
+    testSelector: testAssemblies
+    testAssemblyVer2: "**\\$(BuildConfiguration)\\*UnitTests.dll"
+    searchFolder: $(System.DefaultWorkingDirectory)
+    vsTestVersion: latest
+    codeCoverageEnabled: true
+    testRunTitle: "UnitTests"
+    platform: $(BuildPlatform)
+    configuration: $(BuildConfiguration)
+    publishRunAttachments: true
+  displayName: "Run UnitTests"
+- task: publishBuildArtifacts@1
+  inputs:
+    PathtoPublish: "$(build.sourcesdirectory)/src/DotNetFunction/bin/$(BuildConfiguration)/net461"
+    ArtifactName: function
+    ArtifactType: Container
+  displayName: "Publish Artifact: function"
+- task: publishBuildArtifacts@1
+  inputs:
+    PathtoPublish: "$(build.sourcesdirectory)/test/DotNetFunction.IntegrationTests/bin/$(BuildConfiguration)"
+    ArtifactName: integration-tests
+    ArtifactType: Container
+  displayName: "Publish Artifact: integration-tests"
+- task: publishBuildArtifacts@1
+  inputs:
+    PathtoPublish: "infra/scripts"
+    ArtifactName: scripts
+    ArtifactType: Container
+  displayName: "Publish Artifact: scripts"
+- task: publishBuildArtifacts@1
+  inputs:
+    PathtoPublish: "infra/templates"
+    ArtifactName: infra
+    ArtifactType: Container
+  displayName: "Publish Artifact: infra"
