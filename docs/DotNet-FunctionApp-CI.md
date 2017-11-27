@@ -15,9 +15,9 @@ Here is one example to Build a .NET method to be deployed as an Azure Function A
 
 # Create a YAML Build Definition
 
-You could import [the associated Build Definition stored in this repository](/vsts/DotNet-FunctionApp-CI.json) and then follow these steps to adapt it to your current project, credentials, etc.:
+You could import [create a YAML build definition](https://docs.microsoft.com/en-us/vsts/build-release/actions/build-yaml#manually-create-a-yaml-build-definition).
 
-TODO
+For the **Default agent queue**, select `Hosted VS2017` and for the **YAML path**, select the `vsts/DotNet-FunctionApp-CI.yml` file.
 
 # Create a manual Build Definition
 
@@ -30,8 +30,8 @@ TODO
 
 - Repository Type = GitHub
 - Connection = set appropriate
-- Repository = mathieu-benoit/dot-net-on-azure-function-app
-- Default branch = master
+- Repository = `mathieu-benoit/dot-net-on-azure-function-app`
+- Default branch = `master`
 
 ## Triggers
 
@@ -42,14 +42,16 @@ TODO
 
 ## Options
 
+*For now, not available with the YAML build definition.*
+
 - Create work item on failure = Enabled
   - Type = Bug
   - Assign to requestor = true
 
 ## Process - Build process
 
-- Name = DotNet-FunctionApp-CI
-- Default agent queue = Hosted VS2017
+- Name = `DotNetMethodOnFunctionApp-CI`
+- Default agent queue = `Hosted VS2017`
 
 ## Tasks 
 
